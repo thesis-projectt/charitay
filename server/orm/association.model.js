@@ -1,13 +1,53 @@
 // Define and export the sequelize model that represents the table association.
+
+
 module.exports=(sequelize,DataTypes)=>{
-    const association=sequelize.define("association",{
-        name:{type:DataTypes.STRING},
-        email:{type:DataTypes.STRING},
-        password:{type:DataTypes.STRING},
-        description:{type:DataTypes.STRING},
-        image:{type:DataTypes.STRING},
-        verify: { type: DataTypes.BOOLEAN, defaultValue: false },
-        check:{type:DataTypes.STRING}
+    const Association=sequelize.define("association",{
+        
+  
+        name:{
+            type:DataTypes.STRING,
+            allowNull:false
+        },
+        
+        
+        email:{
+            type:DataTypes.STRING,
+            allowNull : false,
+            unique :true,
+        },
+
+
+        password:{
+            type:DataTypes.STRING,
+            allowNull : false,
+            unique:true
+
+        },
+
+        description:{
+            type:DataTypes.STRING,
+            allowNull : false,
+        },
+
+
+        image:{
+            type:DataTypes.STRING,
+            allowNull : true,
+        },
+
+
+        verify: {
+             type: DataTypes.BOOLEAN,
+             defaultValue: false,
+             allowNull : true,
+             },
+             
+        check:{
+            type:DataTypes.STRING,
+            defaultValue : false,
+            allowNull:true,
+        }
     })
-    return association
+    return Association
 }
