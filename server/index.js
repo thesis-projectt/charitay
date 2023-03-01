@@ -1,20 +1,11 @@
-const express = require("express");
-const db =require("./orm/index.js")
-const app = express();
-const PORT = process.env.PORT || 3000
-const cors = require('cors');
 
+const app = require("./app");
+ const dotenv = require ('dotenv') ;
+ 
 
-
-// const disableRoutes=require('./router/disable')
-// app.use('/api/dis',disableRoutes)
-
-
-
-
-app.listen(PORT, function () {
-    console.log("listening on port 3000!");
-  });
-
-
-module.exports=app
+//Setting the port and listening for connections
+const port = 3000;
+dotenv.config();
+app.listen(port, () => {
+  console.log(`Server listening on port ${port}`);
+});
