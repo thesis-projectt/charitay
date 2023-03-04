@@ -1,6 +1,6 @@
 // Define and export the sequelize model that represents the table admin.
 module.exports=(sequelize,DataTypes)=>{
-    const admin= sequelize.define("admin",{
+    const Admin= sequelize.define("admin",{
        
         name:{
             type:DataTypes.STRING
@@ -10,5 +10,5 @@ module.exports=(sequelize,DataTypes)=>{
             type:DataTypes.STRING
         },
     })
-    return admin
+    return Admin
 }

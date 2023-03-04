@@ -1,26 +1,45 @@
 import React, { useState } from "react";
 import { View,Text ,Image , StyleSheet , TouchableOpacity ,ScrollView } from "react-native";
-import Logo from "../../assets/logo.png";
+import { authentication } from "../firebase";
 import Input from "./input";
 import Button from "./button";
-import Connect from "../connect";
-
+import { createUserWithEmailAndPassword } from "firebase/auth"
 import { useNavigation } from '@react-navigation/native';
-import PhoneInput from "react-native-phone-number-input";
+import axios from "axios";
 
 
 const AssociationSignupScreen = ()=> {
 
     const navigation = useNavigation()
-    const [username,setusername]=useState('')
+    const [email,setemail]=useState('')
     const [password,setpassword]=useState('')
+    const [confirmepassword,setconfirmepassword]=useState('')
+    const [Descreption,setDescreption]=useState('')
+    const [name , setname ]=useState('')
 
-    const onsigninpressed = ()=> {
-       
-    }
-   
-
-    const onsignup = ()=> {
+    const done = async () => {
+        try {
+          await axios.post("http://192.168.101.10:3000/api/associations", {
+            name : name,
+            email: email,
+            description : Descreption
+          });
+        } catch (err) {
+          console.log(err);
+        }
+      };
+    
+      const onsigninpressed = () => {
+        createUserWithEmailAndPassword(authentication, email, password)
+          .then((firedata) => {
+            done(firedata._tokenResponse.localId);
+            return true
+          }).then(()=>{
+            navigation.navigate("Signin")
+          })
+          .catch((err) => console.log(err));
+      };
+    const goback = ()=> {
          navigation.navigate('Signin')
     }
 
@@ -30,16 +49,16 @@ return (
 
 <Text style = {styles.title}> Create an account</Text>
 
-<Input placeholder= 'Association Name'/>
- <Input placeholder= 'Email' value={username} setvalue={setusername}/>
+<Input placeholder= 'Association Name' value={name} setvalue={setname}/>
+ <Input placeholder= 'Email' value={email} setvalue={setemail}/>
  <Input placeholder= 'Password'value={password} setvalue={setpassword} secureTextEntry={true}/>
- <Input placeholder= 'Confirme Password'value={password} setvalue={setpassword} secureTextEntry={true}/>
- <Input placeholder= 'Adress'/>
+ <Input placeholder= 'Confirme Password'value={confirmepassword} setvalue={setconfirmepassword} secureTextEntry={true}/>
+ <Input placeholder= 'Adress' value={Descreption} setvalue={setDescreption} />
 
 
 <Button text= "Register" onpress={onsigninpressed}/>
 
-<Button  text= " have an account ? Log in " onpress={onsignup} type='tertiary'/>
+<Button  text= " have an account ? Log in " onpress={goback} type='tertiary'/>
 
 </View>
 
