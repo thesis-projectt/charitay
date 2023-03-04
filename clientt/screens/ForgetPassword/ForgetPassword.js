@@ -2,26 +2,45 @@ import React, { useState } from "react";
 import { View,Text ,Image , StyleSheet , TouchableOpacity ,ScrollView } from "react-native";
 import Input from "./input";
 import Button from "./button";
-import Connect from "../connect";
+import { authentication } from "../firebase";
+import { signInWithEmailAndPassword , sendPasswordResetEmail} from "firebase/auth";
 import { useNavigation } from '@react-navigation/native';
 
 
 const ForgetPassword = ()=> {
 
+
+
   const navigation = useNavigation()
+
+
   const onsigninpressed = ()=> {
     navigation.navigate('Signin')
   }
-  const newpassword = ()=> {
-    navigation.navigate('ConfirmePassword')
-  }
 
+
+ const [email, setemail] = useState('')
+
+
+const newpassword = ()=>{
+  sendPasswordResetEmail(authentication,email).then(()=>{
+    
+    alert("check your email to change password")
+  }).then
+  (()=>{
+    navigation.navigate('Signin')
+  }).catch((err)=>{
+    console.log(err);
+  })
+
+
+}
 return (
     
 <View style = {styles.root}>
  <Text style={styles.title}> Reset your Password </Text>
  <Text style ={{right:173}}> Email*</Text>
- <Input placeholder= 'Enter your Email ' />
+ <Input  placeholder= 'Enter your Email '  value={email} setvalue={setemail}/>
 <Button onpress={newpassword} text= " sned"/>
 <Button onpress={onsigninpressed} text= " Back to sign in "  type='tertiary'/>
 
