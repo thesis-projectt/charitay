@@ -1,4 +1,4 @@
-const { Sequelize, DataTypes, Model } = require('sequelize');
+                                                                                                                                                                                                                                                                                                                                                                                                              const { Sequelize, DataTypes, Model } = require('sequelize');
 
 const config= require('../orm/config');
 
@@ -17,10 +17,10 @@ db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
 db.Association=require('./association.model')(sequelize,DataTypes) //require the association model
-db.disable=require('./disable.model')(sequelize,DataTypes) // require the disable model
-db.volunteer=require('./volunteer.model')(sequelize,DataTypes)// require the volunteer model
+db.Disable=require('./disable.model')(sequelize,DataTypes) // require the disable model
+db.Volunteer=require('./volunteer.model')(sequelize,DataTypes)// require the volunteer model
 db.Event=require('./event.model')(sequelize,DataTypes) // require the event model 
-db.admin=require('./admin.model')(sequelize,DataTypes)// require the admin model 
+db.Admin=require('./admin.model')(sequelize,DataTypes)// require the admin model 
 
 // many to many relationship disable volunteer
 // db.disable.belongsToMany(db.volunteer,{
@@ -30,8 +30,8 @@ db.admin=require('./admin.model')(sequelize,DataTypes)// require the admin model
 // db.volunteer.belongsToMany(db.disable,{
 //     through:"disable_volunteer"
 // })
-//many to many relationship event volunteer
-// db.volunteer.belongsToMany(db.event,{
+//many to many relationship event volunteer                                
+// db.volunteer.belongsToMany(db.event,{                                 
 //     through:"event_volunteer"
 // })
 // db.event.belongsToMany(db.volunteer,{

@@ -7,11 +7,11 @@ const { getAllEvents, addEvent, updateEvent ,deleteEvent} = require('../controll
 /// POSTS ROUTES ///
 
 //GET request to fetch all posts. NOTE This must come before route for id.
-router.get('/getAllEvents', getAllEvents);
+router.get('/', getAllEvents);
 // POST request for creating a new post.
-router.post('/add', addEvent);
-router.put('/updateOneEvent/:id',updateEvent)
-router.delete('/deleteOneEvent/:id',deleteEvent)
+router.post('/', addEvent);
+router.put('/:id',updateEvent)
+router.delete('/:id',deleteEvent)
 
 
 
