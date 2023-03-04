@@ -4,9 +4,12 @@ import Logo from "../../assets/logo.png";
 import Input from "./input";
 import Button from "./button";
 import Connect from "../connect";
+import { useNavigation } from '@react-navigation/native';
+
 
 const SigninScreen = ()=> {
 
+    const navigation = useNavigation()
     const [username,setusername]=useState('')
     const [password,setpassword]=useState('')
 
@@ -14,18 +17,18 @@ const SigninScreen = ()=> {
         console.warn("sign in ");
     }
     const onforgetpasswordpressed = ()=> {
-        console.warn('forget Password')
+        navigation.navigate('ForgetPassword')
     }
 
     const onsignup = ()=> {
-        console.warn("signup")
+       navigation.navigate('Virfy')
     }
 
 return (
     <ScrollView showsVerticalScrollIndicator={false} >
 <View style = {styles.root}>
 <Image source={Logo} style={styles.Logo} resizeMode = "contain"/>
- <Input placeholder= 'Email' value={username} setvalue={setusername}/>
+ <Input placeholder= 'Email or phoneNumber' value={username} setvalue={setusername}/>
  <Input placeholder= 'Password'value={password} setvalue={setpassword} secureTextEntry={true}/>
 <Button text= "Sign in" onpress={onsigninpressed}/>
 <Button  text= "Forget Password ?" onpress={onforgetpasswordpressed} type='tertiary'/>
@@ -41,11 +44,13 @@ return (
 const styles = StyleSheet.create({
 root : {
     alignItems : 'center',
-    padding : 10
+    padding : 10,
+margin:10
   },
      
     Logo : { 
-  width: '70%',
+  width: '90%',
+  margin:-80,
   maxWidth : 400
  
     }
