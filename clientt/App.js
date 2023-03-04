@@ -4,11 +4,11 @@ import SignupScreen from "./screens/SignupScreen/SignupScreen";
 import ForgetPassword from "./screens/ForgetPassword/ForgetPassword";
 import ConfirmePassword from "./screens/ConfirmePassword/CofirmePassword";
 import Navigation from "./screens/Navigation/Navigation";
-import Onboarding from "./OnBoard";
+import Onboarding from "./components/Onboarding"
 const App = () => {
   return (
     <SafeAreaView style={styles.root}>
-      <Onboarding />
+      <Onboarding/>
             {/* <SigninScreen/> */}
     </SafeAreaView>
   );
