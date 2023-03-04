@@ -16,30 +16,37 @@ const db = {};
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
-db.association=require('./association.model')(sequelize,DataTypes) //require the assocition model
+db.Association=require('./association.model')(sequelize,DataTypes) //require the association model
 db.disable=require('./disable.model')(sequelize,DataTypes) // require the disable model
 db.volunteer=require('./volunteer.model')(sequelize,DataTypes)// require the volunteer model
-db.event=require('./event.model')(sequelize,DataTypes) // require the event model 
+db.Event=require('./event.model')(sequelize,DataTypes) // require the event model 
 db.admin=require('./admin.model')(sequelize,DataTypes)// require the admin model 
 
 // many to many relationship disable volunteer
-db.disable.belongsToMany(db.volunteer,{
-    through:"disable_volunteer"
-})
+// db.disable.belongsToMany(db.volunteer,{
+//     through:"disable_volunteer"
+// })
 
-db.volunteer.belongsToMany(db.disable,{
-    through:"disable_volunteer"
-})
+// db.volunteer.belongsToMany(db.disable,{
+//     through:"disable_volunteer"
+// })
 //many to many relationship event volunteer
-db.volunteer.belongsToMany(db.event,{
-    through:"event_volunteer"
+// db.volunteer.belongsToMany(db.event,{
+//     through:"event_volunteer"
+// })
+// db.event.belongsToMany(db.volunteer,{
+//     through:"event_volunteer"
+// })
+// 1 to many relationship association event
+db.Association.hasMany(db.Event , {
+   foreignKey:"associationId",
 })
-db.event.belongsToMany(db.volunteer,{
-    through:"event_volunteer"
-})
-// 1 to many relationship assocition event
-db.association.hasMany(db.event)
-  db.event.belongsTo(db.association)
+  
+db.Event.belongsTo(db.Association, {
+  as:"user",
+  foreignKey : "associationId",
+  onDelete : "CASCADE ",
+});
 
 db.sequelize.sync()
 

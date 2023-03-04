@@ -1,28 +1,22 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, SafeAreaView, TextInput } from 'react-native';
-
-export default function App() {
+import { StyleSheet, Text, View, SafeAreaView, TextInput } from "react-native";
+import SigninScreen from "./screens/SigninScreen/SigninScreen";
+import SignupScreen from "./screens/SignupScreen/SignupScreen";
+import ForgetPassword from "./screens/ForgetPassword/ForgetPassword";
+import ConfirmePassword from "./screens/ConfirmePassword/CofirmePassword";
+import Navigation from "./screens/Navigation/Navigation";
+import Onboarding from "./components/Onboarding"
+const App = () => {
   return (
-     <View style={styles.container}>
-      <Text>hello from client side </Text>
-      <StatusBar style="auto" />
-     </View>
-     
+    <SafeAreaView style={styles.root}>
+      <Onboarding/>
+            {/* <SigninScreen/> */}
+    </SafeAreaView>
   );
-}
+};
 const styles = StyleSheet.create({
-  container: {
+  root: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "#F9FBFC",
   },
 });
-// const style = StyleSheet.create({
-//   input: {
-//     height: 40,
-//     margin: 12,
-//     borderWidth: 1,
-//     padding: 10,
-//   },
-// });
+export default App;
