@@ -5,9 +5,10 @@ import Input from "./input";
 import Button from "./button";
 import { useNavigation } from '@react-navigation/native';
 import { authentication ,provider } from "../firebase";
-import { signInWithEmailAndPassword , sendPasswordResetEmail} from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 // import { signInWithPopup } from "firebase/auth";
 // import Googelicon from "../../assets/googel.png"
+import Connect from "../Connect";
 
 
 
@@ -51,6 +52,7 @@ const SigninScreen = () => {
                 <Input placeholder='Password' value={password} setvalue={setpassword} secureTextEntry={true} />
                 <Button text="Sign in" onpress={onsigninpressed} />
                 <Button text="Forget Password ?" onpress={onforgetpasswordpressed} type='tertiary' />
+                 <Connect/>
                 <Button text="Don't have an account ? Create one " onpress={onsignup} type='tertiary' />
 
             </View>
@@ -67,7 +69,7 @@ const styles = StyleSheet.create({
 
     Logo: {
         width: '90%',
-        margin: -80,
+        margin: -50,
         maxWidth: 400
 
     }

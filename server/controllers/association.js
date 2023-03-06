@@ -41,7 +41,7 @@ module.exports = {
 
   updateOneAssociation: async (req, res) => {
     try {
-      const associations = await User.update(req.body,{
+      const associations = await Association.update(req.body,{
         where: {id: req.params.id},
       });
       res.status(200).json(associations);
@@ -52,7 +52,7 @@ module.exports = {
 
   deleteOneAssociation: async (req, res) => {
     try {
-      const associations = await User.destroy({where:{id:req.params.id}});
+      const associations = await Association.destroy({where:{id:req.params.id}});
       res.status(200).json(associations);
     } catch (error) {
       res.status(500).send(error);

@@ -1,37 +1,34 @@
-import { View, Text , TextInput , StyleSheet , Image} from 'react-native'
+import { View, Text, TextInput, StyleSheet, Image } from "react-native";
 
-import React from 'react'
+import React from "react";
 
-const Input = ({value , setvalue , placeholder , secureTextEntry}) => {
+const Input = ({ value, setvalue, placeholder, secureTextEntry }) => {
   return (
     <View style={styles.container}>
-        <TextInput  style={styles.input} placeholder = {placeholder}
-        value = {value}
+      <TextInput
+        style={styles.input}
+        placeholder={placeholder}
+        value={value}
         secureTextEntry={secureTextEntry}
-        onChangeText={setvalue}/>
-        
-        
+        onChangeText={setvalue}
+      />
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
-  container:{
-    backgroundColor: 'white',
-    width : '100%',
+  container: {
+    backgroundColor: "white",
+    width: "100%",
     padding: 15,
-   
-    
-    borderColor:'#e8e8e8',
-    borderWidth:1,
+
+    borderColor: "#e8e8e8",
+    borderWidth: 1,
     borderRadius: 5,
     paddingHorizontal: 10,
-    marginVertical : 5
-    
+    marginVertical: 5,
   },
-  input:{
-
-  },
+  input: {},
 });
 
-export default Input
+export default Input;
