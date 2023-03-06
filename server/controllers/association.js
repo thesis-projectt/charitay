@@ -4,12 +4,10 @@ const { Association } = require("../orm");
 
 
 module.exports = {
-  //method to fetch all associations from the blog database.
   getAllAssociation: async (req, res) => {
     try {
       const associations = await Association.findAll({
         order: [["createdAt", "ASC"]],
-        // attributes: { exclude: ['userId'] },
       });
       res.status(200).json(associations);
     } catch (error) {
@@ -41,7 +39,7 @@ module.exports = {
 
   updateOneAssociation: async (req, res) => {
     try {
-      const associations = await User.update(req.body,{
+      const associations = await association.update(req.body,{
         where: {id: req.params.id},
       });
       res.status(200).json(associations);
@@ -52,7 +50,7 @@ module.exports = {
 
   deleteOneAssociation: async (req, res) => {
     try {
-      const associations = await User.destroy({where:{id:req.params.id}});
+      const associations = await association.destroy({where:{id:req.params.id}});
       res.status(200).json(associations);
     } catch (error) {
       res.status(500).send(error);
