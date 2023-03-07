@@ -25,11 +25,11 @@ const SignupScreen = () => {
 
   const done = async (value) => {
     try {
-      await axios.post("http://192.168.101.10:3000/api/volunteer", {
+      await axios.post("http://192.168.1.117:3000/api/volunteer", {
         id: value,
         name: name,
         email: email,
-        phoneNumber: phonenumber.state.number,
+        phoneNumber: phonenumber,
       });
     } catch (err) {
       console.log(err);
@@ -37,14 +37,26 @@ const SignupScreen = () => {
   };
 
   const onsigninpressed = () => {
-    createUserWithEmailAndPassword(authentication, email, password)
-      .then((firedata) => {
-        done(firedata._tokenResponse.localId);
-        return true
-      }).then(()=>{
-        navigation.navigate("Signin")
-      })
-      .catch((err) => console.log(err));
+    if (password !== confirmepassword) {
+      alert("check your password");
+    } else if (password === confirmepassword) {
+      createUserWithEmailAndPassword(authentication, email, password)
+        .then((firedata) => {
+          done(firedata._tokenResponse.localId);
+          return true;
+        })
+        .then(() => {
+          navigation.navigate("Signin");
+        })
+        .catch((err) => {
+          if (err.code === "auth/weak-password") {
+            alert(" Password should be at least 6 characters");
+          } else if (err.code === "auth/invalid-email") {
+            alert(" invalid email");
+          }
+          console.log(err);
+        });
+    }
   };
 
   const goback = () => {
@@ -72,8 +84,8 @@ const SignupScreen = () => {
 
       <TouchableOpacity style={styles.container}>
         <PhoneInput
-          ref={(ref) => {
-            setphonenumber(ref);
+          onChangeText={(text) => {
+            setphonenumber(text);
           }}
         />
       </TouchableOpacity>
@@ -97,8 +109,9 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 30,
     fontWeight: "bold",
-    margin: 15,
-    padding: 15,
+    margin: 30,
+    padding: 20,
+    color: "#3B71F3",
   },
   container: {
     backgroundColor: "white",

@@ -9,6 +9,11 @@ import Map from "./Map1/Map";
 // import Onboarding from "./components/Onboarding"
 
 
+// import SigninScreen from "./screens/SigninScreen/SigninScreen";
+// import SignupScreen from "./screens/SignupScreen/SignupScreen";
+// import ForgetPassword from "./screens/ForgetPassword/ForgetPassword";
+import Navigation from "./screens/Navigation/Navigation";
+import Onboarding from "./components/Onboarding"
 const App = () => {
   return (
               
