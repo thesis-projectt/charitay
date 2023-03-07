@@ -1,22 +1,39 @@
 import { StyleSheet, Text, View, SafeAreaView, TextInput } from "react-native";
-import SigninScreen from "./screens/SigninScreen/SigninScreen";
-import SignupScreen from "./screens/SignupScreen/SignupScreen";
-import ForgetPassword from "./screens/ForgetPassword/ForgetPassword";
-import ConfirmePassword from "./screens/ConfirmePassword/CofirmePassword";
-import Navigation from "./screens/Navigation/Navigation";
+// import SigninScreen from "./screens/SigninScreen/SigninScreen";
+// import SignupScreen from "./screens/SignupScreen/SignupScreen";
+// import ForgetPassword from "./screens/ForgetPassword/ForgetPassword";
+// import ConfirmePassword from "./screens/ConfirmePassword/CofirmePassword";
+// import Navigation from "./screens/Navigation/Navigation";
+import React,{useState,useEffect} from "react";
+import { StatusBar } from "expo-status-bar";
 import Onboarding from "./components/Onboarding"
-const App = () => {
+// import  Screen  from "./components/Screen";
+// import AsyncStorage from "@react-native-async-storage/async-storage";
+// import { ActivityIndicator } from "react-native";
+
+
+
+
+  const  App = () => {
+ 
+
+
   return (
-    <SafeAreaView style={styles.root}>
-      <Onboarding/>
+    <View style={styles.container}>
+      {/* {loading ? <Loading/>:view ? <SigninScreen/> : <Onboarding />} */}
+      <Onboarding />
             {/* <SigninScreen/> */}
-    </SafeAreaView>
+            <StatusBar style="auto"/>
+    </View>
   );
 };
 const styles = StyleSheet.create({
-  root: {
+  container: {
     flex: 1,
-    backgroundColor: "#F9FBFC",
+    backgroundColor: "#fff",
+    alignItems:'center',
+    justifyContent:'center',
+
   },
 });
 export default App;

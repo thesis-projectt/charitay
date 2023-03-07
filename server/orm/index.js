@@ -1,4 +1,4 @@
-                                                                                                                                                                                                                                                                                                                                                                                                              const { Sequelize, DataTypes, Model } = require('sequelize');
+const { Sequelize, DataTypes, Model } = require('sequelize');
 
 const config= require('../orm/config');
 

@@ -25,14 +25,14 @@ const styles =StyleSheet.create({
       justifyContent:'center'
     },
     title:{
-      fontWeight:700,
-      fontSize:28,
+      fontWeight:500,
+      fontSize:25,
       marginBottom:10,
       color:'#493d8a',
       textAlign:'center'
     },
     description:{
-      fontWeight :300,
+      fontWeight :25,
       color:'#62656b',
       textAlign :'center',
       paddingHorizontal:64,

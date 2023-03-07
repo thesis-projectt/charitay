@@ -1,6 +1,7 @@
 import { StatusBar } from 'expo-status-bar'
 import React,{useState,useRef} from 'react'
 import { View, Text,StyleSheet,FlatList,Animated } from 'react-native'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import OnbordingItem from '../components/OnbordingItem'
 import Flesh from '../components/Flesh'
 import NextButton from '../components/NextButton'
@@ -11,16 +12,20 @@ export default Onboarding = () => {
   const scrollX =useRef(new Animated.Value(0)).current;
  const slidesRef =useRef(null);
   const viewableItemsChanged = useRef (({viewableItems})=>{
-    // setCurrentIndex(viewableItems[0].index);
+    setCurrentIndex(viewableItems[0].index);
   }).current;
   
   const viewConfig=useRef ({viewAreaCoveragePercentThreshold:50}).current; 
-  const scrollTo=()=>{
+  const scrollTo = async()=>{
        if(currentIndex < slides.length-1){
          slidesRef.current.scrollToIndex({index:currentIndex+1});
-         setCurrentIndex(currentIndex+1);
+        //  setCurrentIndex(currentIndex+1);
        }else{
-        console.log('Last item.');
+         try{
+             await AsyncStorage.setItem('@view','true');
+         } catch (err){
+            console.log('Error @setItem', err);
+         }
        }
   };
  const percentage=(currentIndex+1)*(100/ slides.length);
@@ -30,7 +35,7 @@ export default Onboarding = () => {
       <FlatList
        data ={slides} renderItem={({item})=> <OnbordingItem item={item}/>}
       horizontal
-      showsHorizontalScrollIndicator
+      showsHorizontalScrollIndicator ={false}
       pagingEnabled
       bounces ={false}
       keyExtractor ={(item)=>item.id}
