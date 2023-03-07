@@ -1,82 +1,103 @@
-import React, { useState } from 'react'
-import { Text, View ,StyleSheet , TouchableOpacity ,SafeAreaView} from 'react-native'
-import RNPickerSelect from "react-native-picker-select";
-import Button from './SigninScreen/button';
-import { useNavigation } from '@react-navigation/native';
+import React, { useState, useRef } from "react";
+import {
+  Text,
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  SafeAreaView,
+  Pressable,
+} from "react-native";
+
+import { useNavigation } from "@react-navigation/native";
+import axios from "axios";
+import DropDownPicker from "react-native-dropdown-picker";
 
 
-const Virfy =() => {
+const Virfy = ({ navigation }) => {
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState(null);
 
-    const navigation = useNavigation()
-
- const handelclick = ()=>{
-   
-    if (valuee === "volunteer") {
-        navigation.navigate("SignUp")
-        console.log(valuee);
-        return
+  const handelclick = () => {
+    if (value === "volunteer") {
+      navigation.navigate("SignUp");
+      console.log(value);
+      return;
+    } else if (value === "association") {
+      navigation.navigate("Association");
+      return;
+    } else if (value === "Need a help") {
+      navigation.navigate("NeedHelp");
+      return;
     }
-    else if (valuee === "association"){
-        navigation.navigate("Association")
-        return
-    }
+    navigation.navigate("Virfy");
+  };
 
-    else if (valuee === "Need a help"){
-    
-        navigation.navigate("NeedHelp")
-   return
-    }
-    navigation.navigate("Virfy")
- }
+  const [items, setItems] = useState([
+    { label: "volunteer", value: "volunteer" },
+    { label: "association", value: "association" },
+    { label: "Need a help", value: "Need a help" },
+  ]);
 
+  return (
+    <View style={styles.root}>
+      <Text style={styles.title}>Verify yourself as what ?</Text>
 
- const [valuee,setvaluee]=useState("")
-    return (
-      <View style = {styles.root}> 
-      
-      <Text style = {styles.title}>Verify yourself as what ?</Text>
-       <TouchableOpacity style={styles.container}>
-       
- <RNPickerSelect 
-    onValueChange={(value) =>{setvaluee(value)}}
-  items={[
- { label: "Need a help", value: "Need a help" },
- { label: "volunteer", value: "volunteer" },
- { label: "association", value: "association" }, ]}/>
- <Button  onpress={handelclick}  text= "Next"  />
-</TouchableOpacity>
+      <TouchableOpacity style={styles.container}>
+        <DropDownPicker
+          open={open}
+          value={value}
+          items={items}
+          setOpen={setOpen}
+          setValue={setValue}
+          setItems={setItems}
+        />
 
-      </View>
-    )
-  }
-  const styles = StyleSheet.create({
-    root : {
-        alignItems : 'center',
-        padding : 10,
-    
-      },
-      title : {
-        fontSize:27,
-        fontWeight:'bold',
-     margin:17,
-     padding : 25,
-     top:200,
+        <Pressable onPress={handelclick} style={[styles.button]}>
+          <Text style={styles.text}>Next</Text>
+        </Pressable>
+      </TouchableOpacity>
+    </View>
+  );
+};
+const styles = StyleSheet.create({
+  root: {
+    alignItems: "center",
+    padding: 10,
+  },
+  title: {
+    fontSize: 27,
+    fontWeight: "bold",
+    margin: 17,
+    padding: 25,
+    top: 200,
+  },
 
-     
-         },
-    
-        container : {
-            top:200,
-            backgroundColor: 'white',
-            width : '100%',
-            padding: 25,
-            borderColor:'#e8e8e8',
-            borderWidth:1,
-            borderRadius: 5,
-            paddingHorizontal: 10,
-            marginVertical : 5,
-            gap:30
-            
-        }
-    })
-export default Virfy
+  container: {
+    top: 200,
+    backgroundColor: "white",
+    width: "100%",
+    padding: 25,
+    borderColor: "#e8e8e8",
+    borderWidth: 1,
+    borderRadius: 5,
+    paddingHorizontal: 10,
+    marginVertical: 5,
+    height: 210,
+    gap: 40,
+  },
+  button: {
+    width: "104%",
+    padding: 15,
+    marginVertical: 5,
+    alignItems: "center",
+    borderRadius: 5,
+    backgroundColor: "#3B71F3",
+    top: 95,
+    left: -6,
+  },
+  text: {
+    fontWeight: "bold",
+    color: "white",
+  },
+});
+export default Virfy;

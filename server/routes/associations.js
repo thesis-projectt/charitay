@@ -7,13 +7,13 @@ const { getAllAssociation, addAssociation, getOneAssociation,updateOneAssociatio
 /// Association ROUTES ///
 
 //GET request to fetch all associations. NOTE This must come before route for id.
-router.get('/getAllAssociations', getAllAssociation);
+router.get('/', getAllAssociation);
 // GET request for one user.
 router.get('/:id', getOneAssociation);
 // POST request for creating a user.
-router.post('/add', addAssociation);
-router.put('/updateAssociation/:id', updateOneAssociation);
-router.delete('/deleteAssociation/:id',deleteOneAssociation)
+router.post('/', addAssociation);
+router.put('/:id', updateOneAssociation);
+router.delete('/:id',deleteOneAssociation)
 
 
 module.exports = router;

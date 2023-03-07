@@ -4,6 +4,7 @@
 module.exports=(sequelize,DataTypes)=>{
     const Association=sequelize.define("association",{
         
+         
   
         name:{
             type:DataTypes.STRING,
@@ -18,16 +19,9 @@ module.exports=(sequelize,DataTypes)=>{
         },
 
 
-        password:{
-            type:DataTypes.STRING,
-            allowNull : false,
-            unique:true
-
-        },
-
         description:{
             type:DataTypes.STRING,
-            allowNull : false,
+            allowNull : true,
         },
 
 

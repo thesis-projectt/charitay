@@ -4,4 +4,5 @@ module.exports = {
     PASSWORD:'alaa25062001',
     DATABASE:'charity',
     dialect:'mysql'
+    
     }
