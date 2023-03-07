@@ -23,7 +23,7 @@ const NeedanhelpSignupScreen = ({ navigation }) => {
 
   const done = async (value) => {
     try {
-      await axios.post("http://192.168.1.117:3000/api/disable", {
+      await axios.post("http://192.168.101.5:3000/api/disable", {
         id: value,
         email: email,
       });

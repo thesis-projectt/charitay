@@ -35,7 +35,7 @@ const Virfy = ({ navigation }) => {
   const [items, setItems] = useState([
     { label: "volunteer", value: "volunteer" },
     { label: "association", value: "association" },
-    { label: "Need a help", value: "Need a help" },
+    { label: "people with special needs", value: "Need a help" },
   ]);
 
   return (

@@ -25,7 +25,7 @@ const SignupScreen = () => {
 
   const done = async (value) => {
     try {
-      await axios.post("http://192.168.1.117:3000/api/volunteer", {
+      await axios.post("http://192.168.101.5:3000/api/volunteer", {
         id: value,
         name: name,
         email: email,

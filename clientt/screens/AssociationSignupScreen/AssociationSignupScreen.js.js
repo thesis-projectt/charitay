@@ -25,7 +25,7 @@ const AssociationSignupScreen = () => {
 
   const done = async () => {
     try {
-      await axios.post("http://192.168.1.117:3000/api/associations", {
+      await axios.post("http://192.168.101.5:3000/api/associations", {
         name: name,
         email: email,
         description: Descreption,
@@ -84,6 +84,7 @@ const AssociationSignupScreen = () => {
         <TextInput
           style={styles.textAreaContainer}
           placeholder="descreption about your Association "
+          onChangeText={(textt)=>{setDescreption(textt)}}
           underlineColorAndroid="transparent"
           multiline={true}
           numberOfLines={10}
