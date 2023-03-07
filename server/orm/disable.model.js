@@ -8,7 +8,7 @@ const Disable=sequelize.define("disable",{
    },
    name:{
       type:DataTypes.STRING,
-      allowNull : false
+      allowNull : true
    },
    email:{
       type:DataTypes.STRING,

@@ -19,10 +19,11 @@ import axios from "axios";
 const NeedanhelpSignupScreen = ({ navigation }) => {
   const [password, setpassword] = useState("");
   const [email, setemail] = useState("");
+  const [confirmpassword, setconfirmpassword] = useState("");
 
   const done = async (value) => {
     try {
-      await axios.post("http://192.168.101.10:3000/api/disable", {
+      await axios.post("http://192.168.1.117:3000/api/disable", {
         id: value,
         email: email,
       });
@@ -32,15 +33,23 @@ const NeedanhelpSignupScreen = ({ navigation }) => {
   };
 
   const onsigninpressed = () => {
-    createUserWithEmailAndPassword(authentication, email, password)
-      .then((firedata) => {
-        done(firedata._tokenResponse.localId);
-        return true;
-      })
-      .then(() => {
-        navigation.navigate("Signin");
-      })
-      .catch((err) => console.log(err));
+    if (password !== confirmpassword) {
+      alert("check your password");
+    } else if (password === confirmpassword) {
+      createUserWithEmailAndPassword(authentication, email, password)
+        .then((firedata) => {
+          done(firedata._tokenResponse.localId);
+          return true;
+        })
+        .then(() => {
+          navigation.navigate("Signin");
+        })
+        .catch((err) => {
+          if (err.code === "auth/weak-password") {
+            alert(" Password should be at least 6 characters");
+          }
+        });
+    }
   };
 
   const goback = () => {
@@ -60,6 +69,12 @@ const NeedanhelpSignupScreen = ({ navigation }) => {
         placeholder="Password"
         value={password}
         setvalue={setpassword}
+        secureTextEntry={true}
+      />
+      <Input
+        placeholder="confirmePassword"
+        value={confirmpassword}
+        setvalue={setconfirmpassword}
         secureTextEntry={true}
       />
 
@@ -82,8 +97,9 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 30,
     fontWeight: "bold",
-    margin: 15,
-    padding: 15,
+    margin: 30,
+    padding: 20,
+    color: "#3B71F3",
   },
   container: {
     backgroundColor: "white",

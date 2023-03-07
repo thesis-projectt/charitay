@@ -6,6 +6,7 @@ import { StyleSheet, Text, View, SafeAreaView, TextInput } from "react-native";
 // import Navigation from "./screens/Navigation/Navigation";
 import React,{useState,useEffect} from "react";
 import { StatusBar } from "expo-status-bar";
+import Navigation from "./screens/Navigation/Navigation";
 import Onboarding from "./components/Onboarding"
 // import  Screen  from "./components/Screen";
 // import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -19,12 +20,12 @@ import Onboarding from "./components/Onboarding"
 
 
   return (
-    <View style={styles.container}>
-      {/* {loading ? <Loading/>:view ? <SigninScreen/> : <Onboarding />} */}
-      <Onboarding />
+    <SafeAreaView style={styles.root}>
+      <Navigation/>
+      {/* <Onboarding/> */}
             {/* <SigninScreen/> */}
             <StatusBar style="auto"/>
-    </View>
+            </SafeAreaView>
   );
 };
 const styles = StyleSheet.create({

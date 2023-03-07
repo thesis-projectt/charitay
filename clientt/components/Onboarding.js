@@ -6,8 +6,13 @@ import OnbordingItem from '../components/OnbordingItem'
 import Flesh from '../components/Flesh'
 import NextButton from '../components/NextButton'
 import slides from '../slides'
+import { useNavigation } from "@react-navigation/native";
+
+
 
 export default Onboarding = () => { 
+
+  const navigation=useNavigation()
   const [currentIndex,setCurrentIndex]=useState(0);
   const scrollX =useRef(new Animated.Value(0)).current;
  const slidesRef =useRef(null);
@@ -16,16 +21,12 @@ export default Onboarding = () => {
   }).current;
   
   const viewConfig=useRef ({viewAreaCoveragePercentThreshold:50}).current; 
-  const scrollTo = async()=>{
-       if(currentIndex < slides.length-1){
+  const scrollTo=()=>{
+    console.log("last");
+    if(currentIndex < slides.length-1){
          slidesRef.current.scrollToIndex({index:currentIndex+1});
         //  setCurrentIndex(currentIndex+1);
        }else{
-         try{
-             await AsyncStorage.setItem('@view','true');
-         } catch (err){
-            console.log('Error @setItem', err);
-         }
        }
   };
  const percentage=(currentIndex+1)*(100/ slides.length);
