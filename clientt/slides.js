@@ -25,4 +25,4 @@ export default [
         image:require('C:/Users/wazze/OneDrive/Bureau/Nouveau dossier (4)/charitay/clientt/assets/association-word-connected-people-arrows-group-club-organization-connecting-community-society-league-team-guild-46363562.jpg')
     }
 
-];
+]
