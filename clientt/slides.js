@@ -25,4 +25,4 @@ export default [
         image:require('C:\Users\wazze\OneDrive\Bureau\Nouveau dossier (4)\charitay\clientt\assets/dsl.jpg')
     }
 
-];
+]
