@@ -26,7 +26,7 @@ const TabNavigator = () => {
             } else if (route.name === "favorite") {
               iconName = focused ? "heart-outline" : "heart";
             } else if (route.name === "profile") {
-              iconName = focused ? "navigate-outline" : "navigate";
+              iconName = focused ? "person-outline" : "person";
             }
 
             // You can return any component that you like here!
@@ -34,7 +34,8 @@ const TabNavigator = () => {
           },
           tabBarActiveTintColor: "black",
           tabBarInactiveTintColor: "gray",
-          headerShown : false
+          headerShown : false,
+          tabBarShowLabel : false
         })}
       >
         <Tab.Screen name="Home" component={AddEvents} />

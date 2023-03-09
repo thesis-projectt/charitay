@@ -15,6 +15,7 @@ import { shadow, sizes, spacing } from './theme';
 import colors from './colors';
 import Icon from './Icon';
 import FavoriteButton from './FavoriteButton';
+import SectionHeader from './SectionHeader'
 
 
 
@@ -65,8 +66,9 @@ const AddEvents = ({route}) => {
        
      
       ))} 
-     <Button title="see All">see All</Button>
+   
      </ScrollView>
+     <SectionHeader title="All Events" buttonTitle="See All" />
      </View>
   )
 
