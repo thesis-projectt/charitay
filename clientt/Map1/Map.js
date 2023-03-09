@@ -7,19 +7,25 @@ import MapView, {
   PROVIDER_GOOGLE,
  
 } from "react-native-maps";
-import { StyleSheet, View, Image, Text} from "react-native";
+import MyComponent from './swipe'
+import SlidingUpPanel from 'rn-sliding-up-panel';
+import { StyleSheet, View, Image, Text, Animated,ScrollView,TouchableOpacity,Button} from "react-native";
 import * as Location from "expo-location";
 import { getPreciseDistance, getDistance } from "geolib";
 import dummyy from "./dummy.js";
 import MapViewDirections from "react-native-maps-directions";
-import  { GOOGLE_MAPS_KEY } from "@env";
+import Card from "../Map1/Cart"
+import itemData from "./itemData.js";
+// import  { GOOGLE_MAPS_KEY } from "@env";
 const Map = () => {
   const [grouppin, setGrouppin] = useState(dummyy);
-  const [radius, setRaduis] = useState(5000);
+  const [radius, setRaduis] = useState(3000);
   const [destination, setDestination] = useState({
     // latitude: 36.88784160689139,
     // longitude:10.198178751583558,
   });
+
+
   const [pin, setPin] = useState({
     latitude: 36.894252,
     longitude: 10.186974,
@@ -118,15 +124,20 @@ const Map = () => {
         <MapViewDirections
           origin={pin}
           destination={destination}
-          apikey
+          apikey={"AIzaSyB3gw78dU8-sOg2nzSiHi4-7LUgEedSasM"}
           strokeWidth={5}
           strokeColor="#0096FF"
         />
         {/* <Polyline coordinates={[pin, directions]} strokeWidth={4}strokeColor="red" /> */}
 
         <Circle center={pin} radius={radius} />
+       
+    
       </MapView>
+
+      <MyComponent/>
     </View>
+    
   );
 };
 
@@ -134,13 +145,36 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  panel: {
+    flex: 1,
+    backgroundColor: 'white',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
   map: {
     width: "100%",
     height: "100%",
   },
-  MarkerImage: {
+   MarkerImage: {
     width: 50,
     height: 50,
+  },
+   scrollView: {
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    right: 0,
+    paddingVertical: 10,
+  },
+   chipsScrollView: {
+    position:'absolute', 
+    paddingHorizontal:10
+  },
+  cardImage: {
+    flex: 3,
+    width: "100%",
+    height: "100%",
+    alignSelf: "center",
   },
 });
 export default Map;

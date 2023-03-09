@@ -14,18 +14,18 @@ export default Onboarding = () => {
   const navigation=useNavigation()
   const [currentIndex,setCurrentIndex]=useState(0);
   const scrollX =useRef(new Animated.Value(0)).current;
- const slidesRef =useRef(null);
+  const slidesRef =useRef(null);
   const viewableItemsChanged = useRef (({viewableItems})=>{
-    // setCurrentIndex(viewableItems[0].index);
+    setCurrentIndex(viewableItems[0].index);
   }).current;
   
   const viewConfig=useRef ({viewAreaCoveragePercentThreshold:50}).current; 
   const scrollTo=()=>{
-    console.log("last");
+    
     if(currentIndex < slides.length-1){
          slidesRef.current.scrollToIndex({index:currentIndex+1});
-         setCurrentIndex(currentIndex+1);
-       }else{
+        //  setCurrentIndex(currentIndex+1);
+       }else{ navigation.navigate('Signin')
        }
   };
  const percentage=(currentIndex+1)*(100/ slides.length);
