@@ -19,7 +19,7 @@ module.exports = {
 
   getOneAssociation: async (req, res) => {
     try {
-      const associations = await Association.findByPk(req.params.id);
+      const associations = await Association.findOne({where:{email:req.params.email}});
       res.status(200).json(associations);
     } catch (error) {
       res.status(500).send(error);
@@ -40,7 +40,7 @@ module.exports = {
   updateOneAssociation: async (req, res) => {
     try {
       const associations = await Association.update(req.body,{
-        where: {id: req.params.id},
+        where: {email: req.params.email},
       });
       res.status(200).json(associations);
     } catch (error) {
@@ -50,7 +50,7 @@ module.exports = {
 
   deleteOneAssociation: async (req, res) => {
     try {
-      const associations = await Association.destroy({where:{id:req.params.id}});
+      const associations = await Association.destroy({where:{email:req.params.email}});
       res.status(200).json(associations);
     } catch (error) {
       res.status(500).send(error);

@@ -18,23 +18,35 @@ const styles =StyleSheet.create({
     container:{
         flex:1,
         justifyContent:"center",
-        alignItems:"center"
+        alignItems:"center",
+        margin:1
     },
     image :{
       flex:0.7,
-      justifyContent:'center'
+      justifyContent:'center',
+      margin : 40,
+      top:15,
+    //  width:"100%",
+     
     },
     title:{
-      fontWeight:700,
-      fontSize:28,
+      marginTop:1,
+      fontSize:30,
       marginBottom:10,
       color:'#493d8a',
-      textAlign:'center'
+      textAlign:'center',
+      fontWeight: "bold",
+      top: -25
+     
     },
     description:{
-      fontWeight :300,
+      // fontWeight :700,
       color:'#62656b',
       textAlign :'center',
-      paddingHorizontal:64,
+      paddingHorizontal:20,
+      fontWeight: "bold",
+      fontSize:15,
+      top: -10,
+      margin:-1
     }, 
 });

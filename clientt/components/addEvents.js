@@ -6,6 +6,7 @@ import {
   Text,
   View,
   Image,
+  Button
 } from "react-native";
 import axios from 'axios'
 import MainHeader from './MainHeader'
@@ -64,7 +65,7 @@ const AddEvents = ({route}) => {
        
      
       ))} 
-     
+     <Button title="see All">see All</Button>
      </ScrollView>
      </View>
   )
