@@ -5,19 +5,20 @@ import MapView, {
   Marker,
   Polyline,
   PROVIDER_GOOGLE,
+ 
 } from "react-native-maps";
-import { StyleSheet, View, Text, Image } from "react-native";
+import { StyleSheet, View, Image, Text} from "react-native";
 import * as Location from "expo-location";
 import { getPreciseDistance, getDistance } from "geolib";
 import dummyy from "./dummy.js";
 import MapViewDirections from "react-native-maps-directions";
-import { GOOGLE_API_KEY } from "@env";
+// import  { GOOGLE_MAPS_KEY } from "@env";
 const Map = () => {
   const [grouppin, setGrouppin] = useState(dummyy);
-  const [radius, setRaduis] = useState(3000);
+  const [radius, setRaduis] = useState(5000);
   const [destination, setDestination] = useState({
-    latitude: 36.886974020712444,
-    longitude: 10.1948469886891,
+    // latitude: 36.88784160689139,
+    // longitude:10.198178751583558,
   });
   const [pin, setPin] = useState({
     latitude: 36.894252,
@@ -80,17 +81,9 @@ const Map = () => {
             });
           }}
         >
-          <MapViewDirections
-            origin={pin}
-            destination={directions}
-            apikey={GOOGLE_API_KEY}
-            strokeWidth={10}
-            strokeColor="#111111"
-          />
-          <Polyline coordinates={[pin, directions]} strokeWidth={10} />
           <View>
             <Image
-              source={require("../assets/helpme.jpg")}
+              source={require("../assets/help.jpg")}
               style={styles.MarkerImage}
             />
           </View>
@@ -113,12 +106,23 @@ const Map = () => {
                 }}
               >
                 <Image
-                  source={require("../assets/okay.gif")}
+                  source={require("../assets/val.png")}
                   style={styles.MarkerImage}
                 />
+            
+            
+   
               </Marker>
             );
           })}
+        <MapViewDirections
+          origin={pin}
+          destination={destination}
+          apikey
+          strokeWidth={5}
+          strokeColor="#0096FF"
+        />
+        {/* <Polyline coordinates={[pin, directions]} strokeWidth={4}strokeColor="red" /> */}
 
         <Circle center={pin} radius={radius} />
       </MapView>
