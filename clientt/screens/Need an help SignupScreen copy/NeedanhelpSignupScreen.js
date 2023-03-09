@@ -15,6 +15,7 @@ import { authentication } from "../firebase";
 import { getAuth, signInWithPhoneNumber } from "firebase/auth";
 import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
+import { disable } from "../../Axios";
 
 const NeedanhelpSignupScreen = ({ navigation }) => {
   const [password, setpassword] = useState("");
@@ -23,7 +24,7 @@ const NeedanhelpSignupScreen = ({ navigation }) => {
 
   const done = async (value) => {
     try {
-      await axios.post("http://192.168.1.117:3000/api/disable", {
+      await axios.post(`${disable}`, {
         id: value,
         email: email,
       });
@@ -42,7 +43,7 @@ const NeedanhelpSignupScreen = ({ navigation }) => {
           return true;
         })
         .then(() => {
-          navigation.navigate("Signin");
+          navigation.navigate("NeedHelp");
         })
         .catch((err) => {
           if (err.code === "auth/weak-password") {

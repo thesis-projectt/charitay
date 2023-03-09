@@ -8,12 +8,14 @@ import {
   ScrollView,
   TextInput,
 } from "react-native";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { authentication } from "../firebase";
 import Input from "./input";
 import Button from "./button";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
+import { associations } from "../../Axios";
 
 const AssociationSignupScreen = () => {
   const navigation = useNavigation();
@@ -25,7 +27,7 @@ const AssociationSignupScreen = () => {
 
   const done = async () => {
     try {
-      await axios.post("http://192.168.1.117:3000/api/associations", {
+      await axios.post(`${associations}`, {
         name: name,
         email: email,
         description: Descreption,
@@ -45,6 +47,7 @@ const AssociationSignupScreen = () => {
           return true;
         })
         .then(() => {
+
           navigation.navigate("Signin");
         })
         .catch((err) => {
@@ -62,6 +65,7 @@ const AssociationSignupScreen = () => {
   };
 
   return (
+    <ScrollView showsVerticalScrollIndicator={false}> 
     <View style={styles.root}>
       <Text style={styles.title}> Create an account</Text>
 
@@ -84,6 +88,7 @@ const AssociationSignupScreen = () => {
         <TextInput
           style={styles.textAreaContainer}
           placeholder="descreption about your Association "
+          onChangeText={(textt)=>{setDescreption(textt)}}
           underlineColorAndroid="transparent"
           multiline={true}
           numberOfLines={10}
@@ -98,6 +103,7 @@ const AssociationSignupScreen = () => {
         type="tertiary"
       />
     </View>
+    </ScrollView>
   );
 };
 

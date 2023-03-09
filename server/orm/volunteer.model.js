@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
       id:{
         type:DataTypes.STRING,
         primaryKey : true,
-        allowNull : false
+        
       },
      
       name: {
@@ -18,7 +18,10 @@ module.exports = (sequelize, DataTypes) => {
          unique:true
          },
 
-    
+         role:{
+          type:DataTypes.STRING,
+          defaultValue: "Volunteer",
+      },
 
       image: {
          type: DataTypes.STRING,
