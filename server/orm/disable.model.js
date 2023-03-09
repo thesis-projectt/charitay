@@ -1,27 +1,24 @@
 // Define and export the sequelize model that represents the table disable.
 
 module.exports=(sequelize,DataTypes)=>{
-const disable=sequelize.define("disable",{
+const Disable=sequelize.define("disable",{
    id : {
-     type:DataTypes.INTEGER,
-     autoIncrement:true,
+     type:DataTypes.STRING,
      primaryKey : true,
    },
    name:{
       type:DataTypes.STRING,
-      allowNull : false
+      allowNull : true
    },
    email:{
       type:DataTypes.STRING,
       allowNull:false,
       unique: true
    },
-   password:{
-
+   role:{
       type:DataTypes.STRING,
-      allowNull : false,
-      unique : true
-   },
+      defaultValue: "Disable",
+  },
    
    image:{
       type: DataTypes.STRING,
@@ -40,9 +37,9 @@ const disable=sequelize.define("disable",{
       },
    phoneNumber:{
       type:DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
       unique : true 
      },
 },{timestamps:true})
-return disable
+return Disable
 }

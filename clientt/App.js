@@ -1,16 +1,32 @@
 import { StyleSheet, Text, View, SafeAreaView, TextInput } from "react-native";
-import SigninScreen from "./screens/SigninScreen/SigninScreen";
-import SignupScreen from "./screens/SignupScreen/SignupScreen";
-import ForgetPassword from "./screens/ForgetPassword/ForgetPassword";
-import ConfirmePassword from "./screens/ConfirmePassword/CofirmePassword";
+// import Map from "./Map1/Map";
+
+// import SigninScreen from "./screens/SigninScreen/SigninScreen";
+// import SignupScreen from "./screens/SignupScreen/SignupScreen";
+
+// import ForgetPassword from "./screens/ForgetPassword/ForgetPassword";
+// import Navigation from "./screens/Navigation/Navigation";
+// import Onboarding from "./components/Onboarding"
+
+
+// import SigninScreen from "./screens/SigninScreen/SigninScreen";
+// import SignupScreen from "./screens/SignupScreen/SignupScreen";
+// import ForgetPassword from "./screens/ForgetPassword/ForgetPassword";
 import Navigation from "./screens/Navigation/Navigation";
-import Onboarding from "./components/Onboarding"
+// import Onboarding from "./components/Onboarding"
+import { NativeBaseProvider} from "native-base";
+import Eventimage from "./components/Eventimage";
 const App = () => {
   return (
+              
+<NativeBaseProvider>
     <SafeAreaView style={styles.root}>
-      <Onboarding/>
-            {/* <SigninScreen/> */}
-    </SafeAreaView>
+            {/* <Map/> */}
+           {/* //   <Onboarding/> */}
+           {/* <SigninScreen/> */}
+           {/* <Navigation/> */}
+            <Eventimage/>
+   </SafeAreaView></NativeBaseProvider>
   );
 };
 const styles = StyleSheet.create({

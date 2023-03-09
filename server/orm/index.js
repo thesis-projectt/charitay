@@ -17,26 +17,26 @@ db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
 db.Association=require('./association.model')(sequelize,DataTypes) //require the association model
-db.disable=require('./disable.model')(sequelize,DataTypes) // require the disable model
-db.volunteer=require('./volunteer.model')(sequelize,DataTypes)// require the volunteer model
+db.Disable=require('./disable.model')(sequelize,DataTypes) // require the disable model
+db.Volunteer=require('./volunteer.model')(sequelize,DataTypes)// require the volunteer model
 db.Event=require('./event.model')(sequelize,DataTypes) // require the event model 
-db.admin=require('./admin.model')(sequelize,DataTypes)// require the admin model 
+db.Admin=require('./admin.model')(sequelize,DataTypes)// require the admin model 
 
 // many to many relationship disable volunteer
-// db.disable.belongsToMany(db.volunteer,{
-//     through:"disable_volunteer"
-// })
+db.Disable.belongsToMany(db.Volunteer,{
+    through:"disable_volunteer"
+})
 
-// db.volunteer.belongsToMany(db.disable,{
-//     through:"disable_volunteer"
-// })
-//many to many relationship event volunteer
-// db.volunteer.belongsToMany(db.event,{
-//     through:"event_volunteer"
-// })
-// db.event.belongsToMany(db.volunteer,{
-//     through:"event_volunteer"
-// })
+db.Volunteer.belongsToMany(db.Disable,{
+    through:"disable_volunteer"
+})
+// many to many relationship event volunteer                                
+db.Volunteer.belongsToMany(db.Event,{                                 
+    through:"event_volunteer"
+})
+db.Event.belongsToMany(db.Volunteer,{
+    through:"event_volunteer"
+})
 // 1 to many relationship association event
 db.Association.hasMany(db.Event , {
    foreignKey:"associationId",
