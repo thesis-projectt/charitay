@@ -69,6 +69,7 @@ const AddEvents = ({route}) => {
    
      </ScrollView>
      <SectionHeader title="All Events" buttonTitle="See All" />
+     <EventsList data={data}/>
      </View>
   )
 
