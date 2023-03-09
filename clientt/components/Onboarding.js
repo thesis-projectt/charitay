@@ -21,17 +21,17 @@ export default Onboarding = () => {
   
   const viewConfig=useRef ({viewAreaCoveragePercentThreshold:50}).current; 
   const scrollTo=()=>{
-    
+   
     if(currentIndex < slides.length-1){
          slidesRef.current.scrollToIndex({index:currentIndex+1});
         //  setCurrentIndex(currentIndex+1);
-       }else{ navigation.navigate('Signin')
+       }else{ navigation.navigate('Signin');
        }
   };
  const percentage=(currentIndex+1)*(100/ slides.length);
   return (
     <View style ={styles.container}> 
-    <View style={{flex :3}}>
+    <View style={{flex :6}}>
       <FlatList
        data ={slides} renderItem={({item})=> <OnbordingItem item={item}/>}
       horizontal
@@ -62,6 +62,7 @@ const styles =StyleSheet.create({
     container:{
         flex:1,
         justifyContent:"center",
-        alignItems:"center"
+        alignItems:"center",
+        
     }
 });
