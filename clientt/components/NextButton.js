@@ -65,14 +65,16 @@ export default NextButton = ({ scrollTo,percentage }) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: 'center',
+    // flex: 1,
+    // justifyContent: 'center',
     alignItems: 'center',
+    top:-20
   },
   button: {
     position: 'absolute',
     backgroundColor: '#f4338f',
     borderRadius: 100,
     padding: 20,
+    top:27
   },
 });

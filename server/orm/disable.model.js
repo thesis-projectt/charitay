@@ -15,7 +15,10 @@ const Disable=sequelize.define("disable",{
       allowNull:false,
       unique: true
    },
-
+   role:{
+      type:DataTypes.STRING,
+      defaultValue: "Disable",
+  },
    
    image:{
       type: DataTypes.STRING,
