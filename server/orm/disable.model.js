@@ -8,14 +8,17 @@ const Disable=sequelize.define("disable",{
    },
    name:{
       type:DataTypes.STRING,
-      allowNull : false
+      allowNull : true
    },
    email:{
       type:DataTypes.STRING,
       allowNull:false,
       unique: true
    },
-
+   role:{
+      type:DataTypes.STRING,
+      defaultValue: "Disable",
+  },
    
    image:{
       type: DataTypes.STRING,
