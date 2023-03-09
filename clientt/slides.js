@@ -1,28 +1,28 @@
 export default [
     {
         id :'1',
-        title :'Welcome',
-        description :'kDisability is the experience of any condition that makes it more difficult for a person to do certain activities or have equitable access within a given society.',
-        image:require('C:/Users/DELL/Desktop/charity1/charitay/clientt/assets/100.png')
+        title :'charity app',
+        description :"A charity app is a mobile application designed to help individuals and organizations raise funds for charitable causes. It provides a platform where people can make donations, learn about different charities, and track their giving history. The app typically includes features such as a donation tracker, news feed, and social sharing options" ,
+        image:require('./assets/logo.png')
     },
    
     {
         id :'2', 
-        title :'disable',
-        description :'kDisability is the experience of any condition that makes it more difficult for a person to do certain activities or have equitable access within a given society.',
-        image:require('C:/Users/DELL/Desktop/charity1/charitay/clientt/assets/téléchargement.png')
+        title :'charity app',
+        description :"Users can search for and select specific charities they wish to support, donate directly to them, or set up recurring donations. They can also view progress updates on the charity’s fundraising goals, learn more about the impact of their donations, and see how their contributions are making a difference.",
+        image:require('./assets/logo.png')
     },
     {
         id :'3', 
-        title :'volunteer',
-        description :'Volunteers are individuals who freely offer their time, labor, and expertise. Volunteers often work for schools or NGOs, where they typically receive training and report to designated senior staff.',
-        image:require('C:/Users/DELL/Desktop/charity1/charitay/clientt/assets/HELPING-VOLUNTEERS-300x300.png')
+        title :'charity app',
+        description :"Charity apps can also provide information on volunteering opportunities, allowing users to sign up and help out in a variety of ways. Additionally, they may offer features such as event calendars, fundraising challenges, and leaderboards to encourage greater community involvement and engagement with charitable causes.",
+        image:require('./assets/logo.png')
     },
     {
         id :'4', 
-        title :'association',
-        description :'An association (relationship) between two numerical variables can be described by its form, direction, strength, and outliers. If one variable increases as the other variable increases, there is said to be a positive association.',
-        image:require('C:/Users/DELL/Desktop/charity1/charitay/clientt/assets/5-image-redimensionnée-bis.jpg')
+        title :'charity app',
+        description :"Overall, a charity app serves as a convenient and accessible way for people to make a positive impact and support causes they care about.",
+        image:require('./assets/logo.png')
     }
 
-];
+]

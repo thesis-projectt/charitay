@@ -1,7 +1,6 @@
 import { StatusBar } from 'expo-status-bar'
 import React,{useState,useRef} from 'react'
 import { View, Text,StyleSheet,FlatList,Animated } from 'react-native'
-import AsyncStorage from '@react-native-async-storage/async-storage'
 import OnbordingItem from '../components/OnbordingItem'
 import Flesh from '../components/Flesh'
 import NextButton from '../components/NextButton'
@@ -17,7 +16,7 @@ export default Onboarding = () => {
   const scrollX =useRef(new Animated.Value(0)).current;
  const slidesRef =useRef(null);
   const viewableItemsChanged = useRef (({viewableItems})=>{
-    setCurrentIndex(viewableItems[0].index);
+    // setCurrentIndex(viewableItems[0].index);
   }).current;
   
   const viewConfig=useRef ({viewAreaCoveragePercentThreshold:50}).current; 
@@ -25,8 +24,9 @@ export default Onboarding = () => {
     console.log("last");
     if(currentIndex < slides.length-1){
          slidesRef.current.scrollToIndex({index:currentIndex+1});
-        //  setCurrentIndex(currentIndex+1);
+         setCurrentIndex(currentIndex+1);
        }else{
+        navigation.navigate('Signin')
        }
   };
  const percentage=(currentIndex+1)*(100/ slides.length);
@@ -36,7 +36,7 @@ export default Onboarding = () => {
       <FlatList
        data ={slides} renderItem={({item})=> <OnbordingItem item={item}/>}
       horizontal
-      showsHorizontalScrollIndicator ={false}
+      showsHorizontalScrollIndicator
       pagingEnabled
       bounces ={false}
       keyExtractor ={(item)=>item.id}
