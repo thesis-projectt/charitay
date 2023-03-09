@@ -30,8 +30,8 @@ const styles =StyleSheet.create({
      
     },
     title:{
-      marginTop:1,
-      fontSize:30,
+      fontWeight:700,
+      fontSize:28,
       marginBottom:10,
       color:'#493d8a',
       textAlign:'center',
@@ -40,7 +40,7 @@ const styles =StyleSheet.create({
      
     },
     description:{
-      // fontWeight :700,
+      fontWeight :300,
       color:'#62656b',
       textAlign :'center',
       paddingHorizontal:20,
