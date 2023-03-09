@@ -7,8 +7,7 @@ import MapView, {
   PROVIDER_GOOGLE,
  
 } from "react-native-maps";
-// hello world
-// hello world
+
 
 import MyComponent from './swipe'
 import SlidingUpPanel from 'rn-sliding-up-panel';
