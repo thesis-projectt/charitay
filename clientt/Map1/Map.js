@@ -16,8 +16,11 @@ import * as Location from "expo-location";
 import { getPreciseDistance, getDistance } from "geolib";
 import dummyy from "./dummy.js";
 import MapViewDirections from "react-native-maps-directions";
+<<<<<<< HEAD
+=======
 import Card from "../Map1/Cart"
 import itemData from "./itemData.js";
+>>>>>>> 312f36fd4729a25b5b4033ec7a4eb65f7d8c447b
 // import  { GOOGLE_MAPS_KEY } from "@env";
 const Map = () => {
   const [grouppin, setGrouppin] = useState(dummyy);
