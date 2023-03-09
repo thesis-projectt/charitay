@@ -16,13 +16,13 @@ export default [
         id :'3', 
         title :'Charity',
         description :"Charity apps can also provide information on volunteering opportunities, allowing users to sign up and help out in a variety of ways. Additionally, they may offer features such as event calendars, fundraising challenges, and leaderboards to encourage greater community involvement and engagement with charitable causes.",
-        image:require('./assets/logo.png')
+        image:require('./assets/png3.jpg')
     },
     {
         id :'4', 
         title :'App',
         description :"Overall, a charity app serves as a convenient and accessible way for people to make a positive impact and support causes they care about.",
-        image:require('./assets/logo.png')
+        image:require('./assets/dsl.jpg')
     }
 
 ]
