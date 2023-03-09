@@ -14,6 +14,7 @@ import { useNavigation } from "@react-navigation/native";
 import PhoneInput from "react-native-phone-number-input";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import axios from "axios";
+import { volunter } from "../../Axios";
 
 const SignupScreen = () => {
   const navigation = useNavigation();
@@ -25,7 +26,7 @@ const SignupScreen = () => {
 
   const done = async (value) => {
     try {
-      await axios.post("http://192.168.101.5:3000/api/volunteer", {
+      await axios.post(`${volunter}`, {
         id: value,
         name: name,
         email: email,
@@ -64,6 +65,7 @@ const SignupScreen = () => {
   };
 
   return (
+    <ScrollView showsVerticalScrollIndicator={false} > 
     <View style={styles.root}>
       <Text style={styles.title}> Create an account</Text>
       <Input placeholder="UseName" setvalue={setname} value={name} />
@@ -97,6 +99,7 @@ const SignupScreen = () => {
         type="tertiary"
       />
     </View>
+    </ScrollView>
   );
 };
 

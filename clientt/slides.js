@@ -3,7 +3,7 @@ export default [
         id :'1',
         title :'Welcome',
         description :"A charity app is a mobile application designed to help individuals and organizations raise funds for charitable causes. It provides a platform where people can make donations, learn about different charities, and track their giving history. The app typically includes features such as a donation tracker, news feed, and social sharing options" ,
-        image:require('C:/Users/wazze/OneDrive/Bureau/Nouveau dossier (4)/charitay/clientt/assets/100.png')
+        image:require('C:/Users/wazze/OneDrive/Bureau/Nouveau dossier (4)/charitay/clientt/assets/100.jpg')
     },
    
     {

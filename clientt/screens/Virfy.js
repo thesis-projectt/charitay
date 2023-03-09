@@ -40,7 +40,6 @@ const Virfy = ({ navigation }) => {
 
   return (
     <View style={styles.root}>
-      <Text style={styles.title}>Verify yourself as what ?</Text>
 
       <TouchableOpacity style={styles.container}>
         <DropDownPicker
@@ -64,16 +63,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 10,
   },
-  title: {
-    fontSize: 27,
-    fontWeight: "bold",
-    margin: 17,
-    padding: 25,
-    top: 200,
-  },
+ 
 
   container: {
-    top: 200,
+    top: "80%",
     backgroundColor: "white",
     width: "100%",
     padding: 25,
@@ -82,22 +75,23 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     paddingHorizontal: 10,
     marginVertical: 5,
-    height: 210,
-    gap: 40,
+    height: 300,
+    
   },
   button: {
-    width: "104%",
-    padding: 15,
+    width: "90%",
+    padding: 13,
     marginVertical: 5,
     alignItems: "center",
     borderRadius: 5,
     backgroundColor: "#3B71F3",
-    top: 95,
-    left: -6,
+    top:150 ,
+    left: 17,
   },
   text: {
     fontWeight: "bold",
     color: "white",
+    fontSize:15
   },
 });
 export default Virfy;

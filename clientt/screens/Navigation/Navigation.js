@@ -8,8 +8,12 @@ import ForgetPassword from "../ForgetPassword/ForgetPassword";
 import AssociationSignupScreen from "../AssociationSignupScreen/AssociationSignupScreen.js";
 import NeedanhelpSignupScreen from "../Need an help SignupScreen copy/NeedanhelpSignupScreen";
 import Virfy from "../Virfy";
-import Home from "../Home/Home";
 import Onboarding from "../../components/Onboarding";
+import AHome from "../AssociationHome/AHome";
+import DHome from "../DisableHome/DHome";
+import VHome from "../VolunteerHome/VHome";
+
+
 
 const Stack = createNativeStackNavigator();
 
@@ -24,7 +28,9 @@ const Navigation = () => {
         <Stack.Screen name="Virfy" component={Virfy} />
         <Stack.Screen name="Association" component={AssociationSignupScreen} />
         <Stack.Screen name="NeedHelp" component={NeedanhelpSignupScreen} />
-        <Stack.Screen name="home" component={Home} />
+        <Stack.Screen name="VolunteerHome" component={VHome} />
+        <Stack.Screen name="DisableHome" component={DHome} />
+        <Stack.Screen name="AssociationHome" component={AHome} />
       </Stack.Navigator>
     </NavigationContainer>
   );
