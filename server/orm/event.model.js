@@ -7,7 +7,11 @@ module.exports = (sequelize, DataTypes) => {
    //    primaryKey : true,
    //    autoIncrement : true,
    //   },
-
+   nameassociation: {
+    type: DataTypes.STRING,
+    allowNull:true
+    
+    }, 
 
       title: {
          type: DataTypes.STRING,
@@ -19,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
          type: DataTypes.STRING,
          allowNull:false
          
-         },
+         }, 
 
        picture : {
          type : DataTypes.STRING,
@@ -34,7 +38,7 @@ module.exports = (sequelize, DataTypes) => {
 
        associationId : {
          type : DataTypes.INTEGER,
-         allowNull: false,
+         allowNull: false, 
          foreignKey : true
        }  
 

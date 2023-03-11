@@ -42,8 +42,9 @@ const AssociationSignupScreen = () => {
       alert("check your password");
     } else if (password === confirmepassword) {
       createUserWithEmailAndPassword(authentication, email, password)
-        .then(() => {
+        .then((res) => {
           done();
+          console.log(res);
           return true;
         })
         .then(() => {
