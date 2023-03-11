@@ -43,7 +43,7 @@ useEffect (()=>{
     <SafeAreaView>
     
     <Box alignItems="center">
-      <Box maxW="80" rounded="lg" overflow="hidden" borderColor="coolGray.200" borderWidth="1" top={110} _dark={{
+      <Box maxW="80" rounded="lg" overflow="hidden" borderColor="coolGray.200" borderWidth="10" top={110} _dark={{
       borderColor: "coolGray.600",
       backgroundColor: "gray.700"
     }} >

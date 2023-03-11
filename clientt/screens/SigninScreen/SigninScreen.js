@@ -54,7 +54,7 @@ const SigninScreen = () => {
               .then((ar) => {
                 if (ar.data !== null) {
           storeData({id:ar.data.email,role:"as"})
-                  navigation.navigate("Event");
+                  navigation.navigate("AssociationProfile");
                 }
               })
               .catch((err) => {

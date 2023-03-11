@@ -59,7 +59,7 @@ const AddEvent = () => {
   const addevent = () => {
     axios
       .post(`${event}`, {
-        nameassociation: name,
+        
         title: title,
         description: description,
         associationId: id,
