@@ -6,7 +6,6 @@ import Map from "./Map1/Map";
 
 // import ForgetPassword from "./screens/ForgetPassword/ForgetPassword";
 // import Navigation from "./screens/Navigation/Navigation";
-// import Onboarding from "./components/Onboarding"
 
 
 // import SigninScreen from "./screens/SigninScreen/SigninScreen";
@@ -24,8 +23,8 @@ const App = () => {
             {/* <Map/> */}
            {/* //   <Onboarding/> */}
            {/* <SigninScreen/> */}
-           {/* <Navigation/> */}
-            <Eventimage/>
+           <Navigation/>
+            {/* <Eventimage/> */}
    </SafeAreaView></NativeBaseProvider>
   );
 };
