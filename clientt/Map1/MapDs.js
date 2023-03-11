@@ -26,6 +26,8 @@ import MapViewDirections from "react-native-maps-directions";
 import Card from "../Map1/Cart"
 import itemData from "./itemData.js";
 // import  { GOOGLE_MAPS_KEY } from "@env";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { volunter } from "../../Axios";
 import axios from "axios";
 
 const Map = () => {
@@ -76,13 +78,34 @@ const Map = () => {
     return pdis;
      console.log(pdis);
   };
+  const getData = async () => {
+    try {
+      const value = await AsyncStorage.getItem("user");
+      const role = await AsyncStorage.getItem("role");
+      console.log(value, "valueeeeeeeeeeeeeeeeeeee");
 
+      return {id:JSON.parse(value).id,role}
+    } catch (e) {}
+  };
+
+ 
   const DataOfMap=()=>{
-    axios.get('http://192.168.103.5:3000/api/disable')
+    getData().then((res) => {
+      console.log(res.role);
+
+      if (res.role=='ds') {
+        return "disable"
+      } else if(res.role == "vr"){
+        return "volunteer"
+      }
+    }).then(role=>{
+ axios.get(`http://192.168.103.5:3000/api/${role}`)
     .then(response =>{
       console.log(response.data);
       setArr(response.data)
     },[])
+    })
+   
 
   }
   return (
@@ -98,6 +121,7 @@ const Map = () => {
         }}
         showsUserLocation={true}
         onUserLocationChange={(e) => {
+
           console.log("onUserLocationChange", e.nativeEvent.coordinate);
           setPin({
             latitude: e.nativeEvent.coordinate.latitude,
@@ -129,7 +153,7 @@ const Map = () => {
         </Marker>
         {show &&
           arr
-            .filter((e) => calculatePreciseDistance(e) <= radius)
+            .filter((e) => calculatePreciseDistance(e) <= radius&& e.latitude && e.longitude)
             .map((cor) => {
               console.log("reight distence",cor)
               return (
@@ -155,7 +179,7 @@ const Map = () => {
         <MapViewDirections
           origin={pin}
           destination={destination}
-          apikey={""}
+          apikey={'AIzaSyB3gw78dU8-sOg2nzSiHi4-7LUgEedSasM'}
           strokeWidth={5}
           strokeColor="#0096FF"
         />
