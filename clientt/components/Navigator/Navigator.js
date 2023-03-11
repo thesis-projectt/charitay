@@ -5,9 +5,10 @@ import { Image } from "react-native-svg";
 import AddEvents from "../addEvents";
 import Favorite from "../favorite";
 import Profile from "../Profile";
+// import AllEvents from "../AllEvents";
 import { NavigationContainer } from "@react-navigation/native";
 import icons from "../../constant/icons";
-
+import Map from "../../Map1/Map";
 import { Ionicons } from "@expo/vector-icons";
 
 const Tab = createBottomTabNavigator();
@@ -20,13 +21,13 @@ const TabNavigator = () => {
          
           tabBarIcon: ({ focused, color, size }) => {
             let iconName;
-            console.log(route)
+            
             if (route.name === "Home") {
-              iconName = focused ? "home-outline" : "home";
-            } else if (route.name === "favorite") {
-              iconName = focused ? "heart-outline" : "heart";
+              iconName = focused ? "home" : "home";
+            } else if (route.name === "map") {
+              iconName = focused ? "navigate" : "navigate";
             } else if (route.name === "profile") {
-              iconName = focused ? "person-outline" : "person";
+              iconName = focused ? "person" : "person";
             }
 
             // You can return any component that you like here!
@@ -39,8 +40,9 @@ const TabNavigator = () => {
         })}
       >
         <Tab.Screen name="Home" component={AddEvents} />
-        <Tab.Screen name="favorite" component={Favorite}/>
+        <Tab.Screen name="map" component={Map}/>
         <Tab.Screen name="profile" component={Profile}/>
+        {/* <Tab.Screen name="events" component={AllEvents}/> */}
       </Tab.Navigator>
     </NavigationContainer>
   );

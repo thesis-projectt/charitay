@@ -45,6 +45,7 @@
     "react-native-svg": "13.4.0",
     "react-native-vector-icons": "^9.2.0",
     "react-native-web": "~0.18.10",
+    "react-navigation-drawer": "^2.7.2",
     "rn-sliding-up-panel": "^2.4.6",
     "typescript": "^4.9.4"
   },

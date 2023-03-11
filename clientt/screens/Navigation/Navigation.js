@@ -12,8 +12,8 @@ import Onboarding from "../../components/Onboarding";
 import AHome from "../AssociationHome/AHome";
 import DHome from "../DisableHome/DHome";
 import VHome from "../VolunteerHome/VHome";
-
-
+// import AllEvents from "../../components/AllEvents";
+// import TabNavigator from "../../components/Navigator/Navigator";
 
 const Stack = createNativeStackNavigator();
 
@@ -21,7 +21,7 @@ const Navigation = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="homepage" component={Onboarding} />
+        <Stack.Screen name="homepage" component={Onboarding} />
         <Stack.Screen name="Signin" component={SigninScreen} />
         <Stack.Screen name="SignUp" component={SignupScreen} />
         <Stack.Screen name="ForgetPassword" component={ForgetPassword} />
@@ -31,6 +31,8 @@ const Navigation = () => {
         <Stack.Screen name="VolunteerHome" component={VHome} />
         <Stack.Screen name="DisableHome" component={DHome} />
         <Stack.Screen name="AssociationHome" component={AHome} />
+        {/* <Stack.Screen name="TabNavigator" component={TabNavigator}/>
+        <Stack.Screen name="AllEvents" component={AllEvents} /> */}
       </Stack.Navigator>
     </NavigationContainer>
   );
