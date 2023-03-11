@@ -42,9 +42,9 @@ const App = () => {
               
 
     <SafeAreaView style={styles.root}>
-      {/* <Navigation/> */}
+      <Navigation/>
     {/* <MapDs/> */}
-    <MapVal/>
+    {/* <MapVal/> */}
    </SafeAreaView>
   );
 };

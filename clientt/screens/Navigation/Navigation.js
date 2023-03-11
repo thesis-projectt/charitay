@@ -35,7 +35,7 @@ const Navigation = () => {
         <Stack.Screen name="NeedHelp" component={NeedanhelpSignupScreen} />
         <Stack.Screen name="VolunteerHome" component={VHome} />
         <Stack.Screen name="DisableHome" component={DHome} />
-        <Stack.Screen name="AssociationHome" component={AHome} />
+        {/* <Stack.Screen name="AssociationHome" component={AHome} /> */}
         
         <Stack.Screen name="MapDs" component={MapDs} />
         <Stack.Screen name="MapVal" component={MapVal} />
