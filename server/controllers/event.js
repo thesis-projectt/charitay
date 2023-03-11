@@ -6,13 +6,7 @@ const {Association , Event} = require("../orm");
 module.exports = {
 getAllEvents: async (req, res) => {
     try {
-      const events = await Event.findAll({
-     
-        order: [["createdAt", "ASC"]],
-        include: 
-          { model: Association, as: "association", attributes: ["name"] }
-        
-      })
+      const events = await Event.findAll({})
       res.status(200).json(events);
     } catch (error) {
       console.log(error);

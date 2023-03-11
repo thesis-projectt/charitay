@@ -4,7 +4,7 @@ import Svg, { G, Circle } from 'react-native-svg';
 import { AntDesign } from '@expo/vector-icons';
 
 export default NextButton = ({ scrollTo,percentage }) => {
-  const size = 128;
+  const size = 115;
   const strokeWidth = 2;
   const center = size / 2;
   const radius = size / 2 - strokeWidth / 2;
@@ -75,6 +75,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#f4338f',
     borderRadius: 100,
     padding: 20,
-    top:27
+    top:20
   },
 });

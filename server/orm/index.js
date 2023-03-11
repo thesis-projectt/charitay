@@ -1,4 +1,4 @@
-                                                                                                                                                                                                                                                                                                                                                                                                              const { Sequelize, DataTypes, Model } = require('sequelize');
+const { Sequelize, DataTypes, Model } = require('sequelize');
 
 const config= require('../orm/config');
 
@@ -43,7 +43,7 @@ db.Association.hasMany(db.Event , {
 })
   
 db.Event.belongsTo(db.Association, {
-  as:"user",
+  as:"association",
   foreignKey : "associationId",
   onDelete : "CASCADE ",
 });
