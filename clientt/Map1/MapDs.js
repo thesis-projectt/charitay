@@ -23,6 +23,8 @@ import * as Location from "expo-location";
 import { getPreciseDistance, getDistance } from "geolib";
 import dummyy from "./dummy.js";
 import MapViewDirections from "react-native-maps-directions";
+import Card from "../Map1/Cart"
+import itemData from "./itemData.js";
 // import  { GOOGLE_MAPS_KEY } from "@env";
 import axios from "axios";
 
@@ -117,7 +119,7 @@ const Map = () => {
         >
           <View>
             <Image
-              source={require("../assets/help.jpg")}
+              source={require("../assets/help.png")}
               style={styles.MarkerImage}
             />
           </View>

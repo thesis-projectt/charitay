@@ -16,6 +16,8 @@ import colors from './colors';
 import Icon from './Icon';
 import FavoriteButton from './FavoriteButton';
 import SectionHeader from './SectionHeader'
+import EventsList from './EventsList'
+// import Drawer1 from './sideBar/sideBar'
 
 
 
@@ -33,7 +35,7 @@ const AddEvents = ({route}) => {
 },[])
 
     const getHandle = () => {
-        axios.get('http://192.168.104.9:3000/api/events')
+        axios.get('http://192.168.101.4:3000/api/events')
         .then((response) => {
             setData(response.data)
         })
@@ -49,11 +51,11 @@ const AddEvents = ({route}) => {
      <View styles={styles.container}>
      <MainHeader title="Charity"/>
      <ScreenHeader mainTitle="A charitable" secondTitle="Journey"/>
-     <ScrollView horizontal>
+     <ScrollView horizontal >
       {/* <TopEvents data={data}/> */}
       {data.map((item) => (
         
-        <View style = {[styles.card , shadow.dark]}>
+        <View style = {[styles.card , shadow.dark]} key={item.id}>
          <FavoriteButton style={styles.favorite} data={data}/>
            {/* {console.log("🚀 ~ file: addEvents.js:57 ~ AddEvents ~ data:", data)} */}
            <View style= {styles.imageBox}>
@@ -69,7 +71,12 @@ const AddEvents = ({route}) => {
    
      </ScrollView>
      <SectionHeader title="All Events" buttonTitle="See All" />
+<<<<<<< HEAD
      {/* <EventsList data={data}/> */}
+=======
+     <EventsList data={data}/>
+     
+>>>>>>> f00bc8ae67bda31523266ad93e7201e6d02a6cd3
      </View>
   )
 
