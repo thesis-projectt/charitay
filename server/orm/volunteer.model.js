@@ -3,9 +3,9 @@ module.exports = (sequelize, DataTypes) => {
  const Volunteer = sequelize.define("volunteer", {
           
       id:{
-        type:DataTypes.INTEGER,
-        autoIncrement:true,
+        type:DataTypes.STRING,
         primaryKey : true,
+        
       },
      
       name: {
@@ -18,13 +18,10 @@ module.exports = (sequelize, DataTypes) => {
          unique:true
          },
 
-
-        password: {
-         type: DataTypes.STRING,
-         allowNull : false,
-         unique:true
-         },
-
+         role:{
+          type:DataTypes.STRING,
+          defaultValue: "Volunteer",
+      },
 
       image: {
          type: DataTypes.STRING,
@@ -34,13 +31,12 @@ module.exports = (sequelize, DataTypes) => {
 
       longitude: {
          type: DataTypes.DOUBLE,
-         allowNull : false,
          },
       latitude: {
         type: DataTypes.DOUBLE 
       },
       phoneNumber: {
-         type: DataTypes.INTEGER 
+         type: DataTypes.STRING 
         },
       verify: {
          type: DataTypes.BOOLEAN, 

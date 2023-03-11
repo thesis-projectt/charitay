@@ -1,20 +1,33 @@
+import { StyleSheet, Text, View, SafeAreaView, TextInput } from "react-native";
+import TabNavigator from "./components/Navigator/Navigator";
+// import Navigation from "./screens/Navigation/Navigation";
 
-import { StyleSheet, Text, View, SafeAreaView, TextInput } from 'react-native';
-import SigninScreen from './screens/SigninScreen/SigninScreen' ;
-const App = ()=> {
+
+// import SigninScreen from "./screens/SigninScreen/SigninScreen";
+// import SignupScreen from "./screens/SignupScreen/SignupScreen";
+// import ForgetPassword from "./screens/ForgetPassword/ForgetPassword";
+import Navigation from "./screens/Navigation/Navigation";
+// import Onboarding from "./components/Onboarding"
+import { NativeBaseProvider} from "native-base";
+import Eventimage from "./components/Eventimage";
+const App = () => {
   return (
+              
+<NativeBaseProvider>
     <SafeAreaView style={styles.root}>
-            <SigninScreen/>
-    </SafeAreaView>
-   
-     
+            {/* <Map/> */}
+           {/* //   <Onboarding/> */}
+           {/* <SigninScreen/> */}
+           <Navigation/>
+            {/* <Eventimage/> */}
+   </SafeAreaView></NativeBaseProvider>
   );
-}
+};
+
 const styles = StyleSheet.create({
-  root : {
-    flex:1,
-    backgroundColor : '#F9FBFC'
-    
-  }
-})
-export default App
+  root: {
+    flex: 1,
+    backgroundColor: "#F9FBFC",
+  },
+});
+export default App;

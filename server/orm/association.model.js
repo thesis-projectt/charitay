@@ -4,6 +4,7 @@
 module.exports=(sequelize,DataTypes)=>{
     const Association=sequelize.define("association",{
         
+       
   
         name:{
             type:DataTypes.STRING,
@@ -17,23 +18,26 @@ module.exports=(sequelize,DataTypes)=>{
             unique :true,
         },
 
-
-        password:{
+        role:{
             type:DataTypes.STRING,
-            allowNull : false,
-            unique:true
-
+            defaultValue: "Association",
         },
+
 
         description:{
             type:DataTypes.STRING,
-            allowNull : false,
+            allowNull : true,
         },
 
 
         image:{
             type:DataTypes.STRING,
             allowNull : true,
+        },
+
+        password:{
+            type:DataTypes.STRING,
+            unique :true,
         },
 
 
