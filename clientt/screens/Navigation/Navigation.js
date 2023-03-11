@@ -9,11 +9,14 @@ import AssociationSignupScreen from "../AssociationSignupScreen/AssociationSignu
 import NeedanhelpSignupScreen from "../Need an help SignupScreen copy/NeedanhelpSignupScreen";
 import Virfy from "../Virfy";
 import Onboarding from "../../components/Onboarding";
-import AHome from "../AssociationHome/AHome";
+import Profile from "../AssociationHome/Profile";
 import DHome from "../DisableHome/DHome";
 import VHome from "../VolunteerHome/VHome";
 import MapDs from "../../Map1/MapDs";
 import MapVal from "../../Map1/MapVal";
+import EditProfile from "../AssociationHome/EditProfile";
+import AddEvent from "../AssociationHome/AddEvent";
+import Events from "../AssociationHome/Events";
 
 
 
@@ -37,6 +40,10 @@ const Navigation = () => {
         <Stack.Screen name="MapDs" component={MapDs} />
         <Stack.Screen name="MapVal" component={MapVal} />
 
+        <Stack.Screen name="EditProfileView" component={EditProfile} />
+        <Stack.Screen name="AssociationProfile" component={Profile} />
+        <Stack.Screen name="AddEvent" component={AddEvent} />
+        <Stack.Screen name="Event" component={Events} />
       </Stack.Navigator>
     </NavigationContainer>
   );
