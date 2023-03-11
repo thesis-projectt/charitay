@@ -16,6 +16,8 @@ import * as Location from "expo-location";
 import { getPreciseDistance, getDistance } from "geolib";
 import dummyy from "./dummy.js";
 import MapViewDirections from "react-native-maps-directions";
+import Card from "../Map1/Cart"
+import itemData from "./itemData.js";
 // import  { GOOGLE_MAPS_KEY } from "@env";
 const Map = () => {
   const [grouppin, setGrouppin] = useState(dummyy);
@@ -89,7 +91,7 @@ const Map = () => {
         >
           <View>
             <Image
-              source={require("../assets/help.jpg")}
+              source={require("../assets/help.png")}
               style={styles.MarkerImage}
             />
           </View>
@@ -112,7 +114,7 @@ const Map = () => {
                 }}
               >
                 <Image
-                  source={require("../assets/val.png")}
+                  source={require("../assets/volunt.png")}
                   style={styles.MarkerImage}
                 />
             
@@ -124,7 +126,7 @@ const Map = () => {
         <MapViewDirections
           origin={pin}
           destination={destination}
-          apikey
+          apikey={'AIzaSyB3gw78dU8-sOg2nzSiHi4-7LUgEedSasM'}
           strokeWidth={5}
           strokeColor="#0096FF"
         />

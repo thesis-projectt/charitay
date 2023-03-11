@@ -23,6 +23,7 @@ const App = () => {
    </SafeAreaView></NativeBaseProvider>
   );
 };
+
 const styles = StyleSheet.create({
   root: {
     flex: 1,

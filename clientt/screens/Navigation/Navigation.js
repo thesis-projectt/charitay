@@ -24,7 +24,7 @@ const Navigation = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="homepage" component={Onboarding} />
+        <Stack.Screen name="homepage" component={Onboarding} />
         <Stack.Screen name="Signin" component={SigninScreen} />
         <Stack.Screen name="SignUp" component={SignupScreen} />
         <Stack.Screen name="ForgetPassword" component={ForgetPassword} />
