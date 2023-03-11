@@ -16,6 +16,11 @@ import { useState,useEffect } from "react";
 // import ForgetPassword from "./screens/ForgetPassword/ForgetPassword";
 import Navigation from "./screens/Navigation/Navigation";
 // import Onboarding from "./components/Onboarding"
+<<<<<<< HEAD
+=======
+import { NativeBaseProvider} from "native-base";
+import Eventimage from "./components/Eventimage";
+>>>>>>> 289a350b21cd4221feabab29422810a280d98918
 const App = () => {
     const [user , setuser]=useState({})
    const fetchUser = async ()=>{
