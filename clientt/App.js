@@ -1,10 +1,5 @@
 import { StyleSheet, Text, View, SafeAreaView, TextInput } from "react-native";
-import Map from "./Map1/Map";
-// import Card from "./Map1/Cart";
-// import SigninScreen from "./screens/SigninScreen/SigninScreen";
-// import SignupScreen from "./screens/SignupScreen/SignupScreen";
-
-// import ForgetPassword from "./screens/ForgetPassword/ForgetPassword";
+import TabNavigator from "./components/Navigator/Navigator";
 // import Navigation from "./screens/Navigation/Navigation";
 
 
