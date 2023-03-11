@@ -12,6 +12,8 @@ import Onboarding from "../../components/Onboarding";
 import AHome from "../AssociationHome/AHome";
 import DHome from "../DisableHome/DHome";
 import VHome from "../VolunteerHome/VHome";
+import MapDs from "../../Map1/MapDs";
+import MapVal from "../../Map1/MapVal";
 
 
 
@@ -31,6 +33,10 @@ const Navigation = () => {
         <Stack.Screen name="VolunteerHome" component={VHome} />
         <Stack.Screen name="DisableHome" component={DHome} />
         <Stack.Screen name="AssociationHome" component={AHome} />
+        
+        <Stack.Screen name="MapDs" component={MapDs} />
+        <Stack.Screen name="MapVal" component={MapVal} />
+
       </Stack.Navigator>
     </NavigationContainer>
   );

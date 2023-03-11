@@ -9,8 +9,8 @@ getAllEvents: async (req, res) => {
       const events = await Event.findAll({
      
         order: [["createdAt", "ASC"]],
-        include: 
-          { model: Association, as: "association", attributes: ["name"] }
+        include:
+          {model: Association, as: "association", attributes: ["name"] }
         
       })
       res.status(200).json(events);
