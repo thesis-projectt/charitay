@@ -38,7 +38,7 @@ const SigninScreen = () => {
       .then((result) => {
         if (result.data !== null) {
           storeData({id:result.data.id,role:"ds"})
-          navigation.navigate("DisableHome");
+          navigation.navigate("tabNavigator");
         }
         axios
           .get(`${volunter}/${id}`)
@@ -46,7 +46,7 @@ const SigninScreen = () => {
             if (res.data !== null) {
           storeData({id:res.data.id,role:"vr"})
 
-              navigation.navigate("VolunteerHome");
+              navigation.navigate("tabNavigator");
 
             }
             axios
@@ -54,7 +54,7 @@ const SigninScreen = () => {
               .then((ar) => {
                 if (ar.data !== null) {
           storeData({id:ar.data.email,role:"as"})
-                  navigation.navigate("AssociationProfile");
+                  navigation.navigate("tabNavigator");
                 }
               })
               .catch((err) => {
