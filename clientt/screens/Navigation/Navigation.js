@@ -12,6 +12,8 @@ import Onboarding from "../../components/Onboarding";
 import Profile from "../AssociationHome/Profile";
 import DHome from "../DisableHome/DHome";
 import VHome from "../VolunteerHome/VHome";
+import MapDs from "../../Map1/MapDs";
+import MapVal from "../../Map1/MapVal";
 import EditProfile from "../AssociationHome/EditProfile";
 import AddEvent from "../AssociationHome/AddEvent";
 import Events from "../AssociationHome/Events";
@@ -33,6 +35,11 @@ const Navigation = () => {
         <Stack.Screen name="NeedHelp" component={NeedanhelpSignupScreen} />
         <Stack.Screen name="VolunteerHome" component={VHome} />
         <Stack.Screen name="DisableHome" component={DHome} />
+        <Stack.Screen name="AssociationHome" component={AHome} />
+        
+        <Stack.Screen name="MapDs" component={MapDs} />
+        <Stack.Screen name="MapVal" component={MapVal} />
+
         <Stack.Screen name="EditProfileView" component={EditProfile} />
         <Stack.Screen name="AssociationProfile" component={Profile} />
         <Stack.Screen name="AddEvent" component={AddEvent} />
