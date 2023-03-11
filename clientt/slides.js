@@ -6,12 +6,12 @@ export default [
         image:require('./assets/1.jpg')
     },
    
-    {
-        id :'2', 
-        title :'To',
-        description :"Users can search for and select specific charities they wish to support, donate directly to them, or set up recurring donations. They can also view progress updates on the charity’s fundraising goals, learn more about the impact of their donations, and see how their contributions are making a difference.",
-        image:require('./assets/volunteers-750x421.jpg')
-    },
+//     {
+//         id :'2', 
+//         title :'To',
+//         description :"Users can search for and select specific charities they wish to support, donate directly to them, or set up recurring donations. They can also view progress updates on the charity’s fundraising goals, learn more about the impact of their donations, and see how their contributions are making a difference.",
+//         image:require('./assets/volunteers-750x421.jpg')
+//     },
     {
         id :'3', 
         title :'Charity',
