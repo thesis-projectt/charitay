@@ -5,7 +5,6 @@ import { disable, volunter, associations } from "../../Axios";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 
-
  const VHome = ()=>{
 
   const [user , setuser]=useState({})
@@ -16,8 +15,9 @@ import axios from 'axios';
         const jsonValue = JSON.parse(value) ;
     console.log("=============>",jsonValue.id);
   const userdata = await axios.get(`${volunter}/${jsonValue.id}`)
+ 
+  setuser(userdata.data) 
   console.log("userdata",userdata.data);
-  setuser(userdata.data)
     }
     
     }catch(err){
@@ -26,6 +26,7 @@ import axios from 'axios';
   }
    useEffect(()=>{
  fetchUser()
+
    },[])
  return (
   

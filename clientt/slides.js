@@ -25,4 +25,4 @@ export default [
         image:require('./assets/association-word-connected-people-arrows-group-club-organization-connecting-community-society-league-team-guild-46363562.jpg')
     }
 
-]
+ ]

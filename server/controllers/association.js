@@ -4,12 +4,10 @@ const { Association } = require("../orm");
 
 
 module.exports = {
-  //method to fetch all associations from the blog database.
   getAllAssociation: async (req, res) => {
     try {
       const associations = await Association.findAll({
         order: [["createdAt", "ASC"]],
-        // attributes: { exclude: ['userId'] },
       });
       res.status(200).json(associations);
     } catch (error) {
