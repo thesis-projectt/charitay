@@ -15,7 +15,9 @@ import Profilev from "../../screens/VolunteerHome/VHome";
 
 const Tab = createBottomTabNavigator();
 
-const TabNavigator = () => {
+const TabNavigator = ({route}) => {
+  const {user}=route.params
+  console.log(route.params.userId,"hello user");
   return (
       <Tab.Navigator
         screenOptions={({ route }) => ({
@@ -27,6 +29,7 @@ const TabNavigator = () => {
               iconName = focused ? "home" : "home";
             } else if (route.name === "map") {
               iconName = focused ? "navigate" : "navigate";
+              
             } else if (route.name === "profile") {
               iconName = focused ? "person" : "person";
             }

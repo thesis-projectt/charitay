@@ -35,7 +35,7 @@ const AddEvents = ({ route }) => {
 
   const getHandle = () => {
     axios
-      .get("http://192.168.104.6:3000/api/events")
+      .get("http://192.168.103.5:3000/api/events")
       .then((response) => {
         setData(response.data);
       })
@@ -90,7 +90,7 @@ const AddEvents = ({ route }) => {
           </ScrollView>
           </SafeAreaView>
           <SectionHeader title="All Events" buttonTitle="See All" />
-        <EventsList data={data}/>
+        {/* <EventsList data={data}/> */}
         </ScrollView>
       </SafeAreaView>
     </View>
