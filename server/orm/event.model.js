@@ -2,11 +2,11 @@
 module.exports = (sequelize, DataTypes) => {
     const event = sequelize.define("event", {
        
-   //   id : {
-   //    type : DataTypes.INTEGER,
-   //    primaryKey : true,
-   //    autoIncrement : true,
-   //   },
+    //  id : {
+    //   type : DataTypes.INTEGER,
+    //   primaryKey : true,
+    //   autoIncrement : true,
+    //  },
 
 
       title: {

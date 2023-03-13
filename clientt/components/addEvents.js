@@ -19,6 +19,9 @@ import FavoriteButton from "./FavoriteButton";
 import SectionHeader from "./SectionHeader";
 import EventsList from './EventsList'
 // import Drawer1 from './sideBar/sideBar'
+import {event,associations} from "../../clientt/Axios"
+import { useNavigation } from "@react-navigation/native";
+import TabNavigator from "./Navigator/Navigator";
 
 
 const CARD_WIDTH = sizes.width - 150;
@@ -29,7 +32,7 @@ const AddEvents = ({ route }) => {
   const [association , setAssociation] = useState([])
   console.log("🚀 ~ file: addEvents.js:29 ~ AddEvents ~ association:", association)
   // console.log("🚀 ~ file: addEvents.js:26 ~ AddEvents ~ data:", data)
-
+const navigation = useNavigation()
   useEffect(() => {
     getHandle() 
      getAssociation()
@@ -37,7 +40,7 @@ const AddEvents = ({ route }) => {
 
   const getHandle = () => {
     axios
-      .get("http://192.168.104.14:3000/api/events")
+      .get(`${event}`)
       .then((response) => {
         setData(response.data);
       })
@@ -48,7 +51,7 @@ const AddEvents = ({ route }) => {
 
 
   const getAssociation = () => {
-    axios.get("http://192.168.104.14:3000/api/associations")
+    axios.get(`${associations}`)
     .then((response) => {
       setAssociation(response.data)
     })
@@ -73,8 +76,8 @@ const AddEvents = ({ route }) => {
               <View style={[styles.card, shadow.dark]} key={item.id}>
                 <FavoriteButton style={styles.favorite} data={data} />
                 {/* {console.log("🚀 ~ file: addEvents.js:57 ~ AddEvents ~ data:", data)} */}
-                <View style={styles.imageBox}>
-                  <Image
+                <View style={styles.imageBox} >
+                  <Image 
                     source={{ uri: item.image }}
                     style={{
                       width: 240,
@@ -91,8 +94,9 @@ const AddEvents = ({ route }) => {
             ))}
           </ScrollView>
           </SafeAreaView>
-          <SectionHeader title="All Events" buttonTitle="See All" />
-        <EventsList data={data}/>
+          {/* <SectionHeader title="All Events" buttonTitle="See All" />*/}
+        <EventsList data={data}/> 
+       
         </ScrollView>
       </SafeAreaView>
     </View>

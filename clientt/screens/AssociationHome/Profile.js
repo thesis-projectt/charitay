@@ -7,6 +7,8 @@ import {
   SafeAreaView,
   Pressable,
   Touchable,
+  ScrollView,
+  TouchableOpacity
 } from "react-native";
 import { disable, volunter, associations } from "../../Axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -22,22 +24,33 @@ import {
   HStack,
   Heading,
   Button,
-  AlertDialog,
+  AlertDialog, 
+  Icon,
+  Flex,
+ 
 } from "native-base";
 import { MaterialCommunityIcons } from '@expo/vector-icons'
+import Events from "./Events";
+import { Entypo } from '@expo/vector-icons'; 
+import { signOut } from "firebase/auth";
+import { async } from "@firebase/util";
+
 
 const Profile = () => {
   const [user, setuser] = useState({});
   const [id , setid]=useState("")
+
   const fetchUser = async () => {
     try {
       const value = await AsyncStorage.getItem("user");
       if (value !== null) {
         const jsonValue = JSON.parse(value);
-        setid(jsonValue.is)
+        console.log(jsonValue.id);
+        setid(jsonValue.id)
         const userdata = await axios.get(`${associations}/${jsonValue.id}`);
-        console.log("userdata", userdata.data);
+        console.log("profile", userdata.data);
         setuser(userdata.data);
+       console.log(user);
        
       }
     } catch (err) {
@@ -50,7 +63,7 @@ const Profile = () => {
 
 const deletee = () =>{
 axios.delete(`${associations}/${id}`).then(()=>{
-localStorage.removeItem("user")
+  deletefromLocalStorage()
 }).catch((err)=>{console.log(err);})
 }
 
@@ -68,6 +81,23 @@ localStorage.removeItem("user")
         console.log(error);
       });
   };
+  const deletefromLocalStorage = async()=>{
+try {
+await AsyncStorage.removeItem("user")
+} catch (err){
+  console.log(err);
+}
+
+  }
+
+const logout = ()=>{
+  signOut(authentication).then(() => {
+   deletefromLocalStorage()
+  }).catch((error) => {
+   console.log(error);
+  });
+  
+}
 
   const [isOpen, setIsOpen] = useState(false);
   const onClose = () => setIsOpen(false);
@@ -75,31 +105,30 @@ localStorage.removeItem("user")
   const navigation = useNavigation();
 
   return (
+
+
     <View>
-      <Box alignItems="center" top="90">
+      <Box alignItems="center" top="1">
+        <TouchableOpacity style={{margin:10}}>
+        <Entypo name="log-out" size={29}  color="#22d3ee" onPress={()=>{
+          logout(), navigation.navigate("Signin")    }}/> 
+       </TouchableOpacity>
         <Box
           maxW="100%"
           maxH="690"
-          backgroundColor={"#fdf4ff"}
-          
-        
-         
-        
-        >
+          backgroundColor={"#fdf4ff"}>
           <Box>
-            <AspectRatio w="100%" ratio={26 / 19} >
+            <AspectRatio w="100%" ratio={20 / 15} >
               <Image 
               resizeMode="contain"
-                source={{
-                  uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmo5eSEhlXUDcaW-3Fm9d5LLBTEpoWkXBV7A&usqp=CAU",
-                }}
+                source={{uri:user.image}}
                 alt="image"
               />
             </AspectRatio>
           </Box>
-          <Stack p="7" space={7}>
+          <Stack p="7" space={1}>
             <Stack space={6}>
-              <Heading>The Garden City</Heading>
+              <Heading>{user.name}</Heading>
               <View
                 style={{
                   // backgroundColor: "#f5f5f5",
@@ -111,30 +140,24 @@ localStorage.removeItem("user")
                  
                 <Text style={{ fontSize: 20, margin: 1, color: "#525252", left:-49 }}>
                <MaterialCommunityIcons name="email-receive-outline" size={24} color="#525252"  />
-                  Charity@gmail.com
+                  {user.email}
                 </Text>
               </View>
             </Stack>
             <Text style={{ fontSize: 16 }}>
-              The Board of Directors (BoD) are often volunteers with a limited
-              term and limited time to devote to the association’s business. If
-              there is a problem with service delivery, it is the BoD’s
-              responsibility to take care of it. That is what the membership
-              expects them to do when the membership elects them to that role.
-              The Board makes decisions that are in the best interest of the
-              membership and association.
+             {user.description}
             </Text>
           </Stack>
 
           <Center>
             <Button
-              colorScheme="danger"
               onPress={() => setIsOpen(!isOpen)}
-              style={{ right: 115 , top:-15}}
+              style={{ right: 135 , top:-15}}
             >
               Delete Account
             </Button>
-           
+            <Button onPress={()=>navigation.navigate("EditProfileView")} style={{width:100,left:150,top:-55}} >Edit Profile</Button>
+            <Button onPress={()=>navigation.navigate("demo")} style={{width:100,left:15,top:-97}} >Events</Button>
             <AlertDialog
               leastDestructiveRef={cancelRef}
               isOpen={isOpen}
@@ -165,16 +188,18 @@ localStorage.removeItem("user")
               </AlertDialog.Content>
 
             </AlertDialog>
-          <Button onPress={()=>navigation.navigate("EditProfileView")} style={{width:100,left:130,top:-55}} >Edit Profile</Button>
+          
           </Center>
-         
+          
         </Box>
        
       </Box>
       <View>
-      
+       
       </View>
-    </View>
+     
+
+        </View>
   );
 };
 export default Profile;

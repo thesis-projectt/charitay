@@ -1,7 +1,7 @@
 export default [
     {
         id :'1',
-        title :'charity app',
+        title :'Welcome',
         description :"A charity app is a mobile application designed to help individuals and organizations raise funds for charitable causes. It provides a platform where people can make donations, learn about different charities, and track their giving history. The app typically includes features such as a donation tracker, news feed, and social sharing options" ,
         image:require('./assets/100.jpg')
     },
@@ -14,13 +14,13 @@ export default [
     },
     {
         id :'3', 
-        title :'charity app',
+        title :'charity ',
         description :"Charity apps can also provide information on volunteering opportunities, allowing users to sign up and help out in a variety of ways. Additionally, they may offer features such as event calendars, fundraising challenges, and leaderboards to encourage greater community involvement and engagement with charitable causes.",
         image:require('./assets/disabled-people-help-flat-design-long-shadow-glyph-icon-volunteer-responsibility-for-handicapped-nursing-care-man-carries-invalid-in-wheelchair-silhouette-illustration-vector.jpg')
     },
     {
         id :'4', 
-        title :'charity app',
+        title :' app',
         description :"Overall, a charity app serves as a convenient and accessible way for people to make a positive impact and support causes they care about.",
         image:require('./assets/association-word-connected-people-arrows-group-club-organization-connecting-community-society-league-team-guild-46363562.jpg')
     }

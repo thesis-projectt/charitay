@@ -65,8 +65,14 @@ addEvent: async (req, res) => {
     }
   },
 
-
- 
+  getOneEvent: async (req, res) => {
+    try {
+      const Event = await Event.findOne({where:{id:req.params.id}});
+      res.status(200).json(Event);
+    } catch (error) {
+      res.status(500).send(error);
+    }
+  },
 
 
 

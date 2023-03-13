@@ -24,45 +24,39 @@ import { disable, volunter, associations, event } from "../../Axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import { useNavigation } from "@react-navigation/native"; 
+import * as ImagePicker from "expo-image-picker";
 
 
-const UpdateEvent = () => {
+const UpdateEvent = ({ route }) => {
   const [image, setimage] = useState(null);
   const [title, settitle] = useState("");
   const [description, setdescription] = useState("");
   const [date, setdate] = useState("");
   const [name, setname] = useState("");
+  const { idd } = route.params;
   const navigation=useNavigation()
-  const [user, setuser] = useState({});
-  const [id, setid] = useState("");
-  const fetchUser = async () => {
-    try {
-      const value = await AsyncStorage.getItem("user");
-      if (value !== null) {
-        const jsonValue = JSON.parse(value);
-        setid(jsonValue.id);
-        const userdata = await axios.get(`${associations}/${jsonValue.id}`);
-        console.log("userdata", userdata.data);
-        setuser(userdata.data);
-        setid(userdata.data.id);
-        setname(userdata.name);
-      }
-    } catch (err) {
-      console.log(err);
+
+  console.log(idd);
+  const handleImagePicker = async () => {
+    const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
+    if (permissionResult.granted === false) {
+      alert("Permission to access camera roll is required!");
+      return;
+    }
+
+    const result = await ImagePicker.launchImageLibraryAsync();
+    if (!result.cancelled) {
+      setimage(result.uri);
+
     }
   };
-  useEffect(() => {
-    fetchUser();
-  }, []);
-  console.log(name);
+ 
 
   const Update = () => {
     axios
-      .put(`${event}/${id}`, {
-        nameassociation: name,
+      .put(`${event}/${idd}`, {
         title: title,
         description: description,
-        associationId: id,
         date: date,
       })
       .then((result) => {
@@ -88,18 +82,20 @@ const UpdateEvent = () => {
           top={79}
           left={5}
         >
-          <Fab
-            renderInPortal={false}
-            colorScheme="danger"
-            shadow={2}
-            size="sm"
-            icon={<Ionicons name="add" size={24} color="white" />}
-          />
+        
         </HStack>
+        <Button style={{width: 50, height: 50 , borderRadius:50 , top:39, margin:5}} onPress={handleImagePicker}>
+            
+            <Ionicons name="add" size={24} color="white"  />
+                  
+                  </Button>
+        
         <Image
           resizeMode="contain"
-          style={{ width: 340, height: 350, top: -240, left: 35 }}
-          source={image}
+          style={{ width: 340, height: 350, top: -300, left: 35 }}
+          source={{
+            uri:image
+          }}
         />
 
         <View style={styles.form}>

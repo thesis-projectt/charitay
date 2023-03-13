@@ -7,15 +7,16 @@ import { useState,useEffect } from "react";
 // import SignupScreen from "./screens/SignupScreen/SignupScreen";
 
 // import ForgetPassword from "./screens/ForgetPassword/ForgetPassword";
-// import Navigation from "./screens/Navigation/Navigation";
-// import Onboarding from "./components/Onboarding"
-import TabNavigator from "./components/Navigator/Navigator";
-// import SigninScreen from "./screens/SigninScreen/SigninScreen";
-// import SignupScreen from "./screens/SignupScreen/SignupScreen";
-// import ForgetPassword from "./screens/ForgetPassword/ForgetPassword";
 import Navigation from "./screens/Navigation/Navigation";
+// import Onboarding from "./components/Onboarding"
+// import TabNavigator from "./components/Navigator/Navigator";
+// import SigninScreen from "./screens/SigninScreen/SigninScreen";
+import SignupScreen from "./screens/SignupScreen/SignupScreen";
+// import ForgetPassword from "./screens/ForgetPassword/ForgetPassword";
+// import Navigation from "./screens/Navigation/Navigation";
 import { NativeBaseProvider} from "native-base";
 // import Eventimage from "./components/Eventimage";
+import Profile from "./screens/AssociationHome/Profile";
 
 
 const App = () => {
@@ -24,12 +25,9 @@ const App = () => {
               
 <NativeBaseProvider>
     <SafeAreaView style={styles.root}>
-    
-      <Navigation/>
-      {/* <TabNavigator/> */}
-    {/* <MapDs/> */}
-    {/* <MapVal/> */}
-   </SafeAreaView></NativeBaseProvider>
+<Navigation/>
+   </SafeAreaView>
+   </NativeBaseProvider>
   );
 };
 
