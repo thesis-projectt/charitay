@@ -35,21 +35,23 @@ const SigninScreen = () => {
       .then((result) => {
         if (result.data !== null) {
           storeData({id:result.data.id,role:"ds"})
-          navigation.navigate("DisableHome");
+          navigation.navigate("tabNavigator",{userId:id});
         }
         axios
           .get(`${volunter}/${id}`)
           .then((res) => {
             if (res.data !== null) {
           storeData({id:res.data.id,role:"vr"})
-              navigation.navigate("VolunteerHome");
+
+              navigation.navigate("tabNavigator",{userId:id});
+
             }
             axios
               .get(`${associations}/${email}`)
               .then((ar) => {
                 if (ar.data !== null) {
           storeData({id:ar.data.email,role:"as"})
-                  navigation.navigate("Event");
+                  navigation.navigate("tabNavigator");
                 }
               })
               .catch((err) => {
@@ -68,6 +70,7 @@ const SigninScreen = () => {
         console.log(firedata);
         console.log("gxfgfg",firedata._tokenResponse.localId, firedata._tokenResponse.email);
         getuser(firedata._tokenResponse.localId, firedata._tokenResponse.email);
+        console.log(firedata._tokenResponse.localId,"hello im user");
         return true;
       })
       .catch((err) => {
