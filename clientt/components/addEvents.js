@@ -71,7 +71,7 @@ const AddEvents = ({ route }) => {
             {association.map((item) => (
               <View style={[styles.card, shadow.dark]} key={item.id}>
                 <FavoriteButton style={styles.favorite} data={data} />
-                {/* {console.log("🚀 ~ file: addEvents.js:57 ~ AddEvents ~ data:", data)} */}
+                {console.log("🚀 ~ file: addEvents.js:57 ~ AddEvents ~ data:", data)}
                 <View style={styles.imageBox}>
                   <Image
                     source={{ uri: item.image }}
@@ -84,14 +84,14 @@ const AddEvents = ({ route }) => {
                   />
                 </View>
                 <View style={styles.titleBox}>
-                  {/* <Text style={styles.title}>{item.name}</Text> */}
+                  <Text style={styles.title}>{item.name}</Text>
                 </View>
               </View>
             ))}
           </ScrollView>
           </SafeAreaView>
           <SectionHeader title="All Events" buttonTitle="See All" />
-        <EventsList data={data}/>
+        {/* <EventsList data={data}/> */}
         </ScrollView>
       </SafeAreaView>
     </View>
