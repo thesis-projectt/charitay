@@ -8,14 +8,17 @@ import Profile from "../Profile";
 // import AllEvents from "../AllEvents";
 import { NavigationContainer } from "@react-navigation/native";
 import icons from "../../constant/icons";
-import Map from "../../Map1/Map";
+// import Map from "../../Map1/Map";
 import { Ionicons } from "@expo/vector-icons";
+import Map from "../../Map1/MapDs";
+import Profilev from "../../screens/VolunteerHome/VHome";
 
 const Tab = createBottomTabNavigator();
 
-const TabNavigator = () => {
+const TabNavigator = ({route}) => {
+  const {user}=route.params
+  console.log(route.params.userId,"hello user");
   return (
-    <NavigationContainer>
       <Tab.Navigator
         screenOptions={({ route }) => ({
          
@@ -26,6 +29,7 @@ const TabNavigator = () => {
               iconName = focused ? "home" : "home";
             } else if (route.name === "map") {
               iconName = focused ? "navigate" : "navigate";
+              
             } else if (route.name === "profile") {
               iconName = focused ? "person" : "person";
             }
@@ -41,10 +45,8 @@ const TabNavigator = () => {
       >
         <Tab.Screen name="Home" component={AddEvents} />
         <Tab.Screen name="map" component={Map}/>
-        <Tab.Screen name="profile" component={Profile}/>
-        {/* <Tab.Screen name="events" component={AllEvents}/> */}
+        <Tab.Screen name="profile" component={Profilev}/>
       </Tab.Navigator>
-    </NavigationContainer>
   );
 };
 
