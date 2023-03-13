@@ -40,7 +40,7 @@ const navigation = useNavigation()
 
   const getHandle = () => {
     axios
-      .get(`${event}`)
+      .get("http://192.168.104.6:3000/api/events")
       .then((response) => {
         setData(response.data);
       })
@@ -94,9 +94,8 @@ const navigation = useNavigation()
             ))}
           </ScrollView>
           </SafeAreaView>
-          {/* <SectionHeader title="All Events" buttonTitle="See All" />*/}
-        <EventsList data={data}/> 
-       
+          <SectionHeader title="All Events" buttonTitle="See All" />
+        <EventsList data={data}/>
         </ScrollView>
       </SafeAreaView>
     </View>
