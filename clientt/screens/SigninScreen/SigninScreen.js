@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   ScrollView,
 } from "react-native";
-import Logo from "../../assets/logo.png";
+import Logo from "../../assets/Logo.png";
 import Input from "./input";
 import Button from "./button";
 import { useNavigation } from "@react-navigation/native";
