@@ -48,13 +48,14 @@ db.Event.belongsTo(db.Association, {
   onDelete : "CASCADE ",
 });
 // 1 to many relationship PaymentD event
-db.PaymentD.hasMany(db.Event,{
-  foreignKey:"eventid",
+db.Volunteer.hasMany(db.Event,{
+  foreignKey:"userid",
 });
 
-db.Event.hasMany(db.PaymentD,{
-  foreignKey:"eventid",
+db.PaymentD.belongsTo(db.Volunteer,{
+  foreignKey:"userid",
 });
+
 
 db.sequelize.sync()
  
