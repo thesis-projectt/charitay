@@ -17,20 +17,44 @@ import colors from "./colors";
 import Icon from "./Icon";
 import FavoriteButton from "./FavoriteButton";
 import SectionHeader from "./SectionHeader";
-import EventsList from './EventsList'
+import EventsList from "./EventsList";
 // import Drawer1 from './sideBar/sideBar'
+import { event, associations } from "../../clientt/Axios";
+import { useNavigation } from "@react-navigation/native";
+import TabNavigator from "./Navigator/Navigator";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Box } from "native-base";
 
 const CARD_WIDTH = sizes.width - 150;
 const CARD_HEIGTH = 200;
 
 const AddEvents = ({ route }) => {
   const [data, setData] = useState([]);
-  const [association , setAssociation] = useState([])
-  console.log("🚀 ~ file: addEvents.js:29 ~ AddEvents ~ association:", association)
+  const [association, setAssociation] = useState([]);
+  const [id, setid] = useState("");
+  console.log(
+    "🚀 ~ file: addEvents.js:29 ~ AddEvents ~ association:",
+    association
+  );
   // console.log("🚀 ~ file: addEvents.js:26 ~ AddEvents ~ data:", data)
+  const navigation = useNavigation();
+
+  const getuser = async () => {
+    try {
+      const value = await AsyncStorage.getItem("user");
+      if (value !== null) {
+        const jsonValue = JSON.parse(value);
+        setid(jsonValue.id);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   useEffect(() => {
-    getHandle() , getAssociation()
+    getHandle();
+    getAssociation();
+    getuser();
   }, []);
 
   const getHandle = () => {
@@ -44,53 +68,64 @@ const AddEvents = ({ route }) => {
       });
   };
 
-
   const getAssociation = () => {
-    axios.get("http://192.168.104.4:3000/api/associations")
-    .then((response) => {
-      setAssociation(response.data)
-    })
-    .catch((error) => {
-      console.log(error);
-    })
-  }
+    axios
+      .get("http://192.168.104.4:3000/api/associations")
+      .then((response) => {
+        setAssociation(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
-
+  // console.log("=========================>>>>>>>>>>>>>>>>>>>", id);
 
   return (
     <View styles={styles.container}>
       <SafeAreaView>
-       
         <ScrollView>
           <MainHeader title="Charity" />
           <ScreenHeader mainTitle="A charitable" secondTitle="Journey" />
           <SafeAreaView>
-          <ScrollView horizontal>
-            {/* <TopEvents data={data}/> */}
-            {association.map((item) => (
-              <View style={[styles.card, shadow.dark]} key={item.id}>
-                <FavoriteButton style={styles.favorite} data={data} />
-                {/* {console.log("🚀 ~ file: addEvents.js:57 ~ AddEvents ~ data:", data)} */}
-                <View style={styles.imageBox}>
-                  <Image
-                    source={{ uri: item.image }}
-                    style={{
-                      width: 240,
-                      height: 200,
-                      borderRadius: 20,
-                      resizeMode: "cover",
-                    }}
-                  />
-                </View>
-                <View style={styles.titleBox}>
-                  {/* <Text style={styles.title}>{item.name}</Text> */}
-                </View>
-              </View>
-            ))}
-          </ScrollView>
+            <ScrollView horizontal>
+              {/* <TopEvents data={data}/> */}
+              {association.map((item) => (
+                <TouchableOpacity
+                  onPress={() => {
+                    if (item.email === id) {
+                      navigation.navigate("AssociationProfile", {
+                        confirmm: false,
+                      });
+                    } else {
+                      navigation.navigate("AssociationProfile", {
+                        confirmm: true,
+                        idd: item.email,
+                      });
+                    }
+                  }}
+                >
+                  <View style={[styles.card, shadow.dark]} key={item.id}>
+                    <FavoriteButton style={styles.favorite} data={data} />
+
+                    <View style={styles.imageBox}>
+                      <Image
+                        source={{ uri: item.image }}
+                        style={{
+                          width: 240,
+                          height: 200,
+                          borderRadius: 20,
+                          resizeMode: "cover",
+                        }}
+                      />
+                    </View>
+                  </View>
+                </TouchableOpacity>
+              ))}
+            </ScrollView>
           </SafeAreaView>
           <SectionHeader title="All Events" buttonTitle="See All" />
-        <EventsList data={data}/>
+          <EventsList data={data} />
         </ScrollView>
       </SafeAreaView>
     </View>
