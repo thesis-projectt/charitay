@@ -1,4 +1,4 @@
-import { HStack } from "native-base";
+import { Button, HStack } from "native-base";
 import React from "react";
 import {
   Image,
@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import colors from "./colors";
 import { shadow, sizes, spacing } from "./theme";
+import { useNavigation } from "@react-navigation/native"; 
 
 const CARD_WIDTH = 160;
 const CARD_HEIGTH = 220;
@@ -17,10 +18,15 @@ const CARD_HEIGTH = 220;
 const EventsList = (props) => {
   //   console.log("🚀 ~ file: EventsList.js:13 ~ EventsList ~ props:", props);
   // const data=[...props.data,...props.data]
+  const navigation=useNavigation()
   return (
     <HStack flexWrap={1}>
       {props.data.map((item, index) => (
-        <TouchableOpacity style={styles.cardContainer}>
+        <TouchableOpacity onPress={() =>
+          navigation.navigate("EventDetails", {
+            idd: item.id,
+            associationId:item.associationId
+          })} style={styles.cardContainer} key={index}>
           <View style={styles.container}>
             <View key={item.id} style={[styles.card, shadow.light]}>
               <View style={styles.imageBox}>
@@ -29,7 +35,7 @@ const EventsList = (props) => {
               <View style={styles.footer}>
                 <View style={styles.titleBox}>
                   <Text style={styles.title}>{item.title}</Text>
-                  <Text style={styles.description}>{item.description}</Text>
+                  {/* <Text style={styles.description}>{item.description}</Text> */}
                 </View>
               </View>
             </View>

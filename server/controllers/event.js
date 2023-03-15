@@ -65,9 +65,28 @@ addEvent: async (req, res) => {
     }
   },
 
+  getOneEvent: async (req, res) => {
+    try {
+      console.log(req.params.id);
+      const Events = await Event.findOne({where:{id:req.params.id},  include: 'association' });
+      res.status(200).json(Events);
+    } catch (error) {
+      console.log(error);
+      res.send(error);
+    }
+  },
 
- 
 
+getEvents: async (req, res) => {
+    try {
+
+      const Events = await Event.findAll({where:{associationId:req.params.associationId}});
+      res.status(200).json(Events);
+    } catch (error) {
+      console.log(error);
+      res.send(error);
+    }
+  },
 
 
 
