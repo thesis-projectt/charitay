@@ -23,21 +23,26 @@ import * as Location from "expo-location";
 import { getPreciseDistance, getDistance } from "geolib";
 import dummyy from "./dummy.js";
 import MapViewDirections from "react-native-maps-directions";
-import Card from "../Map1/Cart"
+import Card from "../Map1/Cart";
 import itemData from "./itemData.js";
 // import  { GOOGLE_MAPS_KEY } from "@env";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { url } from "../Axios";
 import axios from "axios";
 
 const Map = () => {
   // const [grouppin, setGrouppin] = useState(dummyy);
-  const[arr, setArr]=useState([]);
-  const [radius, setRadius] = useState(5000);
+  const [arr, setArr] = useState([]);
+  const [radius, setRadius] = useState(2000);
   const [destination, setDestination] = useState({
     // latitude: 36.88784160689139,
     // longitude:10.198178751583558,
   });
-  const [show, setShow] = useState(false);
 
+  const [loc, setLocation] = useState(false);
+  const [show, setShow] = useState(false);
+  const [token, setToken] = useState(null);
+  const [role, setRole] = useState("vr");
   const [pin, setPin] = useState({
     latitude: 36.894252,
     longitude: 10.186974,
@@ -46,15 +51,56 @@ const Map = () => {
     latitude: 36.88784160689139,
     longitude: 10.198178751583558,
   });
+  const getData = async (alt, long) => {
+    try {
+      const value = await AsyncStorage.getItem("user");
+      // const role = await AsyncStorage.getItem("role");
+      const jsonValue = JSON.parse(value);
+      console.log("======>>>>>amiiiiiiiiiiiin", jsonValue.id);
+      console.log("======>>>>>rjaaaaaaaaab", jsonValue.role);
+      console.log("phhhhhh", jsonValue.phoneNumber);
+      setToken(jsonValue);
+      setRole(jsonValue.role);
+      // console.log(JSON.parse(value).id,JSON.parse(value).role, "valueeeeeeeeeeeeeeeeeeee");
+      if (jsonValue.role === "vr") {
+        // console.log("qqqqqqqqq", alt,long);
+        axios
+          .put(`${url}/api/volunteer/${jsonValue.id}`, {
+            latitude: alt,
+            longitude: long,
+          })
+          .then((res) => {
+            console.log(res.data);
+          })
+          .catch((err) => {
+            console.log("errer comming from put rq", err);
+          });
+      } else if (jsonValue.role === "ds") {
+        axios
+          .put(`${url}/api/disable/${jsonValue.id}`, pin)
+          .then((res) => {
+            console.log(res.data);
+          })
+          .catch((err) => {
+            console.log(err, "err");
+          });
+      }
+      return jsonValue;
+    } catch (e) {
+      console.log(e, "rrrrrrrr");
+    }
+  };
+  // useEffect(() => {
+  //   getData();
+  // }, [loc]);
+
   useEffect(() => {
-    // DataOfMap()
     (async () => {
       let { status } = await Location.requestForegroundPermissionsAsync();
       if (status !== "granted") {
         console.log("Permission to access location was denied");
         return;
       }
-     
 
       let location = await Location.getCurrentPositionAsync({});
       // console.log(location);
@@ -62,116 +108,313 @@ const Map = () => {
         latitude: location.coords.latitude,
         longitude: location.coords.longitude,
       });
+      setLocation(!loc);
+      getData(location.coords.altitude, location.coords.longitude);
     })();
   }, []);
-   useEffect(()=>{
-        DataOfMap()
-      },[])
+  useEffect(() => {
+    DataOfMap();
+  }, []);
   const calculatePreciseDistance = (element) => {
-    console.log("kkkkkk",element);
-    var pdis = getPreciseDistance(pin, {
+    if (element.longitude != null && element.latitude != null) {
+      console.log("kkkkkk", element);
+      var pdis = getPreciseDistance(pin, {
         latitude: element.latitude,
         longitude: element.longitude,
       });
-    return pdis;
-     console.log(pdis);
+      console.log(">>>>>>", pdis);
+      return pdis;
+    }
   };
 
-  const DataOfMap=()=>{
-    axios.get('http://192.168.103.5:3000/api/disable')
-    .then(response =>{
-      console.log(response.data);
-      setArr(response.data)
-    },[])
+  const DataOfMap = () => {
+    getData()
+      .then((res) => {
+        console.log(res.role, "roleeee");
+        return res.role;
+      })
+      .then((role) => {
+        if (role == "vr") {
+          axios.get(`${url}/api/${"disable"}`).then((response) => {
+            setArr(response.data);
+          }, []);
+        } else {
+          axios.get(`${url}/api/${"volunteer"}`).then((response) => {
+            setArr(response.data);
+          }, []);
+        }
+      });
+  };
 
-  }
-  return (
-    <View style={styles.container}>
-      <MapView
-        provider={PROVIDER_GOOGLE}
-        style={styles.map}
-        initialRegion={{
-          latitude: 36.894252,
-          longitude: 10.186974,
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.0421,
-        }}
-        showsUserLocation={true}
-        onUserLocationChange={(e) => {
-          console.log("onUserLocationChange", e.nativeEvent.coordinate);
-          setPin({
-            latitude: e.nativeEvent.coordinate.latitude,
-            longitude: e.nativeEvent.coordinate.longitude,
-          });
-        }}
-      >
-        <Marker
-          coordinate={pin}
-          description="i need help plz"
-          draggable={true}
-          onDragStart={(e) => {
-            console.log("drag start", e.nativeEvent);
+  if (role == "ds") {
+    console.log(jsonValue);
+    return (
+      <View style={styles.container}>
+        <MapView
+          provider={PROVIDER_GOOGLE}
+          style={styles.map}
+          initialRegion={{
+            latitude: 36.894252,
+            longitude: 10.186974,
+            latitudeDelta: 0.0922,
+            longitudeDelta: 0.0421,
+          }}
+          showsUserLocation={true}
+          onUserLocationChange={(e) => {
+            console.log("onUserLocationChange", e.nativeEvent.coordinate);
             setPin({
               latitude: e.nativeEvent.coordinate.latitude,
               longitude: e.nativeEvent.coordinate.longitude,
             });
           }}
         >
-          <View>
-            <Image
-              source={require("../assets/help.png")}
-              style={styles.MarkerImage}
-            />
-          </View>
-          <Callout>
-            <Text>i need help</Text>
-          </Callout>
-        </Marker>
-        {show &&
-          arr
-            .filter((e) => calculatePreciseDistance(e) <= radius)
-            .map((cor) => {
-              console.log("reight distence",cor)
-              return (
-                <Marker
-                  key={cor.id}
-                  coordinate={{
-        latitude: cor.latitude,
-        longitude: cor.longitude,
-      }}
-                  tappable={true}
-                  onPress={(e) => {
-                    console.log("amine tapping", e.nativeEvent.coordinate);
-                    setDestination(e.nativeEvent.coordinate);
-                  }}
-                >
-                  <Image
-                    source={require("../assets/val.png")}
-                    style={styles.MarkerImage}
-                  />
-                </Marker>
-              );
-            })}
-        <MapViewDirections
-          origin={pin}
-          destination={destination}
-          apikey={""}
-          strokeWidth={5}
-          strokeColor="#0096FF"
+          <Marker
+            coordinate={pin}
+            description="i need help plz"
+            draggable={true}
+            onDragStart={(e) => {
+              console.log("drag start", e.nativeEvent);
+              setPin({
+                latitude: e.nativeEvent.coordinate.latitude,
+                longitude: e.nativeEvent.coordinate.longitude,
+              });
+            }}
+          >
+            <View>
+              <Image
+                source={require("../assets/help.png")}
+                style={styles.MarkerImage}
+              />
+            </View>
+            <Callout>
+              <Text>i need help</Text>
+            </Callout>
+          </Marker>
+          {show &&
+            arr
+              .filter(
+                (e) =>
+                  calculatePreciseDistance(e) <= radius &&
+                  e.latitude &&
+                  e.longitude
+              )
+              .map((cor) => {
+                console.log("reight distence", cor);
+                return (
+                  <Marker
+                    key={cor.id}
+                    coordinate={{
+                      latitude: cor.latitude,
+                      longitude: cor.longitude,
+                    }}
+                    tappable={true}
+                    onPress={(e) => {
+                      console.log("amine tapping", e.nativeEvent.coordinate);
+                      setDestination(e.nativeEvent.coordinate);
+                    }}
+                  >
+                    <Image
+                      source={require("../assets/help.png")}
+                      style={styles.MarkerImage}
+                    />
+                  </Marker>
+                );
+              })}
+          <MapViewDirections
+            origin={pin}
+            destination={destination}
+            apikey={"AIzaSyB3gw78dU8-sOg2nzSiHi4-7LUgEedSasM"}
+            strokeWidth={5}
+            strokeColor="#0096FF"
+          />
+          {/* <Polyline coordinates={[pin, directions]} strokeWidth={4}strokeColor="red" /> */}
+          <Circle center={pin} radius={radius} />
+        </MapView>
+        <MyComponent
+          show={show}
+          setShow={setShow}
+          radius={radius}
+          setRadius={setRadius}
         />
-        {/* <Polyline coordinates={[pin, directions]} strokeWidth={4}strokeColor="red" /> */}
+      </View>
+    );
+  } else if (role == "vr") {
+    console.log(role, "vr");
+    return (
+      <View style={styles.container}>
+        <MapView
+          provider={PROVIDER_GOOGLE}
+          style={styles.map}
+          initialRegion={{
+            latitude: 36.894252,
+            longitude: 10.186974,
+            latitudeDelta: 0.0922,
+            longitudeDelta: 0.0421,
+          }}
+          showsUserLocation={true}
+          onUserLocationChange={(e) => {
+            console.log("onUserLocationChange", e.nativeEvent.coordinate);
+            setPin({
+              latitude: e.nativeEvent.coordinate.latitude,
+              longitude: e.nativeEvent.coordinate.longitude,
+            });
+          }}
+        >
+          <Marker
+            coordinate={pin}
+            description="eager to help"
+            draggable={true}
+            onDragStart={(e) => {
+              console.log("drag start", e.nativeEvent);
+              setPin({
+                latitude: e.nativeEvent.coordinate.latitude,
+                longitude: e.nativeEvent.coordinate.longitude,
+              });
+            }}
+          >
+            <View>
+              <Image
+                source={require("../assets/nn.png")}
+                style={styles.MarkerImage}
+              />
+            </View>
+            <Callout>
+              <Text>eager to help</Text>
+            </Callout>
+          </Marker>
+          {show &&
+            arr
+              .filter((e) => calculatePreciseDistance(e) <= radius)
+              .map((cor) => {
+                console.log("reight di          stence", cor);
+                return (
+                  <>
+                    <Marker
+                      key={cor.id}
+                      coordinate={{
+                        latitude: cor.latitude,
+                        longitude: cor.longitude,
+                      }}
+                      tappable={true}
+                      onPress={(e) => {
+                        console.log("amine tapping", e.nativeEvent.coordinate);
+                        setDestination(e.nativeEvent.coordinate);
+                      }}
+                    >
+                      <Image
+                        source={require("../assets/help.png")}
+                        style={styles.MarkerImage}
+                      />
+                    </Marker>
+                    <MapViewDirections
+                      origin={pin}
+                      destination={destination}
+                      apikey={"AIzaSyB3gw78dU8-sOg2nzSiHi4-7LUgEedSasM"}
+                      strokeWidth={5}
+                      strokeColor="#0096FF"
+                    />
+                  </>
+                );
+              })}
 
-        <Circle center={pin} radius={radius} />
-      </MapView>
+          {/* <Polyline coordinates={[pin, directions]} strokeWidth={4}strokeColor="red" /> */}
+          <Circle center={pin} radius={radius} />
+        </MapView>
+        <MyComponent
+          show={show}
+          setShow={setShow}
+          radius={radius}
+          setRadius={setRadius}
+        />
+      </View>
+    );
+  }
 
-      <MyComponent
-        show={show}
-        setShow={setShow}
-        radius={radius}
-        setRadius={setRadius}
-      />
-    </View>
-  );
+  //  return (
+  //     <View style={styles.container}>
+  //       <MapView
+  //         provider={PROVIDER_GOOGLE}
+  //         style={styles.map}
+  //         initialRegion={{
+  //           latitude: 36.894252,
+  //           longitude: 10.186974,
+  //           latitudeDelta: 0.0922,
+  //           longitudeDelta: 0.0421,
+  //         }}
+  //         showsUserLocation={true}
+  //         onUserLocationChange={(e) => {
+  //           console.log("onUserLocationChange", e.nativeEvent.coordinate);
+  //           setPin({
+  //             latitude: e.nativeEvent.coordinate.latitude,
+  //             longitude: e.nativeEvent.coordinate.longitude,
+  //           });
+  //         }}
+  //       >
+  //         <Marker
+  //           coordinate={pin}
+  //           description="i need help plz"
+  //           draggable={true}
+  //           onDragStart={(e) => {
+  //             console.log("drag start", e.nativeEvent);
+  //             setPin({
+  //               latitude: e.nativeEvent.coordinate.latitude,
+  //               longitude: e.nativeEvent.coordinate.longitude,
+  //             });
+  //           }}
+  //         >
+  //           <View>
+  //             <Image
+  //               source={require("../assets/help.png")}
+  //               style={styles.MarkerImage}
+  //             />
+  //           </View>
+  //           <Callout>
+  //             <Text>i need help</Text>
+  //           </Callout>
+  //         </Marker>
+  //         {show &&
+  //           arr
+  //             .filter((e) => calculatePreciseDistance(e) <= radius&& e.latitude && e.longitude)
+  //             .map((cor) => {
+  //               console.log("reight distence",cor)
+  //               return (
+  //                 <Marker
+  //                   key={cor.id}
+  //                   coordinate={{
+  //         latitude: cor.latitude,
+  //         longitude: cor.longitude,
+  //       }}
+  //                   tappable={true}
+  //                   onPress={(e) => {
+  //                     console.log("amine tapping", e.nativeEvent.coordinate);
+  //                     setDestination(e.nativeEvent.coordinate);
+  //                   }}
+  //                 >
+  //                   <Image
+  //                     source={require("../assets/val.png")}
+  //                     style={styles.MarkerImage}
+  //                   />
+  //                 </Marker>
+  //               );
+  //             })}
+  //         <MapViewDirections
+  //           origin={pin}
+  //           destination={destination}
+  //           apikey={'AIzaSyB3gw78dU8-sOg2nzSiHi4-7LUgEedSasM'}
+  //           strokeWidth={5}
+  //           strokeColor="#0096FF"
+  //         />
+  //         {/* <Polyline coordinates={[pin, directions]} strokeWidth={4}strokeColor="red" /> */}
+  //         <Circle center={pin} radius={radius} />
+  //       </MapView>
+  //       <MyComponent
+  //         show={show}
+  //         setShow={setShow}
+  //         radius={radius}
+  //         setRadius={setRadius}
+  //       />
+  //     </View>
+  //   );
 };
 
 const styles = StyleSheet.create({
@@ -183,13 +426,11 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     alignItems: "center",
     justifyContent: "center",
-     elevation: 10,
+    elevation: 10,
   },
   map: {
-
     width: "100%",
     height: "100%",
-
   },
   MarkerImage: {
     width: 50,

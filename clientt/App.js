@@ -9,13 +9,14 @@ import { useState,useEffect } from "react";
 // import ForgetPassword from "./screens/ForgetPassword/ForgetPassword";
 // import Navigation from "./screens/Navigation/Navigation";
 // import Onboarding from "./components/Onboarding"
-import TabNavigator from "./components/Navigator/Navigator";
+// import TabNavigator from "./components/Navigator/Navigator";
 // import SigninScreen from "./screens/SigninScreen/SigninScreen";
 // import SignupScreen from "./screens/SignupScreen/SignupScreen";
 // import ForgetPassword from "./screens/ForgetPassword/ForgetPassword";
-import Navigation from "./screens/Navigation/Navigation";
+// import Navigation from "./screens/Navigation/Navigation";
 // import Onboarding from "./components/Onboarding"
 import { NativeBaseProvider} from "native-base";
+import ChatRoom from "./components/chatRoom";
 // import Eventimage from "./components/Eventimage";
 
 
@@ -44,11 +45,13 @@ const App = () => {
 <NativeBaseProvider>
     <SafeAreaView style={styles.root}>
     
-      <Navigation/>
+      {/* <Navigation/> */}
       {/* <TabNavigator/> */}
     {/* <MapDs/> */}
     {/* <MapVal/> */}
-   </SafeAreaView></NativeBaseProvider>
+    <ChatRoom/>
+   </SafeAreaView>
+   </NativeBaseProvider>
   );
 };
 

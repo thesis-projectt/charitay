@@ -124,6 +124,7 @@ const MyComponent = ({ show, radius, setShow, setRadius }) => {
               <TouchableOpacity
                 style={styles.button}
                 onPress={() => {
+                  console.log("show",show)
                   setShow(!show);
                 }}
               >
