@@ -38,7 +38,7 @@ const Navigation = () => {
         <Stack.Screen name="DisableHome" component={DHome} />
         {/* <Stack.Screen name="AssociationHome" component={AHome} /> */}
         <Stack.Screen name="MapDs" component={MapDs} />
-        <Stack.Screen name="MapVal" component={MapVal} />
+        {/* <Stack.Screen name="MapVal" component={MapVal} /> */}
         {/* <Stack.Screen name="mainpage" component={AddEvents} /> */}
         <Stack.Screen name="EditProfileView" component={EditProfile} />
         <Stack.Screen name="AssociationProfile" component={Profile} />
