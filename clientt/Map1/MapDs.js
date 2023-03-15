@@ -226,7 +226,7 @@ const Map = () => {
           <MapViewDirections
             origin={pin}
             destination={destination}
-            apikey={""}
+            apikey={"AIzaSyB3gw78dU8-sOg2nzSiHi4-7LUgEedSasM"}
             strokeWidth={5}
             strokeColor="#0096FF"
           />
@@ -316,7 +316,7 @@ const Map = () => {
                     <MapViewDirections
                       origin={pin}
                       destination={destination}
-                      apikey={""}
+                      apikey={"AIzaSyB3gw78dU8-sOg2nzSiHi4-7LUgEedSasM"}
                       strokeWidth={5}
                       strokeColor="#0096FF"
                     />

@@ -51,19 +51,19 @@ const Profile = ({ route }) => {
         const jsonValue = JSON.parse(value);
         console.log(jsonValue.id);
         setid(jsonValue.id);
-        if (route.params.idd != null) {
-          const userdata = await axios.get(
-            `${associations}/${route.params.idd}`
-          );
-          console.log("profile", userdata.data);
-          setuser(userdata.data);
-          console.log(user);
-        } else {
+        // if (route.params.idd != null) {
+        //   const userdata = await axios.get(
+        //     `${associations}/${route.params.idd}`
+        //   );
+        //   console.log("profile", userdata.data);
+        //   setuser(userdata.data);
+        //   console.log(user);
+        // } else {
           const userdata = await axios.get(`${associations}/${jsonValue.id}`);
           console.log("profile===============", userdata.data);
           setuser(userdata.data);
           console.log(user);
-        }
+        // }
       }
     } catch (err) {
       console.log(err);
@@ -166,8 +166,8 @@ const Profile = ({ route }) => {
           </Stack>
 
           <Center>
-            {!confirmm && (
-              <>
+            {/* {!confirmm && (
+              <> */}
                 <Button
                   onPress={() => setIsOpen(!isOpen)}
                   style={{ right: 135, top: -15 }}
@@ -186,8 +186,8 @@ const Profile = ({ route }) => {
                 >
                   Events
                 </Button>
-              </>
-            )}
+              {/* </>
+            )} */}
             <AlertDialog
               leastDestructiveRef={cancelRef}
               isOpen={isOpen}
@@ -225,7 +225,7 @@ const Profile = ({ route }) => {
           </Center>
         </Box>
       </Box>
-      <View></View>
+      <View><Button colorScheme="secondary" onPress={()=>{logout(),navigation.navigate('Signin')}}>LogOut</Button></View>
 
     </View>
     
