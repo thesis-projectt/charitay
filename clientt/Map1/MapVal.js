@@ -66,15 +66,15 @@ const MapVal = () => {
         DataOfMap()
       },[])
   const calculatePreciseDistance = (element) => {
-    console.log("kkkkkk",element);
-    var pdis = getPreciseDistance(pin, {
-        latitude: element.latitude,
-        longitude: element.longitude,
-      });
-    return pdis;
-     console.log(pdis);
-  };
+    console.log("hhhhhkkkkkk",element);
 
+    var pdis = getPreciseDistance(pin, {
+      latitude: element.latitude,
+      longitude: element.longitude
+    });
+      console.log("====================",pdis);
+    return pdis;
+  };
   const DataOfMap=()=>{
     axios.get('http://192.168.103.5:3000/api/volunteer')
     .then(response =>{

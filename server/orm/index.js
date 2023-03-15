@@ -21,7 +21,7 @@ db.Disable=require('./disable.model')(sequelize,DataTypes) // require the disabl
 db.Volunteer=require('./volunteer.model')(sequelize,DataTypes)// require the volunteer model
 db.Event=require('./event.model')(sequelize,DataTypes) // require the event model 
 db.Admin=require('./admin.model')(sequelize,DataTypes)// require the admin model 
-
+db.PaymentD=require('./paymentD.model')(sequelize,DataTypes)  // requier the Payment model 
 // many to many relationship disable volunteer
 db.Disable.belongsToMany(db.Volunteer,{
     through:"disable_volunteer"
@@ -47,9 +47,17 @@ db.Event.belongsTo(db.Association, {
   foreignKey : "associationId",
   onDelete : "CASCADE ",
 });
+// 1 to many relationship PaymentD event
+db.PaymentD.hasMany(db.Event,{
+  foreignKey:"eventid",
+});
+
+db.Event.hasMany(db.PaymentD,{
+  foreignKey:"eventid",
+});
 
 db.sequelize.sync()
-
+ 
 db.sequelize
 .authenticate()
   .then(()=>{console.log('Successfully connected')})

@@ -43,7 +43,7 @@ const NeedanhelpSignupScreen = ({ navigation }) => {
           return true;
         })
         .then(() => {
-          navigation.navigate("NeedHelp");
+          navigation.navigate("Signin");
         })
         .catch((err) => {
           if (err.code === "auth/weak-password") {
