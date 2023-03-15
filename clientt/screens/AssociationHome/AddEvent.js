@@ -24,8 +24,27 @@ import { disable, volunter, associations, event } from "../../Axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import { useNavigation } from "@react-navigation/native"; 
+import * as ImagePicker from "expo-image-picker";
+import { TouchableOpacity } from "react-native";
+
+
+  
 
 const AddEvent = () => {
+
+  const handleImagePicker = async () => {
+    const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
+    if (permissionResult.granted === false) {
+      alert("Permission to access camera roll is required!");
+      return;
+    }
+
+    const result = await ImagePicker.launchImageLibraryAsync();
+    if (!result.cancelled) {
+      setimage(result.uri);
+
+    }
+  };
   const [image, setimage] = useState(null);
   const [title, settitle] = useState("");
   const [description, setdescription] = useState("");
@@ -34,13 +53,13 @@ const AddEvent = () => {
   const navigation=useNavigation()
 
   const [user, setuser] = useState({});
-  const [id, setid] = useState("");
+  const [id, setid] = useState(null);
+  const [idd, setidd] = useState("");
   const fetchUser = async () => {
     try {
       const value = await AsyncStorage.getItem("user");
       if (value !== null) {
         const jsonValue = JSON.parse(value);
-        setid(jsonValue.id);
         const userdata = await axios.get(`${associations}/${jsonValue.id}`);
         console.log("userdata", userdata.data);
         setuser(userdata.data);
@@ -59,12 +78,13 @@ const AddEvent = () => {
   const addevent = () => {
     axios
       .post(`${event}`, {
-        nameassociation: name,
+        
         title: title,
         description: description,
-        associationId: id,
+        picture:image,
         date: date,
-      })
+        associationId: id,
+      })  
       .then((result) => {
         console.log(result);
         navigation.navigate("Event")
@@ -87,23 +107,27 @@ const AddEvent = () => {
           p="140"
           top={79}
           left={5}
+          
         >
-          <Fab
-            renderInPortal={false}
-            shadow={2}
-            size="sm"
-            icon={<Ionicons name="add" size={24} color="white" />}
-          />
+         
         </HStack>
+        <Button style={{width: 50, height: 50 , borderRadius:50 , top:39, margin:5}} onPress={handleImagePicker}>
+            
+            <Ionicons name="add" size={24} color="white"  />
+                  
+                  </Button>
+        
         <Image
           resizeMode="contain"
-          style={{ width: 340, height: 350, top: -240, left: 35 }}
-          source={image}
+          style={{ width: 340, height: 350, top: -300, left: 35 }}
+          source={{
+            uri:image
+          }}
         />
 
         <View style={styles.form}>
           <Text style={styles.label}>Title</Text>
-          <TextInput
+          <TextInput 
             style={styles.input}
             placeholder="Enter Title"
             onChangeText={settitle}
@@ -125,7 +149,7 @@ const AddEvent = () => {
             placeholder="Enter Descreption"
           />
         </View>
-        <Button onPress={addevent} top={-200} width={100} left={150}>
+        <Button onPress={()=>{addevent()}} top={-200} width={100} left={150}>
           Add
         </Button>
       </View>
