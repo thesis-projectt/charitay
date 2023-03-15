@@ -35,6 +35,28 @@ const UpdateEvent = ({ route }) => {
   const [name, setname] = useState("");
   const { idd } = route.params;
   const navigation=useNavigation()
+  
+  const [user, setuser] = useState({});
+  const [id, setid] = useState(null);
+
+  const fetchUser = async () => {
+    try {
+      const value = await AsyncStorage.getItem("user");
+      if (value !== null) {
+        const jsonValue = JSON.parse(value);
+        const userdata = await axios.get(`${associations}/${jsonValue.id}`);
+        console.log("userdata", userdata.data);
+        setuser(userdata.data);
+        setid(userdata.data.id);
+        setname(userdata.data.name);  
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  useEffect(() => {
+    fetchUser();
+  }, []);
 
   console.log(idd);
   const handleImagePicker = async () => {
@@ -57,6 +79,7 @@ const UpdateEvent = ({ route }) => {
       .put(`${event}/${idd}`, {
         title: title,
         description: description,
+        picture:image,
         date: date,
       })
       .then((result) => {

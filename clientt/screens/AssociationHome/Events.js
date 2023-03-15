@@ -13,13 +13,14 @@ import {
 import axios from "axios";
 import { disable, volunter, associations, event } from "../../Axios";
 import { useNavigation } from "@react-navigation/native";
-
+import { AntDesign } from '@expo/vector-icons'; 
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Events = () => {
   const [data, setdata] = useState([]);
   const navigation = useNavigation();
   const [id, setid] = useState("");
+  const [reloed,setreloed]=useState(false)
 
   const [user, setuser] = useState({});
   const fetchUser = async () => {
@@ -48,7 +49,13 @@ const Events = () => {
       });
 
     fetchUser();
-  }, []);
+  }, [reloed]);
+
+ const handeldelete = (id)=>{
+axios.delete(`${event}/${id}`).
+then((ressult)=>{console.log(ressult)}).
+catch((err)=>{console.log(err)})
+ }
 
   
   console.log(data);
@@ -57,6 +64,7 @@ const Events = () => {
     <ScrollView>
       <Box alignItems="center" style={{ gap: 20 }}>
         {data.filter(item=>item.associationId === user.id).map((item, index) => (
+          
           <Box key={index}
             maxW="80"
             rounded="lg"
@@ -68,7 +76,9 @@ const Events = () => {
               backgroundColor: "gray.700",
             }}
           >
+            
             <Box>
+          
               <AspectRatio w="100%" ratio={16 / 9}>
                 <Image
                   source={{
@@ -76,24 +86,10 @@ const Events = () => {
                   }}
                   alt="image"
                 />
+                
               </AspectRatio>
-              <Center
-                bg="violet.500"
-                _dark={{
-                  bg: "violet.400",
-                }}
-                _text={{
-                  color: "warmGray.50",
-                  fontWeight: "700",
-                  fontSize: "xs",
-                }}
-                position="absolute"
-                bottom="0"
-                px="3"
-                py="1.5"
-              >
-                donation
-              </Center>
+           
+             
             </Box>
             <Stack p="4" space={3}>
               <Stack space={2}>
@@ -112,7 +108,7 @@ const Events = () => {
                   ml="-0.5"
                   mt="-1"
                 >
-                  {item.association.name}
+                Create by - {item.association.name}
                 </Text>
               </Stack>
               <Text fontWeight="400">{item.description}</Text>
@@ -134,16 +130,16 @@ const Events = () => {
                 </HStack>
               </HStack>
             </Stack>
-            <Button colorScheme="danger">Delete</Button>
+            {/* <Button colorScheme="danger" onPress={()=>{handeldelete(item.id),setreloed(!reloed)}}>Delete</Button>
             <Button
-              onPress={() =>
+              onPress={() => {setreloed(!reloed),
                 navigation.navigate("UpdateEvent", {
                   idd: item.id,
-                })
+                })}
               }
             >
               Update
-            </Button>
+            </Button> */}
           </Box>
         ))}
       </Box>

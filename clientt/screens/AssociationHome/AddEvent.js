@@ -53,13 +53,13 @@ const AddEvent = () => {
   const navigation=useNavigation()
 
   const [user, setuser] = useState({});
-  const [id, setid] = useState("");
+  const [id, setid] = useState(null);
+  const [idd, setidd] = useState("");
   const fetchUser = async () => {
     try {
       const value = await AsyncStorage.getItem("user");
       if (value !== null) {
         const jsonValue = JSON.parse(value);
-        setid(jsonValue.id);
         const userdata = await axios.get(`${associations}/${jsonValue.id}`);
         console.log("userdata", userdata.data);
         setuser(userdata.data);
@@ -81,9 +81,10 @@ const AddEvent = () => {
         
         title: title,
         description: description,
-        associationId: id,
+        picture:image,
         date: date,
-      })
+        associationId: id,
+      })  
       .then((result) => {
         console.log(result);
         navigation.navigate("Event")
@@ -148,7 +149,7 @@ const AddEvent = () => {
             placeholder="Enter Descreption"
           />
         </View>
-        <Button onPress={()=>addevent()} top={-200} width={100} left={150}>
+        <Button onPress={()=>{addevent()}} top={-200} width={100} left={150}>
           Add
         </Button>
       </View>

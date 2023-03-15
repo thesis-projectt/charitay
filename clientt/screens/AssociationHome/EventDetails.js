@@ -11,12 +11,12 @@ import { Box, Center, HStack, AspectRatio , Stack ,Heading} from "native-base";
 import axios from "axios";
 import { disable, volunter, associations, event } from "../../Axios";
 
-const EventDetails = ({ route }) => {
+const EventDetails = ({ associationId }) => {
   const [data, setdata] = useState([]);
-  const { idd } = route.params;
+ 
   useEffect(() => {
     axios
-      .get(`${event}/${idd}`)
+      .get(`${event}/association/${associationId}`)
       .then((result) => {
         setdata(result.data);
       })
@@ -24,12 +24,16 @@ const EventDetails = ({ route }) => {
         console.log(err);
       });
   }, []);
-console.log(idd);
-console.log(data);
+  console.log("aziz",data);
+
   return (
-    <ScrollView>
-      <Box alignItems="center" >
-        <Box
+   
+    <ScrollView >
+       <Box alignItems="center" style={{ gap: 20 }}>
+      {data.map((item)=>(
+         
+      <Box alignItems="center"  >
+        <Box 
           maxW="80"
           rounded="lg"
           overflow="hidden"
@@ -38,56 +42,28 @@ console.log(data);
           _dark={{
             borderColor: "coolGray.600",
             backgroundColor: "gray.700",
+         
           }}
         >
-          <Box>
+          <Box >
             <AspectRatio w="100%" ratio={16 / 9}>
               <Image
                 source={{
-                  uri: data.picture,
+                  uri: item.picture,
                 }}
                 alt="image"
               />
             </AspectRatio>
-            <Center
-              bg="violet.500"
-              _dark={{
-                bg: "violet.400",
-              }}
-              _text={{
-                color: "warmGray.50",
-                fontWeight: "700",
-                fontSize: "xs",
-              }}
-              position="absolute"
-              bottom="0"
-              px="3"
-              py="1.5"
-            >
-              donation
-            </Center>
+          
           </Box>
           <Stack p="4" space={3}>
             <Stack space={2}>
               <Heading size="md" ml="-1">
-                {data.title}
+                {item.title}
               </Heading>
-              <Text
-                fontSize="xs"
-                _light={{
-                  color: "violet.500",
-                }}
-                _dark={{
-                  color: "violet.400",
-                }}
-                fontWeight="500"
-                ml="-0.5"
-                mt="-1"
-              >
-                ghhjyjuyu
-              </Text>
+           
             </Stack>
-            <Text fontWeight="400">{data.description}</Text>
+            <Text fontWeight="400">{item.description}</Text>
             <HStack
               alignItems="center"
               space={4}
@@ -101,12 +77,14 @@ console.log(data);
                   }}
                   fontWeight="400"
                 >
-                  {data.date}
+                  {item.date}
                 </Text>
               </HStack>
             </HStack>
           </Stack>
         </Box>
+      </Box>
+      ))}
       </Box>
     </ScrollView>
   );

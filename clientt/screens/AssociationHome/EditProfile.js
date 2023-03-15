@@ -66,7 +66,7 @@ const EditProfile = () => {
   );
   const [password, setPassword] = useState("");
 
-  const handlechangeemail = () => {
+  const handlechangepassword = () => {
     const userr = authentication.currentUser;
     updatePassword(userr, password)
       .then((result) => {
@@ -77,10 +77,10 @@ const EditProfile = () => {
       });
   };
 
-  const handelchangepassword = () => {
+  const handelchangeemail = () => {
     updateEmail(authentication.currentUser, email)
       .then(() => {
-        handlechangeemail();
+        handlechangepassword();
       })
       .catch((error) => {
         console.log(error);
@@ -96,7 +96,7 @@ const EditProfile = () => {
         image:avatar
       })
       .then(() => {
-        handelchangepassword();
+        handelchangeemail();
       });
   };
   

@@ -22,6 +22,8 @@ import AddEvents from "../../components/addEvents";
 import Bar from "../AssociationHome/Bar"
 import UpdateEvent from "../AssociationHome/UpdateEvent"
 import EventDetails from "../AssociationHome/EventDetails";
+import Eventimage from "../../components/Eventimage";
+import AllEvents from "../../components/AllEvents"
 
 const Stack = createNativeStackNavigator();
 // const Nav = createNativeStackNavigator();
@@ -49,7 +51,8 @@ const Navigation = () => {
          <Stack.Screen name="Event" component={Events} />
          <Stack.Screen name="demo" component={Bar} />
          <Stack.Screen name="UpdateEvent" component={UpdateEvent} />
-         <Stack.Screen name="EventDetails" component={EventDetails} />
+         <Stack.Screen name="EventDetails" component={Eventimage} />
+         <Stack.Screen name="AllEvents" component={AllEvents} />
        </Stack.Navigator>
     </NavigationContainer>
   );

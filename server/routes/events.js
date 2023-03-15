@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 // Require controller modules.
-const { getAllEvents, addEvent, updateEvent ,deleteEvent, getOneEvent} = require('../controllers/event');
+const { getAllEvents, addEvent, updateEvent ,deleteEvent, getOneEvent,getEvents} = require('../controllers/event');
 
 /// POSTS ROUTES ///
 
@@ -13,6 +13,7 @@ router.post('/', addEvent);
 router.put('/:id',updateEvent)
 router.delete('/:id',deleteEvent)
 router.get('/:id', getOneEvent);
+router.get('/association/:associationId', getEvents);
 
 
 module.exports = router;

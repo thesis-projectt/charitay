@@ -25,6 +25,7 @@ const EventsList = (props) => {
         <TouchableOpacity onPress={() =>
           navigation.navigate("EventDetails", {
             idd: item.id,
+            associationId:item.associationId
           })} style={styles.cardContainer} key={index}>
           <View style={styles.container}>
             <View key={item.id} style={[styles.card, shadow.light]}>
