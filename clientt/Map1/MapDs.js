@@ -15,10 +15,7 @@ import {
   View,
   Image,
   Text,
-  Animated,
-  ScrollView,
-  TouchableOpacity,
-  Button,
+ 
 } from "react-native";
 import * as Location from "expo-location";
 import { getPreciseDistance, getDistance } from "geolib";
@@ -267,7 +264,7 @@ const Map = () => {
           >
             <View>
               <Image
-                source={require("../assets/volunt.png")}
+                source={require("../assets/volunteer.png")}
                 style={styles.MarkerImage}
               />
             </View>
