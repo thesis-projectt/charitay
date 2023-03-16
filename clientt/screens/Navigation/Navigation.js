@@ -19,8 +19,8 @@ import AddEvent from "../AssociationHome/AddEvent";
 import Events from "../AssociationHome/Events";
 import TabNavigator from "../../components/Navigator/Navigator";
 import AddEvents from "../../components/addEvents";
-import Bar from "../AssociationHome/Bar"
-import UpdateEvent from "../AssociationHome/UpdateEvent"
+import Bar from "../AssociationHome/Bar";
+import UpdateEvent from "../AssociationHome/UpdateEvent";
 import EventDetails from "../AssociationHome/EventDetails";
 import Eventimage from "../../components/Eventimage";
 import AllEvents from "../../components/AllEvents"

@@ -2,8 +2,9 @@ import { StyleSheet, Text, View, SafeAreaView, TextInput } from "react-native";
 import { useState, useEffect } from "react";
 import Navigation from "./screens/Navigation/Navigation";
 import { NativeBaseProvider } from "native-base";
-import { LogBox } from 'react-native';
-LogBox.ignoreLogs(['Warning: ...'])
+import { LogBox } from "react-native";
+// import ChatRoom from "./components/chatRoom";
+LogBox.ignoreLogs(["Warning: ..."]);
 LogBox.ignoreAllLogs();
 
 const App = () => {
@@ -11,6 +12,10 @@ const App = () => {
     <NativeBaseProvider>
       <SafeAreaView style={styles.root}>
         <Navigation />
+        {/* <TabNavigator/> */}
+        {/* <MapDs/> */}
+        {/* <MapVal/> */}
+        {/* <ChatRoom /> */}
       </SafeAreaView>
     </NativeBaseProvider>
   );
