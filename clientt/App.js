@@ -11,8 +11,8 @@ const App = () => {
   return (
     <NativeBaseProvider>
       <SafeAreaView style={styles.root}>
-        <Pay/>
-        {/* <Navigation /> */}
+        {/* <Pay/> */}
+        <Navigation />
       </SafeAreaView>
     </NativeBaseProvider>
   );
