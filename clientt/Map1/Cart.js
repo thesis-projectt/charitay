@@ -1,4 +1,3 @@
-
 import React from "react";
 import {
   StyleSheet,
@@ -9,10 +8,12 @@ import {
   TouchableOpacity,
 } from "react-native";
 import FeatherIcon from "react-native-vector-icons/Feather";
+import { useNavigation } from "@react-navigation/native";
 
-export default function Card({  oneUser }) {
+export default function Card({ oneUser }) {
+  const navigation = useNavigation();
+
   return (
-    
     <SafeAreaView style={{ flex: 1, backgroundColor: "#f6f6f6" }}>
       <View style={styles.container}>
         <View style={styles.profile}>
@@ -28,15 +29,15 @@ export default function Card({  oneUser }) {
           </Text>
 
           <Text style={styles.profileEmail}>
-             {oneUser != undefined && oneUser.email}
+            {oneUser != undefined && oneUser.email}
           </Text>
           <Text style={styles.profileEmail}>
-           {oneUser != undefined && oneUser.phoneNumber}
+            {oneUser != undefined && oneUser.phoneNumber}
           </Text>
 
           <TouchableOpacity
             onPress={() => {
-              // handle onPress
+              navigation.navigate("chat");
             }}
           >
             <View style={styles.profileAction}>
@@ -102,7 +103,3 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
 });
-
-
-
-

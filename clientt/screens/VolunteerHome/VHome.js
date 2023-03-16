@@ -135,25 +135,42 @@ const Profilev = () => {
     }
   };
 
+  const LogOut = () => {
+    signOut(authentication).then(() => {
+      localStorage.removeItem("user")
+      .catch((error) => {
+        console.log(error);
+      })
+    })
+  }
+
   return (
-    <View style={styles.container}>
+    <ScrollView>
+    <View>
+    <View style={{padding : 10 , width : '100%' , backgroundColor : '#000' , height : 150 }}>
+    
       <TouchableOpacity onPress={handleImagePicker}>
+      <View style={{alignItems : 'center'}}>
         <Image style={styles.image} source={{ uri: imageUri }} />
+        <Text style= {{fontSize : 25 , fontWeight : 'bold' , }}>{name}</Text>
+        </View>
         <View style={styles.imageOverlay}>
           <Text style={styles.imageText}>+</Text>
+          
         </View>
       </TouchableOpacity>
 
       {isEditing ? (
         <>
+        <View style={styles.containerUp}>
           <TextInput
-            style={styles.input}
+            style={styles.inputContainer}
             value={name}
             onChangeText={(text) => setName(text)}
             editable={true}
           />
           <TextInput
-            style={styles.input}
+            style={styles.inputContainer}
             value={email}
             onChangeText={(text) => setEmail(text)}
             editable={true}
@@ -165,14 +182,19 @@ const Profilev = () => {
             editable={true}
           />
           <TextInput
-            style={styles.input}
+            style={styles.inputContainer}
             value={password}
+            placeholder={"Change your password"}
             onChangeText={(text) => setPassword(text)}
             secureTextEntry={true}
             editable={true}
             placeholder="change password"
           />
-          <Button title="Save Changes" onPress={handleSaveChanges} />
+          
+          <TouchableOpacity style={styles.button} onPress={handleSaveChanges}  >
+          <Text style={styles.buttonText}>Save Changes</Text>
+          </TouchableOpacity>
+          </View>
         </>
       ) : (
         <>
