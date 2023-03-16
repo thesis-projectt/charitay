@@ -19,7 +19,7 @@ console.log("🚀 ~ file: chatRoom.js:18 ~ authentication:", authentication);
 
 export default function Chat({ route }) {
   const [messages, setMessages] = useState([]);
-  const name = route.params;
+  // const name = route.params;
 
   // const onSignOut = () => {
   //   signOut(auth).catch((error) => console.log("Error logging out: ", error));

@@ -10,16 +10,7 @@ import MapView, {
 
 import MyComponent from "./swipe";
 import SlidingUpPanel from "rn-sliding-up-panel";
-import {
-  StyleSheet,
-  View,
-  Image,
-  Text,
-  Animated,
-  ScrollView,
-  TouchableOpacity,
-  Button,
-} from "react-native";
+import { StyleSheet, View, Image, Text } from "react-native";
 import * as Location from "expo-location";
 import { getPreciseDistance, getDistance } from "geolib";
 import dummyy from "./dummy.js";
@@ -216,7 +207,7 @@ const Map = () => {
           <MapViewDirections
             origin={pin}
             destination={destination}
-            apikey={"AIzaSyB3gw78dU8-sOg2nzSiHi4-7LUgEedSasM"}
+            apikey={""}
             strokeWidth={5}
             strokeColor="#0096FF"
           />
@@ -303,7 +294,7 @@ const Map = () => {
                     <MapViewDirections
                       origin={pin}
                       destination={destination}
-                      apikey={"AIzaSyB3gw78dU8-sOg2nzSiHi4-7LUgEedSasM"}
+                      apikey={""}
                       strokeWidth={5}
                       strokeColor="#0096FF"
                     />
