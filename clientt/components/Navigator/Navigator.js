@@ -66,7 +66,6 @@ const test=()=>{
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
-
           if (route.name === "Home") {
             iconName = focused ? "home" : "home";
           } else if (route.name === "map") {
@@ -96,5 +95,4 @@ const test=()=>{
 
   );
 };
-
 export default TabNavigator;

@@ -59,7 +59,7 @@ const AddEvents = ({ route }) => {
 
   const getHandle = () => {
     axios
-      .get("http://192.168.104.4:3000/api/events")
+      .get("http://192.168.104.2:3000/api/events")
       .then((response) => {
         setData(response.data);
       })
@@ -70,7 +70,7 @@ const AddEvents = ({ route }) => {
 
   const getAssociation = () => {
     axios
-      .get("http://192.168.104.4:3000/api/associations")
+      .get("http://192.168.104.2:3000/api/associations")
       .then((response) => {
         setAssociation(response.data);
       })
@@ -78,8 +78,6 @@ const AddEvents = ({ route }) => {
         console.log(error);
       });
   };
-
-  // console.log("=========================>>>>>>>>>>>>>>>>>>>", id);
 
   return (
     <View styles={styles.container}>

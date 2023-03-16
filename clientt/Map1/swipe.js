@@ -6,6 +6,7 @@ import {
   Dimensions,
   StyleSheet,
   TouchableOpacity,
+  ImageBackground,
 } from "react-native";
 import SlidingUpPanel from "rn-sliding-up-panel";
 import Card from "./Cart";
@@ -21,54 +22,35 @@ const styles = {
   },
   panel: {
     flex: 1,
-    backgroundColor: "#97BFB4",
+    color: "#7777",
+    backgroundColor: "#EE8900",
     position: "relative",
-    
   },
   panelHeader: {
-    height: 120,
+    height: 80,
     backgroundColor: "#EEEEEE",
     alignItems: "center",
     justifyContent: "center",
   },
-  // favoriteIcon: {
-  //   position: 'absolute',
-  //   top: -24,
-  //   right: 24,
-  //   backgroundColor: '#00a8e8',
-  //   width: 48,
-  //   height: 48,
-  //   padding: 8,
-  //   borderRadius: 10,
-  //   zIndex: 7
-  // },
-  // animButton:{
-  //   marginLeft:15,
-  //   top:20,
-  //   backgroundColor:'#e63946',
-  //   paddingHorizontal:10,
-  //   paddingVertical:5,
-  //   borderRadius:0,
-  //   elevation:10,
-  //   shadowColor:'#000',
-  //   shadowOffset:{
-  //       width:10,
-  //       height:10
-  //   },
-  //   shadowOppacity:0.25,
-  //   shadowRadius:10,
-  // },
+
   container: {
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "center",
-    marginTop: 20,
-    
+    marginTop: -30,
   },
 
   button: {
     justifyContent: "space-between",
-    backgroundColor: "#5D9C59",
+    backgroundColor: "#3A98B9",
+    paddingHorizontal: 25,
+    paddingVertical: 10,
+    marginHorizontal: 5,
+    borderRadius: 5,
+  },
+  button1: {
+    justifyContent: "space-between",
+    backgroundColor: "#0074FF",
     paddingHorizontal: 25,
     paddingVertical: 10,
     marginHorizontal: 5,
@@ -78,38 +60,41 @@ const styles = {
     color: "white",
     fontWeight: "bold",
   },
+  backgroundImage: {
+    flex: 1,
+    resizeMode: "cover",
+    justifyContent: "center",
+  },
 };
-const MyComponent = ({ show, radius, setShow, setRadius }) => {
+const MyComponent = ({ show, radius, setShow, setRadius, oneUser }) => {
   const [scrollEnabled, setScrollEnabled] = useState(true);
+
   return (
     <View style={styles.container}>
-      {/* <Text>Hello world</Text> */}
+      <Text>Hello world</Text>
+
       <SlidingUpPanel
         ref={(c) => (this._panel = c)}
-        draggableRange={{ top: height / 1.75, bottom: 120 }}
+        draggableRange={{ top: height / 2, bottom: 120 }}
         animatedValue={this._draggedValue}
         snappingPoints={[0, 500]}
         showBackdrop={false}
         dragEnabled={false}
-        
+        onPress={() => this._panel.show()}
       >
         <View style={styles.panel}>
+          {/* <Button title="Show panel" /> */}
           <View style={styles.panelHeader}>
-            {/* <Text style={{color: '#FFF'}}>Bottom Sheet Peek</Text> */}
-
-            {/* <TouchableOpacity
-              style={[styles.animButton,{backgroundColor:'#81b29a'}]}
-              onPress={()=>{
-                setShow(!show)
-                if (true){
-
-                    swingAnimRef.current.swing(2000);
-                }
-              }}
+            <View style={styles.container}>
+              <TouchableOpacity
+                onPress={() => this._panel.show()}
+                style={styles.button1}
               >
-                <Text style={styles.animButtonText} > volunteer</Text>
-
-              </TouchableOpacity> */}
+                <Text style={styles.buttonText}>Show Panel</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+          <View style={styles.panelHeader}>
             <View style={styles.container}>
               <TouchableOpacity
                 style={styles.button}
@@ -118,17 +103,16 @@ const MyComponent = ({ show, radius, setShow, setRadius }) => {
                   setRadius((radius += 1000));
                 }}
               >
-                <Text style={styles.buttonText}>R+</Text>
+                <Text style={styles.buttonText}>zone +</Text>
               </TouchableOpacity>
 
               <TouchableOpacity
                 style={styles.button}
                 onPress={() => {
-                  console.log("show",show)
                   setShow(!show);
                 }}
               >
-                <Text style={styles.buttonText}>all valanteer</Text>
+                <Text style={styles.buttonText}>eager to help </Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.button}
@@ -137,11 +121,11 @@ const MyComponent = ({ show, radius, setShow, setRadius }) => {
                   setRadius((radius -= 1000));
                 }}
               >
-                <Text style={styles.buttonText}>R-</Text>
+                <Text style={styles.buttonText}>zone -</Text>
               </TouchableOpacity>
             </View>
           </View>
-          <Card />
+          <Card oneUser={oneUser} />
         </View>
       </SlidingUpPanel>
     </View>
