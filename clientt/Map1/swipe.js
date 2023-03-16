@@ -37,7 +37,7 @@ const styles = {
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "center",
-    marginTop: 20,
+    marginTop: 10,
   },
 
   button: {
