@@ -43,6 +43,7 @@
     "react-native-animatable": "^1.3.3",
     "react-native-dotenv": "^3.4.8",
     "react-native-dropdown-picker": "^5.4.4",
+    "react-native-gesture-handler": "^2.9.0",
     "react-native-image-crop-picker": "^0.39.0",
     "react-native-image-picker": "^5.1.0",
     "react-native-imaged-carousel-card": "^0.1.1",

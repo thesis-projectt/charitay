@@ -125,7 +125,7 @@ const AddEvents = ({ route }) => {
             </ScrollView>
           </SafeAreaView>
           <SectionHeader title="All Events" buttonTitle="See All" />
-          <EventsList data={data} />
+          {/* <EventsList data={data} /> */}
         </ScrollView>
       </SafeAreaView>
     </View>
