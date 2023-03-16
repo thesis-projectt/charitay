@@ -1,103 +1,105 @@
-
 import React from "react";
-import { View, StatusBar, SafeAreaView } from "react-native";
+import {
+  StyleSheet,
+  SafeAreaView,
+  View,
+  Image,
+  Text,
+  TouchableOpacity,
+} from "react-native";
+import FeatherIcon from "react-native-vector-icons/Feather";
+import { useNavigation } from "@react-navigation/native";
 
-import ImagedCarouselCard from "react-native-imaged-carousel-card";
+export default function Card({ oneUser }) {
+  const navigation = useNavigation();
 
-const Card = () => {
   return (
-    <>
-      <StatusBar barStyle="dark-content" />
-      <SafeAreaView>
-        <View
-          style={{
-            top: 32,
-            alignItems: "center",
-            justifyContent: "center"
-          }}
-        >
-          <ImagedCarouselCard
-            height={200}
-            width={200}
-            shadowColor="#051934"
+    <SafeAreaView style={{ flex: 1, backgroundColor: "#f6f6f6" }}>
+      <View style={styles.container}>
+        <View style={styles.profile}>
+          <Image
+            alt=""
             source={{
-              uri:
-                "https://s24990.pcdn.co/wp-content/uploads/2020/04/charity-640x298.jpg"
+              uri: oneUser.image,
             }}
+            style={styles.profileAvatar}
           />
-          
+          <Text style={styles.profileName}>
+            {oneUser != undefined && oneUser.name}
+          </Text>
 
-        
+          <Text style={styles.profileEmail}>
+            {oneUser != undefined && oneUser.email}
+          </Text>
+          <Text style={styles.profileEmail}>
+            {oneUser != undefined && oneUser.phoneNumber}
+          </Text>
+
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate("chat");
+            }}
+          >
+            <View style={styles.profileAction}>
+              <Text style={styles.profileActionText}>chat</Text>
+            </View>
+          </TouchableOpacity>
         </View>
-      </SafeAreaView>
-    </>
+      </View>
+    </SafeAreaView>
   );
-};
-export default Card;
+}
 
-// import React from 'react';
-// import {View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
-// import  itemData from '../Map1/itemData'
-
-// const Card = ({onPress}) => {
-//   return (
-//     <TouchableOpacity onPress={onPress}>
-//       <View style={styles.card}>
-//         <View style={styles.cardImgWrapper}>
-//           <Image
-//             source={require('../assets/googel.png')}
-//             resizeMode="cover"
-//             style={styles.cardImg}
-//           />
-//         </View>
-//         <View style={styles.cardInfo}>
-//           <Text style={styles.cardTitle}>{itemData.title}</Text>
-//           <Text numberOfLines={2} style={styles.cardDetails}>{itemData.description}</Text>
-//         </View>
-//       </View>
-//     </TouchableOpacity>
-//   );
-// };
-
-// export default Card;
-
-// const styles = StyleSheet.create({
-//   card: {
-//     height: 100,
-//     marginVertical: 10,
-//     flexDirection: 'row',
-//     shadowColor: '#999',
-//     shadowOffset: {width: 0, height: 1},
-//     shadowOpacity: 0.8,
-//     shadowRadius: 2,
-//     elevation: 5,
-//   },
-//   cardImgWrapper: {
-//     flex: 1,
-//   },
-//   cardImg: {
-//     height: '100%',
-//     width: '100%',
-//     alignSelf: 'center',
-//     borderRadius: 8,
-//     borderBottomRightRadius: 0,
-//     borderTopRightRadius: 0,
-//   },
-//   cardInfo: {
-//     flex: 2,
-//     padding: 10,
-//     borderColor: '#ccc',
-//     borderWidth: 1,
-//     borderLeftWidth: 0,
-//     borderBottomRightRadius: 8,
-//     borderTopRightRadius: 8,
-//     backgroundColor: '#fff',
-//   },
-//   cardTitle: {
-//     fontWeight: 'bold',
-//   },
-//   cardDetails: {
-//     fontSize: 12,
-//     color: '#444',
-//   },
-// });
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#f6f6f6",
+    padding: 16,
+  },
+  profile: {
+    flexDirection: "column",
+    alignItems: "center",
+    backgroundColor: "#fff",
+    borderRadius: 8,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+    padding: 16,
+  },
+  profileAvatar: {
+    width: 120,
+    height: 120,
+    borderRadius: 60,
+    marginBottom: 16,
+  },
+  profileName: {
+    fontSize: 24,
+    fontWeight: "600",
+    color: "#090909",
+    marginBottom: 8,
+    textAlign: "center",
+  },
+  profileEmail: {
+    fontSize: 16,
+    fontWeight: "400",
+    color: "#848484",
+    marginBottom: 16,
+    textAlign: "center",
+  },
+  profileAction: {
+    backgroundColor: "#3A98B9",
+    paddingHorizontal: 20,
+    paddingVertical: 8,
+    borderRadius: 4,
+  },
+  profileActionText: {
+    color: "white",
+    fontWeight: "bold",
+    fontSize: 16,
+  },
+});

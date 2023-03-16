@@ -53,6 +53,9 @@ const navigation=useNavigation()
           <Button onPress={()=>navigation.navigate("AddEvent")} colorScheme="secondary" top={240}>
             Make your events
           </Button>
+          <Button onPress={()=>navigation.navigate("Event")} colorScheme="secondary" top={280}>
+            See our events
+          </Button>
          
     </Center>;
     

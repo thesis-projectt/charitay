@@ -2,21 +2,23 @@
 module.exports = (sequelize, DataTypes) => {
     const event = sequelize.define("event", {
        
-   //   id : {
-   //    type : DataTypes.INTEGER,
-   //    primaryKey : true,
-   //    autoIncrement : true,
-   //   },
+     id : {
+      type : DataTypes.INTEGER,
+      primaryKey : true,
+     
+     },
 
 
       title: {
          type: DataTypes.STRING,
          allowNull :false, 
         },
+
+        
       
       
        description: {
-         type: DataTypes.STRING,
+         type: DataTypes.TEXT('long'),
          allowNull:false
          
          }, 

@@ -7,6 +7,8 @@ import {
   SafeAreaView,
   Pressable,
   Touchable,
+  ScrollView,
+  TouchableOpacity,
 } from "react-native";
 import { disable, volunter, associations } from "../../Axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -23,22 +25,45 @@ import {
   Heading,
   Button,
   AlertDialog,
+  Icon,
+  Flex,
 } from "native-base";
-import { MaterialCommunityIcons } from '@expo/vector-icons'
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import Events from "./Events";
+import { Entypo } from "@expo/vector-icons";
+import { signOut } from "firebase/auth";
 
-const Profile = () => {
+const Profile = ({ route }) => {
   const [user, setuser] = useState({});
-  const [id , setid]=useState("")
+  const [id, setid] = useState("");
+  const [confirmm, setConfirmm] = useState(false);
+
+  useEffect(() => {
+    if (route.params != null) {
+      setConfirmm(route.params.confirmm);
+    }
+  }, []);
+  console.log(confirmm);
   const fetchUser = async () => {
     try {
       const value = await AsyncStorage.getItem("user");
       if (value !== null) {
         const jsonValue = JSON.parse(value);
-        setid(jsonValue.is)
-        const userdata = await axios.get(`${associations}/${jsonValue.id}`);
-        console.log("userdata", userdata.data);
-        setuser(userdata.data);
-       
+        console.log(jsonValue.id);
+        setid(jsonValue.id);
+        if (route.params.idd != null) {
+          const userdata = await axios.get(
+            `${associations}/${route.params.idd}`
+          );
+          console.log("profile", userdata.data);
+          setuser(userdata.data);
+          console.log(user);
+        } else {
+          const userdata = await axios.get(`${associations}/${jsonValue.id}`);
+          console.log("profile===============", userdata.data);
+          setuser(userdata.data);
+          console.log(user);
+        }
       }
     } catch (err) {
       console.log(err);
@@ -48,21 +73,43 @@ const Profile = () => {
     fetchUser();
   }, []);
 
-const deletee = () =>{
-axios.delete(`${associations}/${id}`).then(()=>{
-localStorage.removeItem("user")
-}).catch((err)=>{console.log(err);})
-}
-
+  const deletee = () => {
+    axios
+      .delete(`${associations}/${id}`)
+      .then(() => {
+        deletefromLocalStorage();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   const handeldelete = () => {
     const userr = authentication.currentUser;
     deleteUser(userr)
       .then((result) => {
-       deletee()
-       return true
-      }).then(()=>{
-         navigation.navigate("Signin")
+        deletee();
+        return true;
+      })
+      .then(() => {
+        navigation.navigate("Signin");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  const deletefromLocalStorage = async () => {
+    try {
+      await AsyncStorage.removeItem("user");
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const logout = () => {
+    signOut(authentication)
+      .then(() => {
+        deletefromLocalStorage();
       })
       .catch((error) => {
         console.log(error);
@@ -76,30 +123,20 @@ localStorage.removeItem("user")
 
   return (
     <View>
-      <Box alignItems="center" top="90">
-        <Box
-          maxW="100%"
-          maxH="690"
-          backgroundColor={"#fdf4ff"}
-          
-        
-         
-        
-        >
+      <Box alignItems="center" top="1">
+        <Box maxW="100%" maxH="690" backgroundColor={"#fdf4ff"}>
           <Box>
-            <AspectRatio w="100%" ratio={26 / 19} >
-              <Image 
-              resizeMode="contain"
-                source={{
-                  uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmo5eSEhlXUDcaW-3Fm9d5LLBTEpoWkXBV7A&usqp=CAU",
-                }}
+            <AspectRatio w="100%" ratio={20 / 15}>
+              <Image
+                resizeMode="contain"
+                source={{ uri: user.image }}
                 alt="image"
               />
             </AspectRatio>
           </Box>
-          <Stack p="7" space={7}>
-            <Stack space={6}>
-              <Heading>The Garden City</Heading>
+          <Stack p="5" space={6}>
+            <Stack space={4}>
+              <Heading>{user.name}</Heading>
               <View
                 style={{
                   // backgroundColor: "#f5f5f5",
@@ -108,33 +145,49 @@ localStorage.removeItem("user")
                   alignItems: "center",
                 }}
               >
-                 
-                <Text style={{ fontSize: 20, margin: 1, color: "#525252", left:-49 }}>
-               <MaterialCommunityIcons name="email-receive-outline" size={24} color="#525252"  />
-                  Charity@gmail.com
+                <Text
+                  style={{
+                    fontSize: 20,
+                    margin: 1,
+                    color: "#525252",
+                    left: -33,
+                  }}
+                >
+                  <MaterialCommunityIcons
+                    name="email-receive-outline"
+                    size={24}
+                    color="#525252"
+                  />
+                  {user.email}
                 </Text>
               </View>
             </Stack>
-            <Text style={{ fontSize: 16 }}>
-              The Board of Directors (BoD) are often volunteers with a limited
-              term and limited time to devote to the association’s business. If
-              there is a problem with service delivery, it is the BoD’s
-              responsibility to take care of it. That is what the membership
-              expects them to do when the membership elects them to that role.
-              The Board makes decisions that are in the best interest of the
-              membership and association.
-            </Text>
+            <Text style={{ fontSize: 16 }}>{user.description}</Text>
           </Stack>
 
           <Center>
-            <Button
-              colorScheme="danger"
-              onPress={() => setIsOpen(!isOpen)}
-              style={{ right: 115 , top:-15}}
-            >
-              Delete Account
-            </Button>
-           
+            {!confirmm && (
+              <>
+                <Button
+                  onPress={() => setIsOpen(!isOpen)}
+                  style={{ right: 135, top: -15 }}
+                >
+                  Delete Account
+                </Button>
+                <Button
+                  onPress={() => navigation.navigate("EditProfileView")}
+                  style={{ width: 100, left: 150, top: -55 }}
+                >
+                  Edit Profile
+                </Button>
+                <Button
+                  onPress={() => navigation.navigate("demo")}
+                  style={{ width: 100, left: 15, top: -97 }}
+                >
+                  Events
+                </Button>
+              </>
+            )}
             <AlertDialog
               leastDestructiveRef={cancelRef}
               isOpen={isOpen}
@@ -157,24 +210,25 @@ localStorage.removeItem("user")
                     >
                       Cancel
                     </Button>
-                    <Button colorScheme="danger" onPress={()=>{handeldelete()}}>
+                    <Button
+                      colorScheme="danger"
+                      onPress={() => {
+                        handeldelete();
+                      }}
+                    >
                       Delete
                     </Button>
                   </Button.Group>
                 </AlertDialog.Footer>
               </AlertDialog.Content>
-
             </AlertDialog>
-          <Button onPress={()=>navigation.navigate("EditProfileView")} style={{width:100,left:130,top:-55}} >Edit Profile</Button>
           </Center>
-         
         </Box>
-       
       </Box>
-      <View>
-      
-      </View>
+      <View></View>
+
     </View>
+    
   );
 };
 export default Profile;

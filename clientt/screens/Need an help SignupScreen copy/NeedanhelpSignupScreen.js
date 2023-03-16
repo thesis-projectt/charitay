@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   ScrollView,
 } from "react-native";
-import Logo from "../../assets/logo.png";
+
 import Input from "./input";
 import Button from "./button";
 import { createUserWithEmailAndPassword } from "firebase/auth";
@@ -22,15 +22,18 @@ const NeedanhelpSignupScreen = ({ navigation }) => {
   const [email, setemail] = useState("");
   const [confirmpassword, setconfirmpassword] = useState("");
 
-  const done = async (value) => {
-    try {
-      await axios.post(`${disable}`, {
+  const done = (value) => {
+    axios
+      .post(`${disable}`, {
         id: value,
         email: email,
+      })
+      .then((result) => {
+        console.log(result);
+      })
+      .catch((err) => {
+        console.log(err);
       });
-    } catch (err) {
-      console.log(err);
-    }
   };
 
   const onsigninpressed = () => {
@@ -43,7 +46,7 @@ const NeedanhelpSignupScreen = ({ navigation }) => {
           return true;
         })
         .then(() => {
-          navigation.navigate("NeedHelp");
+          navigation.navigate("Signin");
         })
         .catch((err) => {
           if (err.code === "auth/weak-password") {
@@ -79,7 +82,12 @@ const NeedanhelpSignupScreen = ({ navigation }) => {
         secureTextEntry={true}
       />
 
-      <Button text="Register" onpress={onsigninpressed} />
+      <Button
+        text="Register"
+        onpress={() => {
+          onsigninpressed();
+        }}
+      />
       <Button
         text=" have an account ? Log in "
         onpress={goback}

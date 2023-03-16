@@ -15,10 +15,23 @@ import { authentication } from "../firebase";
 import { getAuth, updateEmail, updatePassword } from "firebase/auth";
 import { useNavigation } from "@react-navigation/native";
 import { MaterialIcons } from '@expo/vector-icons'; 
+import * as ImagePicker from "expo-image-picker";
 
 
 const EditProfile = () => {
+  const handleImagePicker = async () => {
+    const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
+    if (permissionResult.granted === false) {
+      alert("Permission to access camera roll is required!");
+      return;
+    }
 
+    const result = await ImagePicker.launchImageLibraryAsync();
+    if (!result.cancelled) {
+      setAvatar(result.uri);
+
+    }
+  };
 
   const navigation = useNavigation();
   const [id, setid] = useState("");
@@ -34,24 +47,26 @@ const EditProfile = () => {
         const userdata = await axios.get(`${associations}/${jsonValue.id}`);
         console.log("userdata", userdata.data);
         setuser(userdata.data);
+
       }
     } catch (err) {
       console.log(err);
     }
   };
-  useEffect(() => {
+
+  useEffect(() => {  
     fetchUser();
   }, []);
 
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [bio, setBio] = useState("");
+  const [name, setName] = useState(user.name);
+  const [email, setEmail] = useState(user.email);
+  const [bio, setBio] = useState(user.description);
   const [avatar, setAvatar] = useState(
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmo5eSEhlXUDcaW-3Fm9d5LLBTEpoWkXBV7A&usqp=CAU"
+    user.image
   );
   const [password, setPassword] = useState("");
 
-  const handlechangeemail = () => {
+  const handlechangepassword = () => {
     const userr = authentication.currentUser;
     updatePassword(userr, password)
       .then((result) => {
@@ -62,10 +77,10 @@ const EditProfile = () => {
       });
   };
 
-  const handelchangepassword = () => {
+  const handelchangeemail = () => {
     updateEmail(authentication.currentUser, email)
       .then(() => {
-        handlechangeemail();
+        handlechangepassword();
       })
       .catch((error) => {
         console.log(error);
@@ -78,26 +93,30 @@ const EditProfile = () => {
         name: name,
         email: email,
         description: bio,
+        image:avatar
       })
       .then(() => {
-        handelchangepassword();
+        handelchangeemail();
       });
   };
-
+  
+console.log(avatar);
   return (
     <ScrollView  showsVerticalScrollIndicator={false}>
       
       <View style={styles.container}>
+    
         <View style={styles.avatarContainer}>
           <Image
             style={styles.avatar}
             source={{
-              uri: "data:image/png;base64,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",
+              uri:avatar,
             }}
           />
+
           <TouchableOpacity
             style={styles.changeAvatarButton}
-            onPress={() => {}}
+            onPress={handleImagePicker}
           >
             <Text style={styles.changeAvatarButtonText}>Change Avatar</Text>
           </TouchableOpacity>
@@ -109,12 +128,14 @@ const EditProfile = () => {
             style={styles.input}
             placeholder="Enter Name"
             onChangeText={setName}
+           
           />
           <Text style={styles.label}>Email</Text>
           <TextInput
             style={styles.input}
             placeholder="Enter Email"
             onChangeText={setEmail}
+           
           />
           <Text style={styles.label}>Password</Text>
           <TextInput
@@ -128,9 +149,10 @@ const EditProfile = () => {
             style={styles.inputt}
             underlineColorAndroid="transparent"
             multiline={true}
-            numberOfLines={10}
+            numberOfLines={100}
             placeholder="Enter Bio"
             onChangeText={setBio}
+          
           />
           <TouchableOpacity
             style={styles.button}
@@ -141,8 +163,9 @@ const EditProfile = () => {
             <Text style={styles.buttonText}>Submit</Text>
           </TouchableOpacity>
         </View>
+     
       </View>
-      <MaterialIcons onPress={()=>navigation.navigate('AssociationProfile')} style={{top:-700}} name="navigate-before" size={39} color="black" />
+      
     </ScrollView>
   );
 };
@@ -200,8 +223,10 @@ const styles = StyleSheet.create({
     borderColor: "#ccc",
     borderWidth: 1,
     borderRadius: 5,
-    fontSize: 15,
+    fontSize: 18,
     textAlignVertical: "top",
+    padding: 15,
+
   },
 });
 
