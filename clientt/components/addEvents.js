@@ -93,11 +93,11 @@ const AddEvents = ({ route }) => {
                   onPress={() => {
                     if (item.email === id) {
                       navigation.navigate("AssociationProfile", {
-                        confirmm: false,
+                        
                       });
                     } else {
-                      navigation.navigate("AssociationProfile", {
-                        confirmm: true,
+                      navigation.navigate("VisterProfile", {
+                        
                         idd: item.email,
                       });
                     }
@@ -137,7 +137,8 @@ const styles = StyleSheet.create({
   card: {
     width: CARD_WIDTH,
     height: CARD_HEIGTH,
-    marginVertical: 20,
+    marginVertical: 2,
+    left:10
   },
   favorite: {
     position: "absolute",

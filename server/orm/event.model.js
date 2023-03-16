@@ -5,6 +5,7 @@ module.exports = (sequelize, DataTypes) => {
      id : {
       type : DataTypes.INTEGER,
       primaryKey : true,
+      autoIncrement: true
      
      },
 
@@ -13,8 +14,6 @@ module.exports = (sequelize, DataTypes) => {
          type: DataTypes.STRING,
          allowNull :false, 
         },
-
-        
       
      
          description: {

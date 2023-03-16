@@ -12,16 +12,17 @@ import colors from "./colors";
 import { shadow, sizes, spacing } from "./theme";
 import { useNavigation } from "@react-navigation/native"; 
 
-const CARD_WIDTH = 160;
-const CARD_HEIGTH = 220;
+const CARD_WIDTH = 180;
+const CARD_HEIGTH = 210;
 
 const EventsList = (props) => {
   //   console.log("🚀 ~ file: EventsList.js:13 ~ EventsList ~ props:", props);
   // const data=[...props.data,...props.data]
   const navigation=useNavigation()
+  console.log(props.data.length);
   return (
     <HStack flexWrap={1}>
-      {props.data.map((item, index) => (
+      {props.data.filter((e,i)=> i<1).map((item, index) => (
         <TouchableOpacity onPress={() =>
           navigation.navigate("EventDetails", {
             idd: item.id,
@@ -34,7 +35,7 @@ const EventsList = (props) => {
               </View>
               <View style={styles.footer}>
                 <View style={styles.titleBox}>
-                  <Text style={styles.title}>{item.title}</Text>
+                  {/* <Text style={styles.title}>{item.title}</Text> */}
                   {/* <Text style={styles.description}>{item.description}</Text> */}
                 </View>
               </View>
