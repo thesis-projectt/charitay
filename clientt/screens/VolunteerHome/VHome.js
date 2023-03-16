@@ -146,7 +146,7 @@ const Profilev = () => {
 
   return (
     <ScrollView>
-    <View>
+   
     <View style={{padding : 10 , width : '100%' , backgroundColor : '#000' , height : 150 }}>
     
       <TouchableOpacity onPress={handleImagePicker}>
@@ -188,7 +188,7 @@ const Profilev = () => {
             onChangeText={(text) => setPassword(text)}
             secureTextEntry={true}
             editable={true}
-            placeholder="change password"
+        
           />
           
           <TouchableOpacity style={styles.button} onPress={handleSaveChanges}  >
@@ -207,6 +207,7 @@ const Profilev = () => {
         </>
       )}
     </View>
+</ScrollView>
   );
 };
 
