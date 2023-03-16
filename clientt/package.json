@@ -44,12 +44,9 @@
     "react-native-animatable": "^1.3.3",
     "react-native-dotenv": "^3.4.8",
     "react-native-dropdown-picker": "^5.4.4",
-<<<<<<< HEAD
     "react-native-elements": "^3.4.3",
     "react-native-gesture-handler": "^2.9.0",
-=======
     "react-native-gifted-chat": "^2.0.0",
->>>>>>> 3f43ec9d689e5a88c4589640d8528c1e06ee51fb
     "react-native-image-crop-picker": "^0.39.0",
     "react-native-image-picker": "^5.1.0",
     "react-native-imaged-carousel-card": "^0.1.1",
