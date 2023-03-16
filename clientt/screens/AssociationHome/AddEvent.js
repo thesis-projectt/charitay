@@ -87,7 +87,7 @@ const AddEvent = () => {
       })  
       .then((result) => {
         console.log(result);
-        navigation.navigate("Event")
+        navigation.navigate("tabNavigator")
       })
       .catch((err) => {
         console.log(err);

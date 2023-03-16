@@ -24,6 +24,7 @@ import UpdateEvent from "../AssociationHome/UpdateEvent"
 import EventDetails from "../AssociationHome/EventDetails";
 import Eventimage from "../../components/Eventimage";
 import AllEvents from "../../components/AllEvents"
+import VisterProfile from "../AssociationHome/VisterProfile";
 
 const Stack = createNativeStackNavigator();
 // const Nav = createNativeStackNavigator();
@@ -34,6 +35,7 @@ const Navigation = () => {
        <Stack.Navigator screenOptions={{ headerShown: false }}>
          <Stack.Screen name="homepage" component={Onboarding} />
          <Stack.Screen name="Signin" component={SigninScreen} />
+         <Stack.Screen name="VisterProfile" component={VisterProfile} />
          <Stack.Screen name="tabNavigator" component={TabNavigator} />
          <Stack.Screen name="SignUp" component={SignupScreen} />
          <Stack.Screen name="ForgetPassword" component={ForgetPassword} />
