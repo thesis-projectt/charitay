@@ -10,13 +10,7 @@ import MapView, {
 
 import MyComponent from "./swipe";
 import SlidingUpPanel from "rn-sliding-up-panel";
-import {
-  StyleSheet,
-  View,
-  Image,
-  Text,
- 
-} from "react-native";
+import { StyleSheet, View, Image, Text } from "react-native";
 import * as Location from "expo-location";
 import { getPreciseDistance, getDistance } from "geolib";
 import dummyy from "./dummy.js";
@@ -204,7 +198,7 @@ const Map = () => {
                     }}
                   >
                     <Image
-                      source={require("../assets/volunt.png")}
+                      source={require("../assets/help.png")}
                       style={styles.MarkerImage}
                     />
                   </Marker>
@@ -264,7 +258,7 @@ const Map = () => {
           >
             <View>
               <Image
-                source={require("../assets/volunteer.png")}
+                source={require("../assets/nn.png")}
                 style={styles.MarkerImage}
               />
             </View>
@@ -321,8 +315,6 @@ const Map = () => {
       </View>
     );
   }
-
-  
 };
 
 const styles = StyleSheet.create({

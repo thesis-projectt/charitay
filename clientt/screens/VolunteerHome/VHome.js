@@ -12,6 +12,9 @@ import * as ImagePicker from "expo-image-picker";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { volunter } from "../../Axios";
 import axios from "axios";
+import { ScrollView } from "native-base";
+import { authentication } from "../firebase";
+import { signOut } from "@firebase/auth";
 
 const Profilev = () => {
   const getData = async () => {
@@ -82,55 +85,86 @@ const Profilev = () => {
     }
   };
 
+  const LogOut = () => {
+    signOut(authentication).then(() => {
+      localStorage.removeItem("user")
+      .catch((error) => {
+        console.log(error);
+      })
+    })
+  }
+
   return (
-    <View style={styles.container}>
+    <ScrollView>
+    <View>
+    <View style={{padding : 10 , width : '100%' , backgroundColor : '#000' , height : 150 }}>
+    
       <TouchableOpacity onPress={handleImagePicker}>
+      <View style={{alignItems : 'center'}}>
         <Image style={styles.image} source={{ uri: imageUri }} />
+        <Text style= {{fontSize : 25 , fontWeight : 'bold' , }}>{name}</Text>
+        </View>
         <View style={styles.imageOverlay}>
           <Text style={styles.imageText}>+</Text>
+          
         </View>
       </TouchableOpacity>
 
       {isEditing ? (
         <>
+        <View style={styles.containerUp}>
           <TextInput
-            style={styles.input}
+            style={styles.inputContainer}
             value={name}
             onChangeText={(text) => setName(text)}
             editable={true}
           />
           <TextInput
-            style={styles.input}
+            style={styles.inputContainer}
             value={email}
             onChangeText={(text) => setEmail(text)}
             editable={true}
           />
           <TextInput
-            style={styles.input}
+            style={styles.inputContainer}
             value={phoneNumber.toString()}
             onChangeText={(text) => setPhoneNumber(parseInt(text))}
             editable={true}
           />
           <TextInput
-            style={styles.input}
+            style={styles.inputContainer}
             value={password}
+            placeholder={"Change your password"}
             onChangeText={(text) => setPassword(text)}
             secureTextEntry={true}
             editable={true}
           />
-          <Button title="Save Changes" onPress={handleSaveChanges} />
+          
+          <TouchableOpacity style={styles.button} onPress={handleSaveChanges}  >
+          <Text style={styles.buttonText}>Save Changes</Text>
+          </TouchableOpacity>
+          </View>
         </>
       ) : (
         <>
-          <Text style={styles.info}>Name: {name}</Text>
-          <Text style={styles.info}>Email: {email}</Text>
-  <Text style={styles.info}>Phone Number: {phoneNumber}</Text>
+       <View style={styles.text}>
+        <Text style={{fontSize : 15 , fontWeight : 'bold' , color  : 'white'}}>{phoneNumber}</Text>
+        </View>
+        <View style={styles.text}>
+          <Text style={{color : 'white' , fontWeight : 'bold' , fontSize : 15}}>{email}</Text>
+          </View>
       <TouchableOpacity style={styles.button} onPress={handleUpdateProfile}>
         <Text style={styles.buttonText}>Edit Profile</Text>
       </TouchableOpacity>
+      <TouchableOpacity style={styles.button1} onPress={LogOut}>
+        <Text style={styles.buttonText}>LogOut</Text>
+      </TouchableOpacity>
+    
     </>
   )}
 </View>
+</View>
+</ScrollView>
 );
 };
 
@@ -176,16 +210,71 @@ fontSize: 18,
 marginBottom: 10,
 },
 button: {
-backgroundColor: "#0066cc",
-padding: 10,
-borderRadius: 5,
-marginTop: 20,
+alignSelf : 'center' , 
+flexDirection : 'row',
+justifyContent : 'center',
+backgroundColor : '#fff',
+backgroundColor : '#777',
+width : '50%',
+padding : 20,
+paddingBottom : 22,
+borderRadius : 10,
+shadowOpacity : 50,
+elevation : 15,
+marginTop : 20,
+marginBottom : 40,
+backgroundColor : '#000'
 },
+button1: {
+  alignSelf : 'center' , 
+  flexDirection : 'row',
+  justifyContent : 'center',
+  backgroundColor : '#fff',
+  backgroundColor : '#777',
+  width : '50%',
+  padding : 20,
+  paddingBottom : 22,
+  borderRadius : 10,
+  shadowOpacity : 50,
+  elevation : 15,
+  marginTop : 20,
+  marginBottom : 40,
+  backgroundColor : '#000',
+  marginTop : -20
+  },
 buttonText: {
 color: "#fff",
 fontSize: 18,
 fontWeight: "bold",
 },
+text : {
+  alignSelf : 'center',
+  flexDirection : 'row',
+  justifyContent : 'center',
+  backgroundColor : '#601A17',
+  width : '90%',
+  padding : 20,
+  borderRadius : 10,
+  shadowOpacity : 50,
+  elevation : 15,
+  marginTop : 30
+
+}, 
+containerUP : {
+  fontSize : 45,
+  color : '#000',
+  fontWeight : 'bold'
+},
+inputContainer : {
+  borderWidth : 0.5,
+  padding : 15,
+  fontSize : 16,
+  marginTop : 20,
+  borderRadius : 50,
+
+}
+
+
 });
 
 export default Profilev;

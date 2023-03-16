@@ -16,41 +16,40 @@ import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import Connect from "../Connect";
 import axios from "axios";
 import { disable, volunter, associations } from "../../Axios";
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 const SigninScreen = () => {
   const navigation = useNavigation();
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
   const storeData = async (value) => {
     try {
-      const jsonValue = JSON.stringify(value)
-      await AsyncStorage.setItem('user', jsonValue)
+      const jsonValue = JSON.stringify(value);
+      await AsyncStorage.setItem("user", jsonValue);
     } catch (e) {
-   console.log(e);
+      console.log(e);
     }
-  }
+  };
   const getuser = (id, email) => {
     axios
       .get(`${disable}/${id}`)
       .then((result) => {
         if (result.data !== null) {
-          storeData({id:result.data.id,role:"ds"})
-          navigation.navigate("tabNavigator",{userId:id});
+          storeData({ id: result.data.id, role: "ds" });
+          navigation.navigate("tabNavigator", { userId: id });
         }
         axios
           .get(`${volunter}/${id}`)
           .then((res) => {
             if (res.data !== null) {
-          storeData({id:res.data.id,role:"vr"})
+              storeData({ id: res.data.id, role: "vr" });
 
-              navigation.navigate("tabNavigator",{userId:id});
-
+              navigation.navigate("tabNavigator", { userId: id });
             }
             axios
               .get(`${associations}/${email}`)
               .then((ar) => {
                 if (ar.data !== null) {
-          storeData({id:ar.data.email,role:"as"})
+                  storeData({ id: ar.data.email, role: "as" });
                   navigation.navigate("tabNavigator");
                 }
               })
@@ -68,9 +67,13 @@ const SigninScreen = () => {
     signInWithEmailAndPassword(authentication, email, password)
       .then((firedata) => {
         console.log(firedata);
-        console.log("gxfgfg",firedata._tokenResponse.localId, firedata._tokenResponse.email);
+        console.log(
+          "gxfgfg",
+          firedata._tokenResponse.localId,
+          firedata._tokenResponse.email
+        );
         getuser(firedata._tokenResponse.localId, firedata._tokenResponse.email);
-        console.log(firedata._tokenResponse.localId,"hello im user");
+        console.log(firedata._tokenResponse.localId, "hello im user");
         return true;
       })
       .catch((err) => {
@@ -125,7 +128,7 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   Logo: {
-    width: "90%",
+    width: "50%",
     margin: -50,
     maxWidth: 400,
   },

@@ -13,7 +13,9 @@ import {
 
   return (
 
-     <View><Text>your profile</Text></View>
+     <View>
+     <Text>your profile</Text>
+     </View>
   )
 
   }
