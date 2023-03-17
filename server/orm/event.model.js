@@ -15,12 +15,16 @@ module.exports = (sequelize, DataTypes) => {
          allowNull :false, 
         },
       
-      
-       description: {
-         type: DataTypes.TEXT('long'),
-         allowNull:false
-         
-         }, 
+     
+         description: {
+          type: DataTypes.TEXT('long'),
+          allowNull:false
+          
+          }, 
+          amount :{
+            type: DataTypes.DECIMAL(10, 2),
+            allowNull: false,
+          },
 
        picture : {
          type : DataTypes.STRING,

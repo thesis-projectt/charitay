@@ -61,3 +61,5 @@ const Navigation = () => {
 };
 
 export default Navigation;
+{/* <Stack.Screen name="mainpage" component={AddEvents} /> */}
+{/* <Stack.Screen name="AssociationHome" component={AHome} /> */}

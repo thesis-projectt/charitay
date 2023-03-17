@@ -286,6 +286,7 @@ const Map = () => {
                         setDestination(e.nativeEvent.coordinate);
                       }}
                     >
+                      {/* f,dfclkskdlcfkzlaefzeaklf */}
                       <Image
                         source={require("../assets/help.png")}
                         style={styles.MarkerImage}

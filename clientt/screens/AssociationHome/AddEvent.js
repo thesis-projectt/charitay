@@ -50,6 +50,7 @@ const AddEvent = () => {
   const [description, setdescription] = useState("");
   const [date, setdate] = useState("");
   const [name, setname] = useState("");
+  const [amount , setAmount] = useState("");
   const navigation=useNavigation()
 
   const [user, setuser] = useState({});
@@ -83,6 +84,7 @@ const AddEvent = () => {
         description: description,
         picture:image,
         date: date,
+        amount : amount,
         associationId: id,
       })  
       .then((result) => {
@@ -137,6 +139,12 @@ const AddEvent = () => {
             style={styles.input}
             placeholder="Enter Last Day of Eevent "
             onChangeText={setdate}
+          />
+          <Text style={styles.label}>Amount </Text>
+          <TextInput
+            style={styles.input}
+            placeholder="Enter Last Day of Eevent "
+            onChangeText={setAmount}
           />
 
           <Text style={styles.label}>Descreption</Text>

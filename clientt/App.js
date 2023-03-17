@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import Navigation from "./screens/Navigation/Navigation";
 import { NativeBaseProvider } from "native-base";
 import { LogBox } from "react-native";
+import Pay from "./components/Pay";
 // import ChatRoom from "./components/chatRoom";
 LogBox.ignoreLogs(["Warning: ..."]);
 LogBox.ignoreAllLogs();
@@ -11,6 +12,7 @@ const App = () => {
   return (
     <NativeBaseProvider>
       <SafeAreaView style={styles.root}>
+        {/* <Pay/> */}
         <Navigation />
         {/* <TabNavigator/> */}
         {/* <MapDs/> */}
