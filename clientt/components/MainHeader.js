@@ -10,7 +10,7 @@ const MainHeader = ({title}) => {
     <View style={styles.container}>
     <Icon icon="Hamburger" onPress={() => {}}/>
     <Text style={styles.title}>{title}</Text>
-    <Icon icon="Notification" onPress={() => {}}/>
+    {/* <Icon icon="Notification" onPress={() => {}}/> */}
     </View>
     )
 }

@@ -7,6 +7,9 @@ import {
   SafeAreaView,
   Pressable,
   Touchable,
+  ScrollView,
+  TouchableOpacity,
+  StatusBar,
 } from "react-native";
 import { disable, volunter, associations } from "../../Axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -23,22 +26,29 @@ import {
   Heading,
   Button,
   AlertDialog,
+  Icon,
+  Flex,
 } from "native-base";
-import { MaterialCommunityIcons } from '@expo/vector-icons'
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import Events from "./Events";
+import { Entypo } from "@expo/vector-icons";
+import { signOut } from "firebase/auth";
 
 const Profile = () => {
   const [user, setuser] = useState({});
-  const [id , setid]=useState("")
+  const [id, setid] = useState("");
+
   const fetchUser = async () => {
     try {
       const value = await AsyncStorage.getItem("user");
       if (value !== null) {
         const jsonValue = JSON.parse(value);
-        setid(jsonValue.is)
+
+        setid(jsonValue.id);
+
         const userdata = await axios.get(`${associations}/${jsonValue.id}`);
-        console.log("userdata", userdata.data);
+
         setuser(userdata.data);
-       
       }
     } catch (err) {
       console.log(err);
@@ -48,21 +58,43 @@ const Profile = () => {
     fetchUser();
   }, []);
 
-const deletee = () =>{
-axios.delete(`${associations}/${id}`).then(()=>{
-localStorage.removeItem("user")
-}).catch((err)=>{console.log(err);})
-}
-
+  const deletee = () => {
+    axios
+      .delete(`${associations}/${id}`)
+      .then(() => {
+        deletefromLocalStorage();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   const handeldelete = () => {
     const userr = authentication.currentUser;
     deleteUser(userr)
       .then((result) => {
-       deletee()
-       return true
-      }).then(()=>{
-         navigation.navigate("Signin")
+        deletee();
+        return true;
+      })
+      .then(() => {
+        navigation.navigate("Signin");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  const deletefromLocalStorage = async () => {
+    try {
+      await AsyncStorage.removeItem("user");
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const logout = () => {
+    signOut(authentication)
+      .then(() => {
+        deletefromLocalStorage();
       })
       .catch((error) => {
         console.log(error);
@@ -75,106 +107,106 @@ localStorage.removeItem("user")
   const navigation = useNavigation();
 
   return (
-    <View>
-      <Box alignItems="center" top="90">
-        <Box
-          maxW="100%"
-          maxH="690"
-          backgroundColor={"#fdf4ff"}
-          
-        
-         
-        
-        >
-          <Box>
-            <AspectRatio w="100%" ratio={26 / 19} >
-              <Image 
-              resizeMode="contain"
-                source={{
-                  uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmo5eSEhlXUDcaW-3Fm9d5LLBTEpoWkXBV7A&usqp=CAU",
-                }}
-                alt="image"
-              />
-            </AspectRatio>
-          </Box>
-          <Stack p="7" space={7}>
-            <Stack space={6}>
-              <Heading>The Garden City</Heading>
-              <View
-                style={{
-                  // backgroundColor: "#f5f5f5",
-                  width: 300,
-                  height: 35,
-                  alignItems: "center",
-                }}
-              >
-                 
-                <Text style={{ fontSize: 20, margin: 1, color: "#525252", left:-49 }}>
-               <MaterialCommunityIcons name="email-receive-outline" size={24} color="#525252"  />
-                  Charity@gmail.com
-                </Text>
+    <SafeAreaView style={styles.container}>
+      <ScrollView style={styles.scrollView}>
+        <View>
+          <Box alignItems="center" top="0">
+            <Box maxW="100%" maxH="690">
+              <Box>
+                <AspectRatio w="100%" ratio={20 / 15}>
+                  <Image
+                    resizeMode="contain"
+                    source={{ uri: user.image }}
+                    alt="image"
+                  />
+                </AspectRatio>
+              </Box>
+              <Stack p="3" space={5}>
+                <Stack space={3}>
+                  <Heading>{user.name}</Heading>
+                  <View>
+                    <Heading style={{ color: "#525252", fontSize: 20 }}>
+                      <MaterialCommunityIcons
+                        name="email-receive-outline"
+                        size={24}
+                        color="#525252"
+                      />
+                      {user.email}
+                    </Heading>
+                  </View>
+                </Stack>
+                <Text style={{ fontSize: 16 }}>{user.description}</Text>
+              </Stack>
+
+              <Center>
+                <AlertDialog
+                  leastDestructiveRef={cancelRef}
+                  isOpen={isOpen}
+                  onClose={onClose}
+                >
+                  <AlertDialog.Content>
+                    <AlertDialog.CloseButton />
+                    <AlertDialog.Header>Delete Account</AlertDialog.Header>
+                    <AlertDialog.Body>
+                      This will remove account relating to You. This action
+                      cannot be reversed. Deleted data can not be recovered.
+                    </AlertDialog.Body>
+                    <AlertDialog.Footer>
+                      <Button.Group space={2}>
+                        <Button
+                          variant="unstyled"
+                          colorScheme="coolGray"
+                          onPress={onClose}
+                          ref={cancelRef}
+                        >
+                          Cancel
+                        </Button>
+                        <Button
+                          colorScheme="danger"
+                          onPress={() => {
+                            handeldelete();
+                          }}
+                        >
+                          Delete
+                        </Button>
+                      </Button.Group>
+                    </AlertDialog.Footer>
+                  </AlertDialog.Content>
+                </AlertDialog>
+              </Center>
+              <View style={{ gap: 10 }}>
+                <Button onPress={() => navigation.navigate("demo")}>
+                  Events
+                </Button>
+                <Button onPress={() => navigation.navigate("EditProfileView")}>
+                  Edit Profile
+                </Button>
+                <Button onPress={() => setIsOpen(!isOpen)}>
+                  Delete Account
+                </Button>
+                <Button
+                  colorScheme="danger"
+                  onPress={() => {
+                    logout(), navigation.navigate("Signin");
+                  }}
+                >
+                  logout
+                </Button>
               </View>
-            </Stack>
-            <Text style={{ fontSize: 16 }}>
-              The Board of Directors (BoD) are often volunteers with a limited
-              term and limited time to devote to the association’s business. If
-              there is a problem with service delivery, it is the BoD’s
-              responsibility to take care of it. That is what the membership
-              expects them to do when the membership elects them to that role.
-              The Board makes decisions that are in the best interest of the
-              membership and association.
-            </Text>
-          </Stack>
-
-          <Center>
-            <Button
-              colorScheme="danger"
-              onPress={() => setIsOpen(!isOpen)}
-              style={{ right: 115 , top:-15}}
-            >
-              Delete Account
-            </Button>
-           
-            <AlertDialog
-              leastDestructiveRef={cancelRef}
-              isOpen={isOpen}
-              onClose={onClose}
-            >
-              <AlertDialog.Content>
-                <AlertDialog.CloseButton />
-                <AlertDialog.Header>Delete Account</AlertDialog.Header>
-                <AlertDialog.Body>
-                  This will remove account relating to You. This action cannot
-                  be reversed. Deleted data can not be recovered.
-                </AlertDialog.Body>
-                <AlertDialog.Footer>
-                  <Button.Group space={2}>
-                    <Button
-                      variant="unstyled"
-                      colorScheme="coolGray"
-                      onPress={onClose}
-                      ref={cancelRef}
-                    >
-                      Cancel
-                    </Button>
-                    <Button colorScheme="danger" onPress={()=>{handeldelete()}}>
-                      Delete
-                    </Button>
-                  </Button.Group>
-                </AlertDialog.Footer>
-              </AlertDialog.Content>
-
-            </AlertDialog>
-          <Button onPress={()=>navigation.navigate("EditProfileView")} style={{width:100,left:130,top:-55}} >Edit Profile</Button>
-          </Center>
-         
-        </Box>
-       
-      </Box>
-      <View>
-      
-      </View>
-    </View>
+            </Box>
+          </Box>
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 };
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    paddingTop: StatusBar.currentHeight,
+  },
+  scrollView: {
+    marginHorizontal: 20,
+  },
+});
 export default Profile;

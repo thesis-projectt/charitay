@@ -25,7 +25,7 @@ module.exports=(sequelize,DataTypes)=>{
 
 
         description:{
-            type:DataTypes.STRING,
+            type: DataTypes.TEXT('long'),
             allowNull : true,
         },
 
@@ -33,6 +33,7 @@ module.exports=(sequelize,DataTypes)=>{
         image:{
             type:DataTypes.STRING,
             allowNull : true,
+            
         },
 
         password:{

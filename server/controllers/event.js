@@ -4,13 +4,31 @@ const {Association , Event} = require("../orm");
 
 
 module.exports = {
-getAllEvents: async (req, res) => {
+// getAllEvents: async (req, res) => {
+//     try {
+//       const events = await Event.findAll({})
+//       res.status(200).json(events);
+//     } catch (error) {
+//       console.log(error);
+//       res.status(500).send("Failed to load resource");    
+//     }
+//   },
+
+
+  getAllEvents: async (req, res) => {
     try {
-      const events = await Event.findAll({})
-      res.status(200).json(events);
+      const Events = await Event.findAll({
+     
+        order: [["createdAt", "ASC"]],
+        include: [
+          { model: Association, as: "association", attributes: ["name"] },
+          
+      ]
+      })
+      res.status(200).json(Events);
     } catch (error) {
       console.log(error);
-      res.status(500).send("Failed to load resource");    
+      res.status(500).send("Failed to load resource");
     }
   },
 
@@ -47,9 +65,28 @@ addEvent: async (req, res) => {
     }
   },
 
+  getOneEvent: async (req, res) => {
+    try {
+      console.log(req.params.id);
+      const Events = await Event.findOne({where:{id:req.params.id},  include: 'association' });
+      res.status(200).json(Events);
+    } catch (error) {
+      console.log(error);
+      res.send(error);
+    }
+  },
 
- 
 
+getEvents: async (req, res) => {
+    try {
+
+      const Events = await Event.findAll({where:{associationId:req.params.associationId}});
+      res.status(200).json(Events);
+    } catch (error) {
+      console.log(error);
+      res.send(error);
+    }
+  },
 
 
 

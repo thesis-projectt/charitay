@@ -26,6 +26,7 @@ const styles =StyleSheet.create({
       justifyContent:'center',
       margin : 40,
       top:15,
+     
     //  width:"100%",
      
     },

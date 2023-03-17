@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   ScrollView,
 } from "react-native";
-import Logo from "../../assets/logo.png";
+import Logo from "../../assets/Logo.png";
 import Input from "./input";
 import Button from "./button";
 import { useNavigation } from "@react-navigation/native";
@@ -16,45 +16,41 @@ import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import Connect from "../Connect";
 import axios from "axios";
 import { disable, volunter, associations } from "../../Axios";
-import AsyncStorage from '@react-native-async-storage/async-storage';
-
+import AsyncStorage from "@react-native-async-storage/async-storage";
 const SigninScreen = () => {
   const navigation = useNavigation();
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
-
   const storeData = async (value) => {
     try {
-      const jsonValue = JSON.stringify(value)
-      await AsyncStorage.setItem('user', jsonValue)
+      const jsonValue = JSON.stringify(value);
+      await AsyncStorage.setItem("user", jsonValue);
     } catch (e) {
-   console.log(e);
+      console.log(e);
     }
-  }
-
+  };
   const getuser = (id, email) => {
     axios
       .get(`${disable}/${id}`)
       .then((result) => {
         if (result.data !== null) {
-          storeData({id:result.data.id,role:"ds"})
-          navigation.navigate("DisableHome");
+          storeData({ id: result.data.id, role: "ds" });
+          navigation.navigate("tabNavigator", { userId: id });
         }
         axios
           .get(`${volunter}/${id}`)
           .then((res) => {
             if (res.data !== null) {
-          storeData({id:res.data.id,role:"vr"})
+              storeData({ id: res.data.id, role: "vr" });
 
-              navigation.navigate("VolunteerHome");
-
+              navigation.navigate("tabNavigator", { userId: id });
             }
             axios
               .get(`${associations}/${email}`)
               .then((ar) => {
                 if (ar.data !== null) {
-          storeData({id:ar.data.email,role:"as"})
-                  navigation.navigate("Event");
+                  storeData({ id: ar.data.email, role: "as" });
+                  navigation.navigate("tabNavigator");
                 }
               })
               .catch((err) => {
@@ -67,16 +63,19 @@ const SigninScreen = () => {
       })
       .catch((err) => console.log(err));
   };
-
   const onsigninpressed = () => {
     signInWithEmailAndPassword(authentication, email, password)
       .then((firedata) => {
         console.log(firedata);
-        console.log("gxfgfg",firedata._tokenResponse.localId, firedata._tokenResponse.email);
+        console.log(
+          "gxfgfg",
+          firedata._tokenResponse.localId,
+          firedata._tokenResponse.email
+        );
         getuser(firedata._tokenResponse.localId, firedata._tokenResponse.email);
+        console.log(firedata._tokenResponse.localId, "hello im user");
         return true;
       })
-
       .catch((err) => {
         if (err.code === "auth/user-not-found") {
           alert("incorect email");
@@ -85,15 +84,12 @@ const SigninScreen = () => {
         }
       });
   };
-
   const onforgetpasswordpressed = () => {
     navigation.navigate("ForgetPassword");
   };
-
   const onsignup = () => {
     navigation.navigate("Virfy");
   };
-
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
       <View style={styles.root}>
@@ -125,16 +121,14 @@ const SigninScreen = () => {
     </ScrollView>
   );
 };
-
 const styles = StyleSheet.create({
   root: {
     alignItems: "center",
     padding: 10,
     margin: 10,
   },
-
   Logo: {
-    width: "90%",
+    width: "50%",
     margin: -50,
     maxWidth: 400,
   },

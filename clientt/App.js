@@ -1,28 +1,28 @@
 import { StyleSheet, Text, View, SafeAreaView, TextInput } from "react-native";
-import TabNavigator from "./components/Navigator/Navigator";
-// import Navigation from "./screens/Navigation/Navigation";
-
-
-// import SigninScreen from "./screens/SigninScreen/SigninScreen";
-// import SignupScreen from "./screens/SignupScreen/SignupScreen";
-// import ForgetPassword from "./screens/ForgetPassword/ForgetPassword";
+import { useState, useEffect } from "react";
 import Navigation from "./screens/Navigation/Navigation";
-// import Onboarding from "./components/Onboarding"
-import { NativeBaseProvider} from "native-base";
-import Eventimage from "./components/Eventimage";
+import { NativeBaseProvider } from "native-base";
+import { LogBox } from "react-native";
+import Pay from "./components/Pay";
+// import ChatRoom from "./components/chatRoom";
+LogBox.ignoreLogs(["Warning: ..."]);
+LogBox.ignoreAllLogs();
+
 const App = () => {
   return (
-              
-<NativeBaseProvider>
-    <SafeAreaView style={styles.root}>
-            {/* <Map/> */}
-           {/* //   <Onboarding/> */}
-           {/* <SigninScreen/> */}
-           <Navigation/>
-            {/* <Eventimage/> */}
-   </SafeAreaView></NativeBaseProvider>
+    <NativeBaseProvider>
+      <SafeAreaView style={styles.root}>
+        {/* <Pay/> */}
+        <Navigation />
+        {/* <TabNavigator/> */}
+        {/* <MapDs/> */}
+        {/* <MapVal/> */}
+        {/* <ChatRoom /> */}
+      </SafeAreaView>
+    </NativeBaseProvider>
   );
 };
+
 const styles = StyleSheet.create({
   root: {
     flex: 1,
