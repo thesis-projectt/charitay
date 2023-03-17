@@ -20,6 +20,8 @@ import {
 } from "firebase/storage";
 import app, { storage } from "../firebase";
 import { signOut } from "@firebase/auth";
+import { authentication } from '../firebase';
+
 
 
 const uploadProfileImage = async (uri) => {
@@ -188,6 +190,10 @@ console.log(storage);
           <Text style={styles.info}>Email: {email}</Text>
           <TouchableOpacity style={styles.button} onPress={handleUpdateProfile}>
             <Text style={styles.buttonText}>Edit Profile</Text>
+            
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button} onPress={LogOut}>
+            <Text style={styles.buttonText}>Log Out</Text>
             
           </TouchableOpacity>
         </>

@@ -7,6 +7,7 @@ import {
   StyleSheet,
   Button,
   TouchableOpacity,
+
 } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -145,18 +146,13 @@ const Profilev = () => {
   }
 
   return (
-    <ScrollView>
+ 
    
-    <View style={{padding : 10 , width : '100%' , backgroundColor : '#000' , height : 150 }}>
-    
+    <View style={styles.container}>
       <TouchableOpacity onPress={handleImagePicker}>
-      <View style={{alignItems : 'center'}}>
         <Image style={styles.image} source={{ uri: imageUri }} />
-        <Text style= {{fontSize : 25 , fontWeight : 'bold' , }}>{name}</Text>
-        </View>
-        <View style={styles.imageOverlay}>
-          <Text style={styles.imageText}>+</Text>
-          
+       <View style={styles.imageOverlay}>
+          <Text style={styles.imageText}>+</Text>  
         </View>
       </TouchableOpacity>
 
@@ -176,7 +172,7 @@ const Profilev = () => {
             editable={true}
           />
           <TextInput
-            style={styles.input}
+            style={styles.inputContainer}
             value={phoneNumber}
             onChangeText={(text) => setPhoneNumber(parseInt(text))}
             editable={true}
@@ -207,7 +203,7 @@ const Profilev = () => {
         </>
       )}
     </View>
-</ScrollView>
+
   );
 };
 
@@ -263,6 +259,18 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
   },
+  containerUp :{
+    fontSize : 45,
+    color : "#000",
+    fontWeight : 'bold'
+  },
+  inputContainer : {
+    borderWidth : 0.5,
+    padding : 15,
+    fontSize : 16,
+    marginTop : 20,
+    borderRadius : 50
+  }
 });
 
 export default Profilev;
